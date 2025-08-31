@@ -1,0 +1,45 @@
+# modifier
+set $mod Mod4
+# useful keys
+bindsym $mod+Shift+e exit
+bindsym $mod+Shift+r restart
+bindsym $mod+space exec dmenu_run
+# apps
+bindsym $mod+Shift+t exec kitty
+# font
+font pango:MesloLGS Nerd Font 18
+#tiling 
+bindsym $mod+Shift+f fullscreen toggle
+bindsym $mod+Shift+v split v
+bindsym $mod+Shift+h split h
+# workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+# margins
+gaps inner 10
+gaps outer 10
+# bar
+bar {
+  status_command i3blocks
+  position top
+  tray_output primary
+  font pango:MesloLGS Nerd Font 18
+  colors {
+    background #000000
+    statusline #c1c1c1
+    separator #5f8787
+    focused_workspace #5f8787 #000000 #c1c1c1
+    active_workspace #888888 #000000 #c1c1c1
+    inactive_workspace #121212 #000000 #999999
+    urgent_workspace #9b8d7f #000000 #c1c1c1
+  }
+}
+# auidio
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# auto exec
+exec --no-startup-id i3-msg "workspace 1; exec kitty"
+exec --no-startup-id i3-msg "workspace 2; exec firefox"
