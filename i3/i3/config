@@ -40,6 +40,9 @@ bar {
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# keyboard layout 
+exec "setxkbmap -layout us,ru"
+exec "setxkbmap -option 'grp:ctrl_space_toggle, ctrl:swapcaps'"
 # auto exec
 exec --no-startup-id i3-msg "workspace 1; exec kitty"
 exec --no-startup-id i3-msg "workspace 2; exec firefox"

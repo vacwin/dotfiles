@@ -124,5 +124,5 @@ alias cs="console_sudoku"
 if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
-  export PATH="$HOME/.local/bin/$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
 fi
