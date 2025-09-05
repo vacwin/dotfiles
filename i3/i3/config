@@ -43,6 +43,8 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 # keyboard layout 
 exec "setxkbmap -layout us,ru"
 exec "setxkbmap -option 'grp:ctrl_space_toggle, ctrl:swapcaps'"
+#wallpaper
+exec feh --no-startup-id feh --bg-scale ~/Downloads/wp.jpg
 # auto exec
 exec --no-startup-id i3-msg "workspace 1; exec kitty"
 exec --no-startup-id i3-msg "workspace 2; exec firefox"
