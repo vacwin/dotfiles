@@ -1,5 +1,5 @@
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%Y/%b/%a %I:%M %p'
 interval=1
 color=#c1c1c1
 align=center
