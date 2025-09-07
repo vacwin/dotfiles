@@ -60,22 +60,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # margins
 gaps inner 10
 gaps outer 10
-# bar
-bar {
-  status_command i3blocks
-  position top
-  tray_output primary
-  font pango:MesloLGS Nerd Font 18
-  colors {
-    background #000000
-    statusline #c1c1c1
-    separator #5f8787
-    focused_workspace #5f8787 #000000 #c1c1c1
-    active_workspace #888888 #000000 #c1c1c1
-    inactive_workspace #121212 #000000 #999999
-    urgent_workspace #9b8d7f #000000 #c1c1c1
-  }
-}
 # audio
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
@@ -97,5 +81,5 @@ exec --no-startup-id i3-msg "workspace $ws1; exec kitty"
 exec --no-startup-id i3-msg "workspace $ws2; exec firefox"
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws3; exec obsidian; workspace back_and_forth'
-# exec --no-startup-id i3-msg "workspace $ws3; exec telegram"
-# exec --no-startup-id i3-msg "workspace $ws3; exec obsidian"
+# bar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
