@@ -1,0 +1,1 @@
+/Users/vacwin/dotfiles/vim/plugged/colors.vim/base16-black-metal-gorgoroth.vim

@@ -1,0 +1,26 @@
+" leader
+let mapleader = " "
+" config dir
+execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
+" plugins
+call plug#begin(expand('~/dotfiles/vim/plugged'))
+	Plug 'utensils/colors.vim'
+call plug#end()
+" basics:
+	set nocompatible
+	filetype plugin on
+	filetype indent on
+	syntax on
+	set number relativenumber
+	set cursorline
+	set cursorcolumn
+" autocompletion
+	set wildmenu
+	set wildmode=longest,list,full
+" theme
+set termguicolors
+colorscheme base16-black-metal-gorgoroth
+" connect mappings
+if filereadable(expand('~/dotfiles/vim/mappings.vim'))
+	execute 'source' fnameescape(expand('~/dotfiles/vim/mappings.vim'))
+endif
