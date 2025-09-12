@@ -5,6 +5,7 @@ execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
 " plugins
 call plug#begin(expand('~/dotfiles/vim/plugged'))
 	Plug 'utensils/colors.vim'
+	Plug 'junegunn/goyo.vim'
 call plug#end()
 " basics:
 	set nocompatible
