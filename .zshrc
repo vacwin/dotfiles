@@ -31,6 +31,25 @@ fi
 source $ZSH/oh-my-zsh.sh
 # vim mode
 bindkey -v
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+   	  printf '\e[6 q'   # NORMAL → underscore
+         else
+             printf '\e[2 q'   # INSERT → block
+               fi
+               }
+               zle -N zle-keymap-select
+
+               function zle-line-init {
+                 zle -K viins
+                   printf '\e[2 q'     # стартуем в insert → block
+                   }
+                   zle -N zle-line-init
+
+                   function zle-line-finish {
+                     printf '\e[2 q'
+                     }
+                     zle -N zle-line-finish
 # aliases
 alias kssh="kitten ssh"
 alias sp="spotify"
