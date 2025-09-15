@@ -9,7 +9,7 @@ case "$(uname -s)" in
 esac
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="refined"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # plugins
 plugins=(
   git 
@@ -41,3 +41,6 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
