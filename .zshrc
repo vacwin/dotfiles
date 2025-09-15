@@ -1,7 +1,5 @@
 typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # определение системы
 case "$(uname -s)" in 
   Linux*) OS=Linux ;;
@@ -11,8 +9,7 @@ esac
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# plugins
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 plugins=(
   git zsh-syntax-highlighting 
   zsh-autosuggestions
