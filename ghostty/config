@@ -1,4 +1,6 @@
 window-save-state = always
+window-decoration = true
+mouse-hide-while-typing = true
 config-file = ?config.d/quake.conf
 config-file = ?config.d/keybinds.conf
 config-file = ?config.d/tabs.conf
