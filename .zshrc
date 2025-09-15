@@ -1,3 +1,4 @@
+typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -10,10 +11,10 @@ esac
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # plugins
 plugins=(
-  git 
-  zsh-syntax-highlighting 
+  git zsh-syntax-highlighting 
   zsh-autosuggestions
   tmux
 )
@@ -32,24 +33,22 @@ source $ZSH/oh-my-zsh.sh
 # vim mode
 bindkey -v
 function zle-keymap-select {
-  if [[ $KEYMAP == vicmd ]]; then
-   	  printf '\e[6 q'   # NORMAL → underscore
-         else
-             printf '\e[2 q'   # INSERT → block
-               fi
-               }
-               zle -N zle-keymap-select
-
-               function zle-line-init {
-                 zle -K viins
-                   printf '\e[2 q'     # стартуем в insert → block
-                   }
-                   zle -N zle-line-init
-
-                   function zle-line-finish {
-                     printf '\e[2 q'
-                     }
-                     zle -N zle-line-finish
+  	if [[ $KEYMAP == vicmd ]]; then
+   	  	printf '\e[6 q'  
+        else
+             	printf '\e[2 q'  
+    	fi
+}
+zle -N zle-keymap-select
+function zle-line-init {
+      	zle -K viins
+       	printf '\e[2 q'     
+}
+zle -N zle-line-init
+function zle-line-finish {
+ 	printf '\e[2 q'
+}
+zle -N zle-line-finish
 # aliases
 alias kssh="kitten ssh"
 alias sp="spotify"
@@ -60,6 +59,3 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
