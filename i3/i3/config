@@ -77,7 +77,7 @@ exec --no-startup-id feh --bg-scale ~/Downloads/wp.jpg
 assign [class="(?i)telegram.*"] $ws3
 assign [class="(?i)obsidian"] $ws3
 # auto exec
-exec --no-startup-id i3-msg "workspace $ws1; exec kitty"
+exec --no-startup-id i3-msg "workspace $ws1; exec ghostty"
 exec --no-startup-id i3-msg "workspace $ws2; exec firefox"
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws3; exec obsidian; workspace back_and_forth'
