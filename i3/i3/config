@@ -7,7 +7,7 @@ bindsym $mod+space exec dmenu_run
 bindsym $mod+Shift+l exec i3lock, mode "default"
 bindsym $mod+q kill
 # apps
-bindsym $mod+t exec kitty
+bindsym $mod+t exec ghostty
 # font
 font pango:MesloLGS Nerd Font 18
 # focus
