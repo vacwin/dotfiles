@@ -1,0 +1,71 @@
+#!/usr/bin/env sh
+set -e
+export PATH="/usr/local/bin:/usr/bin:$PATH"
+
+LOCK_BIN="$(command -v i3lock)"
+[ -z "$LOCK_BIN" ] && { echo "i3lock не найден в PATH"; exit 1; }
+
+# === Palette (Base16 Black Metal Gorgoroth) ===
+BG=000000FF
+FG=c1c1c1E6
+
+RED=5f8787E6     # accent
+GREEN=9b8d7fE6   # crit
+YELLOW=8c7f70E6  # warn
+BLUE=888888E6
+PURPLE=999999E6
+CYAN=aaaaaaE6
+WHITE=c1c1c1E6
+
+BLANK=00000000
+CLEAR=ffffff22
+
+DEFAULT=$RED
+TEXT=$FG
+WRONG=$YELLOW
+VERIFYING=$GREEN
+
+exec "$LOCK_BIN" \
+  --blur 9 \
+  --indicator \
+  --clock --force-clock \
+  --radius=160 --ring-width=10 \
+  \
+  --insidever-color="$CLEAR" \
+  --ringver-color="$VERIFYING" \
+  --insidewrong-color="$CLEAR" \
+  --ringwrong-color="$WRONG" \
+  --inside-color="$BLANK" \
+  --ring-color="$DEFAULT" \
+  --line-color="$BLANK" \
+  --separator-color="$DEFAULT" \
+  \
+  --verif-color="$TEXT" \
+  --wrong-color="$TEXT" \
+  --layout-color="$TEXT" \
+  --keyhl-color="$RED" \
+  --bshl-color="$RED" \
+  \
+  --verif-text="sheeesh" \
+  --wrong-text="tap better" \
+  --noinput-text="" \
+  --lock-text="" \
+  \
+  --time-font="Iosevka" \
+  --time-size=48 \
+  --time-color="9b8d7fE6" \
+  --time-pos="ix:iy-200" \
+  --time-str="%I:%M %p" \
+  \
+  --date-font="Iosevka" \
+  --date-size=20 \
+  --date-color="$TEXT" \
+  --date-pos="ix:iy+200" \
+  --date-str="%a, %d %b %Y" \
+  \
+  --greeter-text="Welcome, vacwin" \
+  --greeter-font="Iosevka" \
+  --greeter-size=22 \
+  --greeter-color="$TEXT" \
+  --greeter-pos="ix:iy+250"
+

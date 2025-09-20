@@ -4,12 +4,12 @@ set $mod Mod4
 bindsym $mod+Shift+e exit
 bindsym $mod+Shift+r restart
 bindsym $mod+space exec dmenu_run
-bindsym $mod+Shift+l exec i3lock, mode "default"
+bindsym $mod+Shift+l exec /home/vacwin/dotfiles/i3/scripts/lock
 bindsym $mod+q kill
 # apps
 bindsym $mod+t exec ghostty
 # font
-font pango:MesloLGS Nerd Font 18
+font pango:Iosevka Nerd Font 18
 # focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
