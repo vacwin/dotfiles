@@ -34,7 +34,16 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "10: set $ws1 "1:  terminal"
+set $ws2 "2:  firefox"
+set $ws3 "3:  telegram"
+set $ws4 "4:  spotify"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10:  obsidian"
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -75,11 +84,11 @@ exec --no-startup-id bluetoothctl connect FC:41:68:8F:4E:7B
 exec --no-startup-id feh --bg-scale ~/Downloads/wp.jpg
 # rules for auto
 assign [class="(?i)telegram.*"] $ws3
-assign [class="(?i)obsidian"] $ws3
+assign [class="(?i)obsidian"] $ws10
 # auto exec
 exec --no-startup-id i3-msg "workspace $ws1; exec ghostty"
 exec --no-startup-id i3-msg "workspace $ws2; exec firefox"
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
-exec --no-startup-id i3-msg 'workspace $ws3; exec obsidian; workspace back_and_forth'
+exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_forth'
 # bar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
