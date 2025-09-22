@@ -15,6 +15,9 @@ call plug#end()
 	set number relativenumber
 	set cursorline
 	set cursorcolumn
+	set expandtab
+	set tabstop=2
+	set shiftwidth=2
 " autocompletion
 	set wildmenu
 	set wildmode=longest,list,full
