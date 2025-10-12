@@ -74,11 +74,14 @@ exec --no-startup-id bluetoothctl connect FC:41:68:8F:4E:7B
 #wallpaper
 exec --no-startup-id feh --bg-scale ~/Downloads/wp.jpg
 # rules for auto
+assign [class="(?i) ghostty.*"] $ws1
+assign [class="(?i) firefox.*"] $ws2
 assign [class="(?i)telegram.*"] $ws3
+assign [class="(?i)spotify.*"] $ws4
 assign [class="(?i)obsidian"] $ws10
 # auto exec
-exec --no-startup-id i3-msg "workspace $ws1; exec ghostty"
-exec --no-startup-id i3-msg "workspace $ws2; exec firefox"
+exec --no-startup-id i3-msg 'workspace $ws1; exec ghostty; workspace back_and_forth'
+exec --no-startup-id i3-msg 'workspace $ws2; exec firefox; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws4; exec spotify; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_forth'
