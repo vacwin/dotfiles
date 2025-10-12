@@ -25,16 +25,16 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+v split v
 bindsym $mod+Shift+h split h
 # workspaces
-set $ws1 "1:  terminal"
-set $ws2 "2:  firefox"
-set $ws3 "3:  telegram"
-set $ws4 "4:  spotify"
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10:  obsidian"
+set $ws10 "10:  "
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -80,6 +80,7 @@ assign [class="(?i)obsidian"] $ws10
 exec --no-startup-id i3-msg "workspace $ws1; exec ghostty"
 exec --no-startup-id i3-msg "workspace $ws2; exec firefox"
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
+exec --no-startup-id i3-msg 'workspace $ws4; exec spotify; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_forth'
 # bar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

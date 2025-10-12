@@ -1,6 +1,5 @@
 typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-# определение системы
 case "$(uname -s)" in 
   Linux*) OS=Linux ;;
   Darwin*) OS=Mac ;;
@@ -37,3 +36,6 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Add snap binaries to PATH
+export PATH="$PATH:/snap/bin"
