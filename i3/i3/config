@@ -64,8 +64,10 @@ gaps outer 10
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# brightness
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl -d intel_backlight set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -d intel_backlight set 10%-
+exec --no-startup-id brightnessctl --device='tpacpi::kbd_backlight' set 2
 # keyboard layout 
 exec "setxkbmap -layout us,ru"
 exec "setxkbmap -option 'grp:ctrl_space_toggle, ctrl:swapcaps'"
@@ -73,6 +75,9 @@ exec "setxkbmap -option 'grp:ctrl_space_toggle, ctrl:swapcaps'"
 exec --no-startup-id bluetoothctl connect FC:41:68:8F:4E:7B
 #wallpaper
 exec --no-startup-id feh --bg-scale ~/Downloads/wp.jpg
+#screensaver
+exec --no-startup-id xset s off -dpms
+exec --no-startup-id xset s noblank
 # rules for auto
 assign [class="(?i) ghostty.*"] $ws1
 assign [class="(?i) firefox.*"] $ws2
