@@ -68,6 +68,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl -d intel_backlight set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -d intel_backlight set 10%-
 exec --no-startup-id brightnessctl --device='tpacpi::kbd_backlight' set 2
+bindsym Print exec flameshot gui
 # keyboard layout 
 exec "setxkbmap -layout us,ru"
 exec "setxkbmap -option 'grp:ctrl_space_toggle, ctrl:swapcaps'"
