@@ -19,10 +19,13 @@ if [[ "$OS" == "Mac" ]]; then
   plugins+=(
     brew
     macos
+    spotify
   )
 fi
 # linux plugins
 if [[ "$OS" == "Linux" ]]; then
+  plugins+=(
+  )
 fi
 # reload config
 source $ZSH/oh-my-zsh.sh
@@ -30,6 +33,7 @@ source $ZSH/oh-my-zsh.sh
 alias kssh="kitten ssh"
 alias sp="spotify"
 alias cs="console_sudoku"
+alias clip="xclip -selection clipboard"
 # system's path
 if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
