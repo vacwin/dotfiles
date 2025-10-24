@@ -90,5 +90,6 @@ exec --no-startup-id i3-msg 'workspace $ws2; exec firefox; workspace back_and_fo
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws4; exec spotify; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_forth'
+exec --no-startup-id picom -b
 # bar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
