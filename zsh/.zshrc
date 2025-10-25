@@ -19,7 +19,6 @@ if [[ "$OS" == "Mac" ]]; then
   plugins+=(
     brew
     macos
-    spotify
   )
 fi
 # linux plugins
