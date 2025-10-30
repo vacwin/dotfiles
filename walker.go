@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"math"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -21,6 +20,7 @@ func main() {
 	flag.Parse()
 
 	loc := time.Now().Location()
+
 	startHM, err := time.ParseInLocation("15:04", *startStr, loc)
 	must(err)
 	endHM, err := time.ParseInLocation("15:04", *endStr, loc)
@@ -34,16 +34,20 @@ func main() {
 	start := dayTime(now, startHM)
 	end := dayTime(now, endHM)
 
+	// Если уже после конца — выходим
 	if !now.Before(end) {
 		return
 	}
 
+	// Если до старта — спим до старта; после пробуждения перепроверяем
 	if now.Before(start) {
 		sleepUntil(start)
+		if time.Now().After(end) {
+			return
+		}
 	}
 
 	nextFire := nextAlignedFromStart(time.Now(), start, *interval)
-
 	if !nextFire.Before(end) {
 		return
 	}
@@ -52,19 +56,32 @@ func main() {
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
 	for {
+		// Жёсткая проверка дедлайна в начале каждой итерации
+		if time.Now().After(end) {
+			return
+		}
+
 		wait := time.Until(nextFire)
 		if wait <= 0 {
-			notify(*title, *message)
-			nextFire = nextFire.Add(*interval)
-		} else {
-			timer := time.NewTimer(wait)
-			select {
-			case <-timer.C:
-				notify(*title, *message)
-				nextFire = nextFire.Add(*interval)
-			case <-sigs:
+			// Предохранительная проверка перед показом
+			if time.Now().After(end) {
 				return
 			}
+			notify(*title, *message)
+			nextFire = nextFire.Add(*interval)
+			continue
+		}
+
+		timer := time.NewTimer(wait)
+		select {
+		case <-timer.C:
+			if time.Now().After(end) {
+				return
+			}
+			notify(*title, *message)
+			nextFire = nextFire.Add(*interval)
+		case <-sigs:
+			return
 		}
 
 		if !nextFire.Before(end) {
@@ -88,16 +105,20 @@ func dayTime(t time.Time, hm time.Time) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), hm.Hour(), hm.Minute(), 0, 0, t.Location())
 }
 
+// nextAlignedFromStart вычисляет следующий "тик" строго после now,
+// выравниваясь от start, без float.
 func nextAlignedFromStart(now, start time.Time, interval time.Duration) time.Time {
 	if now.Before(start) {
 		return start.Add(interval)
 	}
 	elapsed := now.Sub(start)
-	step := math.Ceil(float64(elapsed) / float64(interval))
-	if step < 1 {
-		step = 1
+	steps := elapsed / interval
+	if elapsed%interval == 0 {
+		steps++ // следующий слот, а не текущий
+	} else {
+		steps++
 	}
-	return start.Add(time.Duration(step) * interval)
+	return start.Add(steps * interval)
 }
 
 func notify(title, message string) {
