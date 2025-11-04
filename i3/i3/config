@@ -87,7 +87,7 @@ assign [class="(?i)spotify.*"] $ws4
 assign [class="(?i)obsidian"] $ws10
 # auto exec
 exec --no-startup-id i3-msg 'workspace $ws1; exec ghostty; workspace back_and_forth'
-exec --no-startup-id i3-msg 'workspace $ws2; exec firefox; workspace back_and_forth'
+exec --no-startup-id i3-msg 'workspace $ws2; exec env MOZ_X11_EGL=1 MOZ_DISABLE_RDD_SANDBOX=1 firefox-esr; workspace back_and_forth';
 exec --no-startup-id i3-msg 'workspace $ws3; exec telegram; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws4; exec spotify; workspace back_and_forth'
 exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_forth'
