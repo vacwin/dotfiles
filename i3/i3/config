@@ -4,7 +4,7 @@ set $mod Mod4
 bindsym $mod+Shift+e exit
 bindsym $mod+Shift+r restart
 bindsym $mod+space exec dmenu_run
-bindsym $mod+Shift+l exec /home/vacwin/dotfiles/i3/scripts/lock
+bindsym $mod+Ctrl+q exec /home/vacwin/dotfiles/i3/scripts/lock
 bindsym $mod+q kill
 # apps
 bindsym $mod+t exec ghostty
