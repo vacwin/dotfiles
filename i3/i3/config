@@ -94,3 +94,4 @@ exec --no-startup-id i3-msg 'workspace $ws10; exec obsidian; workspace back_and_
 exec --no-startup-id picom -b
 # bar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/dotfiles/i3/scripts/external.sh
