@@ -1,0 +1,4 @@
+set $mod Mod4
+
+bindsym $mod+Shift+f exec MOZ_ENABLED_WAYLAND=1 firefox-esr
+bindsym $mod+t exac foot

@@ -1,4 +1,8 @@
 vim/.netrwhist
 vim/plugged/
+<<<<<<< HEAD
 zsh/.zsh_*
 zsh/.zcompdump*
+=======
+zsh/.zc*
+>>>>>>> 15baf43 (new sway)
