@@ -20,11 +20,13 @@ if [[ "$OS" == "Mac" ]]; then
     brew
     macos
   )
+  alias clip="pbcopy"
 fi
 # linux plugins
 if [[ "$OS" == "Linux" ]]; then
   plugins+=(
   )
+  alias clip="wl-copy"
 fi
 # reload config
 source $ZSH/oh-my-zsh.sh
@@ -38,7 +40,5 @@ if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
+  export MOZ_ENABLE_WAYLAND=1
 fi
-
-# Add snap binaries to PATH
-export PATH="$PATH:/snap/bin"
