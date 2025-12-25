@@ -18,7 +18,7 @@ call plug#end()
 	set expandtab
 	set tabstop=2
 	set shiftwidth=2
-  set clipboard=unnamed
+" set clipboard=unnamed
 " autocompletion
 	set wildmenu
 	set wildmode=longest,list,full
