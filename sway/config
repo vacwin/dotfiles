@@ -7,14 +7,15 @@ set $up k
 set $right l
 # font
 
-bindsym $mod+Shift+f exec MOZ_ENABLED_WAYLAND=1 firefox-esr
-
 # keybindings
-bindsym $mod+return exac foot
 #bindsym $mod+space exec $menu
 bindsym $mod+q kill
 bindsym $mod+c reload
-bindsym $mod+r resize
+bindsym $mod+Shift+r resize
+bindsym $mod+Ctrl+q exec swaylock
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 # focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -24,12 +25,16 @@ bindsym $mod+$right focus right
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
-bindsym $Mod+Shift+$right move right
+bindsym $mod+Shift+$right move right
 
 bindsym $mod+Shift+Left  move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
-bindsym $Mod+Shift+Right move right
+bindsym $mod+Shift+Right move right
+#split
+bindsym $mod+v split v
+bindsym $mod+b split h
+bindsym $mod+f fullscreen toggle
 # workspaces
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -67,5 +72,13 @@ mode "resize" {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
+# keyboard
+input type:keyboard {
+	xkb_layout "us, ru"
+	xkb_options "grp:ctrl_space_toggle, ctrl:swapcaps"
+}
 # status bar
 bar swaybar_command waybar
+# apps 
+bindsym $mod+Return exec foot
+bindsym $mod+Shift+f exec MOZ_ENABLED_WAYLAND=1 firefox-esr
