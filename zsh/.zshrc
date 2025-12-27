@@ -31,10 +31,7 @@ fi
 # reload config
 source $ZSH/oh-my-zsh.sh
 # aliases
-alias kssh="kitten ssh"
 alias sp="spotify"
-alias cs="console_sudoku"
-alias clip="xclip -selection clipboard"
 # system's path
 if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
