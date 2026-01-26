@@ -19,13 +19,13 @@ if [[ "$OS" == "Mac" ]]; then
     brew
     macos
   )
-  alias clip="pbcopy"
+  alias copy="pbcopy"
 fi
 # linux plugins
 if [[ "$OS" == "Linux" ]]; then
   plugins+=(
   )
-  alias clip="wl-copy"
+  alias copy="wl-copy"
 fi
 # reload config
 source $ZSH/oh-my-zsh.sh
