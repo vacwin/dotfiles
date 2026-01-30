@@ -78,7 +78,7 @@ mode "resize" {
 # keyboard and touchpad
 input "1:1:AT_Translated_Set_2_keyboard" {
 	xkb_layout "us,ru"
-	xkb_options "ctrl:swapcaps,grp:ctrl_space_toggle"
+	xkb_options "ctrl:swapcaps"
 }
 input type:touchpad {
 	tap enabled
