@@ -44,3 +44,7 @@ elif [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.local/bin:$PATH"
   export MOZ_ENABLE_WAYLAND=1
 fi
+
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+  exec sway
+fi
