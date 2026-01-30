@@ -12,7 +12,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
   git zsh-syntax-highlighting 
   zsh-autosuggestions
-  tmux
 )
 # mac plugins
 if [[ "$OS" == "Mac" ]]; then
@@ -20,13 +19,13 @@ if [[ "$OS" == "Mac" ]]; then
     brew
     macos
   )
-  alias clip="pbcopy"
+  alias copy="pbcopy"
 fi
 # linux plugins
 if [[ "$OS" == "Linux" ]]; then
   plugins+=(
   )
-  alias clip="wl-copy"
+  alias copy="wl-copy"
 fi
 # reload config
 source $ZSH/oh-my-zsh.sh
