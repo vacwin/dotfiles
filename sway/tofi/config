@@ -1,0 +1,34 @@
+# Fonts
+font = Iosevka
+font-size = 14
+
+# Window
+width = 100%
+height = 100%
+background-color = #000000
+outline-width = 0
+border-width = 0
+padding-left = 35%
+padding-top = 35%
+
+# Text colors
+text-color = #9e9e9e
+prompt-text = "run: "
+prompt-color = #5f8787
+placeholder-text = ""
+selection-color = #5f8787
+selection-background = #000000
+selection-background-padding = 4
+
+# Input
+input-color = #c1c1c1
+default-result-color = #888888
+
+# Results
+num-results = 8
+result-spacing = 20
+
+# Behavior
+hide-cursor = true
+history = true
+fuzzy-match = true
