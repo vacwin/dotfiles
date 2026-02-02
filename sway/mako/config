@@ -1,0 +1,24 @@
+# Styling
+font=Iosevka 12
+background-color=#000000
+text-color=#9e9e9e
+border-color=#5f8787
+border-size=2
+border-radius=0
+padding=10
+margin=10
+
+# Behavior
+default-timeout=5000
+ignore-timeout=0
+
+# Position
+anchor=top-right
+width=300
+height=100
+
+# Urgency colors
+[urgency=high]
+border-color=#5f8787
+background-color=#111111
+text-color=#c1c1c1
