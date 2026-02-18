@@ -101,4 +101,5 @@ bar swaybar_command waybar
 bindsym $mod+Return exec ghostty
 bindsym $mod+Shift+f exec MOZ_ENABLED_WAYLAND=1 firefox-esr
 bindsym Control+space exec swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_switch_layout next
+bindsym $mod+Shift+z exec ~/.tarball-installations/zen/zen
 exec mako
