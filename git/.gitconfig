@@ -1,0 +1,19 @@
+[http]
+	version = HTTP/1.1
+[user]
+	name = vacwin
+	email = nikif.app@icloud.com
+[alias]
+  # info
+  st = status -s
+  sta = status
+  # reset
+  unstage = reset HEAD --
+  # checkout 
+  co = checkout
+  # commit
+  ci = commit
+  # log
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+  # config
+  cge = config --global --edit
