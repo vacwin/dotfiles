@@ -41,9 +41,9 @@ alias sp="spotify"
 if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
   export MOZ_ENABLE_WAYLAND=1
 fi
+export PATH="$HOME/.local/bin:$PATH"
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec sway
