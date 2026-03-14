@@ -25,6 +25,9 @@ link ghostty "$HOME/.config/ghostty"
 link scripts/copy "$HOME/.local/bin/copy"
 chmod +x "$DOTFILES/scripts/copy"
 
+link scripts/copy "$HOME/.local/bin/paste"
+chmod +x "$DOTFILES/scripts/paste"
+
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
   link sway "$HOME/.config/sway"
