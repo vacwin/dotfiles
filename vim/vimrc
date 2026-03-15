@@ -25,12 +25,12 @@ call plug#end()
 " theme
 set termguicolors
 colorscheme base16-black-metal-gorgoroth
-set termguicolors
 " transparent
 augroup TransparentBG
   autocmd!
   autocmd VimEnter,ColorScheme * call s:TransparentBG()
-  autocmd User GoyoEnter,GoyoLeave call s:TransparentBG()
+  autocmd User GoyoEnter call s:TransparentBG()
+  autocmd User GoyoLeave call s:TransparentBG()
 augroup END
 
 function! s:TransparentBG() abort
