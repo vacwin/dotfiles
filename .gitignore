@@ -2,3 +2,5 @@ vim/.netrwhist
 vim/plugged/
 zsh/.zsh_*
 zsh/.zcompdump*
+ghostty/.DS*
+.DS*
