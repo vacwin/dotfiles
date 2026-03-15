@@ -8,7 +8,7 @@ link() {
   local src="$DOTFILES/$1"
   local dst="$2"
   mkdir -p "$(dirname "$dst")"
-  ln -sf "$src" "$dst"
+  ln -sfn "$src" "$dst"
   echo "linked $dst"
 }
 
@@ -25,7 +25,7 @@ link ghostty "$HOME/.config/ghostty"
 link scripts/copy "$HOME/.local/bin/copy"
 chmod +x "$DOTFILES/scripts/copy"
 
-link scripts/copy "$HOME/.local/bin/paste"
+link scripts/paste "$HOME/.local/bin/paste"
 chmod +x "$DOTFILES/scripts/paste"
 
 # OS-specific
