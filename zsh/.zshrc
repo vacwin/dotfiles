@@ -28,6 +28,8 @@ alias sp="spotify"
 # system's path
 if [[ "$OS" == "Mac" ]]; then
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+  export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
+  export PATH="$JAVA_HOME/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
   export MOZ_ENABLE_WAYLAND=1
 fi
