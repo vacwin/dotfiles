@@ -2,6 +2,14 @@
 set -e
 set -u
 
+case "${1:-}" in
+  -h|--help)
+    echo "usage: $(basename "$0") [FILE]"
+    echo "copy stdin or file to clipboard"
+    exit 0
+    ;;
+esac
+
 if hash pbcopy 2>/dev/null; then
   exec pbcopy
 elif hash wl-copy 2>/dev/null; then
