@@ -7,53 +7,44 @@ call plug#begin(expand('~/dotfiles/vim/plugged'))
 	Plug 'utensils/colors.vim'
 	Plug 'junegunn/goyo.vim'
 call plug#end()
-" basics:
-	set nocompatible
-	filetype plugin on
-	filetype indent on
-	syntax on
-	set number relativenumber
-	set cursorline
-	set cursorcolumn
-	set expandtab
-	set tabstop=2
-	set shiftwidth=2
-" set clipboard=unnamed
+" basics
+set nocompatible
+filetype plugin on
+filetype indent on
+syntax on
+set number relativenumber
+set cursorline
+set cursorcolumn
+set expandtab
+set tabstop=2
+set shiftwidth=2
 " autocompletion
-	set wildmenu
-	set wildmode=longest,list,full
+set wildmenu
+set wildmode=longest,list,full
 " theme
 set termguicolors
-colorscheme base16-black-metal-gorgoroth
-" transparent
+colorscheme deep-sea
+" transparent bg
 augroup TransparentBG
   autocmd!
   autocmd VimEnter,ColorScheme * call s:TransparentBG()
   autocmd User GoyoEnter call s:TransparentBG()
   autocmd User GoyoLeave call s:TransparentBG()
 augroup END
-
 function! s:TransparentBG() abort
   highlight Normal           ctermbg=NONE guibg=NONE
   highlight NormalNC         ctermbg=NONE guibg=NONE
   highlight EndOfBuffer      ctermbg=NONE guibg=NONE
   highlight SignColumn       ctermbg=NONE guibg=NONE
   highlight LineNr           ctermbg=NONE guibg=NONE
-  highlight CursorLine       ctermbg=NONE guibg=NONE
   highlight CursorColumn     ctermbg=NONE guibg=NONE
-  highlight CursorLineNr     ctermbg=NONE guibg=NONE
   highlight NormalFloat      ctermbg=NONE guibg=NONE
   highlight FloatBorder      ctermbg=NONE guibg=NONE
   highlight Pmenu            ctermbg=NONE guibg=NONE
   highlight PmenuSel         ctermbg=NONE guibg=NONE
-  highlight StatusLine       ctermbg=NONE guibg=NONE
-  highlight StatusLineNC     ctermbg=NONE guibg=NONE
-  highlight TabLine          ctermbg=NONE guibg=NONE
-  highlight TabLineFill      ctermbg=NONE guibg=NONE
-  highlight TabLineSel       ctermbg=NONE guibg=NONE
-  highlight WinSeparator     ctermbg=NONE guibg=NONE
 endfunction
 " connect mappings
 if filereadable(expand('~/dotfiles/vim/mappings.vim'))
 	execute 'source' fnameescape(expand('~/dotfiles/vim/mappings.vim'))
 endif
+

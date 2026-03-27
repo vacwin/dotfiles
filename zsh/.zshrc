@@ -35,6 +35,11 @@ elif [[ "$OS" == "Linux" ]]; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
+# tmux autostart
+if [ -z "$TMUX" ]; then
+  ~/dotfiles/tmux/startup.sh
+fi
+
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec sway
 fi
