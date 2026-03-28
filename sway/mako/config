@@ -1,11 +1,11 @@
 # Styling
 font=Iosevka 12
-background-color=#000000
-text-color=#9e9e9e
-border-color=#5f8787
-border-size=2
-border-radius=0
-padding=10
+background-color=#122028CC
+text-color=#a8c4c8
+border-color=#2d5060
+border-size=1
+border-radius=6
+padding=12,16
 margin=10
 
 # Behavior
@@ -18,7 +18,17 @@ width=300
 height=100
 
 # Urgency colors
+[urgency=low]
+border-color=#2d5060
+background-color=#0d1a1fAA
+text-color=#5a9aaa
+
+[urgency=normal]
+border-color=#2d5060
+background-color=#122028CC
+text-color=#a8c4c8
+
 [urgency=high]
-border-color=#5f8787
-background-color=#111111
-text-color=#c1c1c1
+border-color=#cc5555
+background-color=#122028E5
+text-color=#dd7777

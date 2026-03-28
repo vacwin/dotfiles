@@ -6,9 +6,9 @@
 }
 
 window#waybar {
-    background-color: #000000;
-    border-bottom: 2px solid #333333;
-    color: #9e9e9e;
+    background-color: #0d1a1f;
+    border-bottom: 1px solid #1e3840;
+    color: #a8c4c8;
 }
 
 button {
@@ -20,29 +20,29 @@ button {
 }
 
 button:hover {
-    background: #111111;
+    background: #1e3840;
     box-shadow: none;
 }
 
 #workspaces button {
     padding: 0 8px;
     background-color: transparent;
-    color: #888888;
+    color: #2d5060;
 }
 
 #workspaces button:hover {
-    background: #111111;
-    color: #9e9e9e;
+    background: #122028;
+    color: #a8c4c8;
 }
 
 #workspaces button.focused {
-    background-color: #5f8787;
-    color: #000000;
+    background-color: #1e3840;
+    color: #5abbc0;
 }
 
 #workspaces button.urgent {
-    background-color: #5f8787;
-    color: #ffffff;
+    background-color: #cc5555;
+    color: #0d1a1f;
 }
 
 #clock,
@@ -61,9 +61,9 @@ button:hover {
 #language {
     padding: 0 10px;
     margin: 0 2px;
-    background-color: #000000;
-    color: #9e9e9e;
-    border-left: 1px solid #333333;
+    background-color: #0d1a1f;
+    color: #a8c4c8;
+    border-left: 1px solid #1e3840;
 }
 
 #window,
@@ -80,21 +80,21 @@ button:hover {
 }
 
 #clock {
-    color: #c1c1c1;
+    color: #c8dde0;
     font-weight: bold;
 }
 
 #battery {
-    color: #aaaaaa;
+    color: #a8c4c8;
 }
 
 #battery.charging, #battery.plugged {
-    color: #5f8787;
+    color: #2a8855;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #5f8787;
-    color: #000000;
+    background-color: #cc5555;
+    color: #0d1a1f;
     animation-name: blink;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -104,51 +104,51 @@ button:hover {
 
 @keyframes blink {
     to {
-        background-color: #000000;
-        color: #5f8787;
+        background-color: #0d1a1f;
+        color: #cc5555;
     }
 }
 
 #cpu {
-    color: #888888;
+    color: #5a9aaa;
 }
 
 #memory {
-    color: #888888;
+    color: #5a9aaa;
 }
 
 #disk {
-    color: #888888;
+    color: #5a9aaa;
 }
 
 #backlight {
-    color: #aaaaaa;
+    color: #a8c4c8;
 }
 
 #network {
-    color: #5f8787;
+    color: #5abbc0;
 }
 
 #network.disconnected {
-    color: #556677;
+    color: #2d5060;
 }
 
 #pulseaudio,
 #wireplumber {
-    color: #aaaaaa;
+    color: #a8c4c8;
 }
 
 #pulseaudio.muted,
 #wireplumber.muted {
-    color: #556677;
+    color: #2d5060;
 }
 
 #temperature {
-    color: #888888;
+    color: #5a9aaa;
 }
 
 #temperature.critical {
-    color: #5f8787;
+    color: #cc5555;
 }
 
 #tray {
@@ -160,25 +160,25 @@ button:hover {
 }
 
 #tray > .needs-attention {
-    background-color: #5f8787;
-    color: #000000;
+    background-color: #cc5555;
+    color: #0d1a1f;
 }
 
 #idle_inhibitor {
-    color: #888888;
+    color: #5a9aaa;
 }
 
 #idle_inhibitor.activated {
-    color: #5f8787;
+    color: #5abbc0;
 }
 
 #language {
-    color: #5f8787;
+    color: #3a9aaa;
     min-width: 16px;
 }
 
 #mode {
-    background-color: #5f8787;
-    color: #000000;
+    background-color: #1e3840;
+    color: #5abbc0;
     font-weight: bold;
 }

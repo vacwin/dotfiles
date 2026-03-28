@@ -1,0 +1,50 @@
+# Clock
+clock
+timestr=%I:%M %p
+datestr=%A, %d %B
+
+# Screenshot + effects
+screenshots
+effect-blur=7x5
+effect-vignette=0.5:0.8
+
+# Hide keyboard layout
+indicator-idle-visible
+hide-keyboard-layout
+
+# Indicator style
+indicator-radius=100
+indicator-thickness=4
+line-uses-ring
+
+# Colors — deep-sea
+color=0d1a1f
+
+ring-color=1e3840
+ring-ver-color=5abbc0
+ring-wrong-color=cc5555
+ring-clear-color=2d5060
+
+key-hl-color=5abbc0
+bs-hl-color=cc5555
+
+inside-color=12202800
+inside-ver-color=12202800
+inside-wrong-color=12202800
+inside-clear-color=12202800
+
+line-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+line-clear-color=00000000
+
+text-color=a8c4c8
+text-ver-color=5abbc0
+text-wrong-color=cc5555
+text-clear-color=2d5060
+
+separator-color=00000000
+
+# Font
+font=Iosevka
+font-size=40
