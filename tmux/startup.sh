@@ -1,8 +1,7 @@
 #!/bin/bash
 
-tmux has-session -t main 2>/dev/null && exit 0
-
 NOTES="${NOTES_DIR:-$HOME/obsidian-notes}"
+
 if tmux has-session -t main 2>/dev/null; then
   tmux attach -t main
 else
