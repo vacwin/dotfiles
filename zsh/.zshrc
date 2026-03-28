@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 alias sp="spotify"
 # system's path
 if [[ "$OS" == "Mac" ]]; then
-  export NOTES_DIR=~/pd/obsidian-notes/obsidian-notes
+  export NOTES_DIR=~/pd/obsidian-notes
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
   export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
   export PATH="$JAVA_HOME/bin:$PATH"
