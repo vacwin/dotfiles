@@ -29,6 +29,7 @@ alias sp="spotify"
 if [[ "$OS" == "Mac" ]]; then
   export NOTES_DIR=~/pd/obsidian-notes
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+	export PATH="$HOME/go/bin:$PATH"
   export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
   export PATH="$JAVA_HOME/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
@@ -45,3 +46,4 @@ fi
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec sway
 fi
+showpkm
