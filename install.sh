@@ -31,4 +31,6 @@ chmod +x "$DOTFILES/scripts/paste"
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
   link sway "$HOME/.config/sway"
+  link eww "$HOME/.config/eww"
+  chmod +x "$DOTFILES/eww/osd.sh"
 fi

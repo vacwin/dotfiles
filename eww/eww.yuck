@@ -1,0 +1,37 @@
+(defvar osd-icon "")
+(defvar osd-value 50)
+(defvar osd-label "Volume")
+
+(defwindow osd
+  :monitor 0
+  :geometry (geometry
+    :x "0"
+    :y "40px"
+    :width "300px"
+    :height "90px"
+    :anchor "top center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  :style "background: transparent;"
+  (osd-widget))
+
+(defwidget osd-widget []
+  (box :class "osd-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 7
+    (box :orientation "h"
+      :space-evenly false
+      :spacing 10
+      :valign "center"
+      (label :class "osd-icon" :text osd-icon)
+      (label :class "osd-label" :text osd-label)
+      (label :class "osd-value" :text "${osd-value}%" :halign "end" :hexpand true))
+    (scale :class "osd-bar"
+      :value osd-value
+      :min 0
+      :max 100
+      :active false
+      :orientation "h"
+      :hexpand true)))

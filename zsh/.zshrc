@@ -10,9 +10,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 plugins=(
-	git
-  	zsh-autosuggestions
-	zsh-syntax-highlighting
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 # mac plugins
 if [[ "$OS" == "Mac" ]]; then
@@ -35,8 +35,13 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   export NOTES_DIR=~/obsidian-notes
   export MOZ_ENABLE_WAYLAND=1
+  export PATH=$PATH:/usr/local/go/bin
 fi
+
 export PATH="$HOME/.local/bin:$PATH"
+
+# cargo / rust
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # tmux autostart
 if [ -z "$TMUX" ]; then
