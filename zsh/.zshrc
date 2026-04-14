@@ -48,7 +48,4 @@ if [ -z "$TMUX" ]; then
   ~/dotfiles/tmux/startup.sh
 fi
 
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-  exec sway
-fi
 showpkm
