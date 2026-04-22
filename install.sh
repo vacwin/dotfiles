@@ -20,6 +20,12 @@ link git/.gitconfig "$HOME/.gitconfig"
 
 # ghostty
 link ghostty "$HOME/.config/ghostty"
+SHADERS_DIR="$DOTFILES/ghostty/shaders"
+if [[ ! -d "$SHADERS_DIR" ]]; then
+  git clone https://github.com/sahaj-b/ghostty-cursor-shaders "$SHADERS_DIR"
+else
+  git -C "$SHADERS_DIR" pull --ff-only
+fi
 
 # scripts
 link scripts/copy "$HOME/.local/bin/copy"

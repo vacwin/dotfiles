@@ -3,4 +3,5 @@ vim/plugged/
 zsh/.zsh_*
 zsh/.zcompdump*
 ghostty/.DS*
+ghostty/shaders/
 .DS*

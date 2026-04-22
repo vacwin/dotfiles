@@ -7,5 +7,6 @@ config-file = ?config.d/tabs.conf
 config-file = ?config.d/colors.conf
 config-file = ?config.d/fonts.conf
 config-file = ?config.d/cursor.conf
+custom-shader = shaders/cursor_tail.glsl
 
 
