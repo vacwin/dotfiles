@@ -34,6 +34,10 @@ chmod +x "$DOTFILES/scripts/copy"
 link scripts/paste "$HOME/.local/bin/paste"
 chmod +x "$DOTFILES/scripts/paste"
 
+# nvim
+link nvim "$HOME/.config/nvim"
+nvim --headless "+Lazy! sync" +qa 2>&1
+
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
   link sway "$HOME/.config/sway"
