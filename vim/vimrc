@@ -5,7 +5,6 @@ execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
 " plugins
 call plug#begin(expand('~/dotfiles/vim/plugged'))
 	Plug 'utensils/colors.vim'
-	Plug 'junegunn/goyo.vim'
 call plug#end()
 " basics
 set nocompatible
@@ -18,12 +17,13 @@ set cursorcolumn
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set noshowcmd
 " autocompletion
 set wildmenu
 set wildmode=longest,list,full
 " theme
 set termguicolors
-colorscheme deep-sea
+colorscheme base16-black-metal-mayhem
 " transparent bg
 augroup TransparentBG
   autocmd!
