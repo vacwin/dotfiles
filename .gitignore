@@ -1,7 +1,12 @@
 vim/.netrwhist
 vim/plugged/
-zsh/.zsh_*
-zsh/.zcompdump*
 ghostty/.DS*
 ghostty/shaders/
 .DS*
+
+# zsh runtime
+zsh/.zsh_history
+zsh/.zsh_sessions/
+zsh/.zcompdump*
+zsh/.zcompcache
+zsh/*.bak.*
