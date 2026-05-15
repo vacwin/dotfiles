@@ -40,6 +40,7 @@ if [[ "$OS" == "Mac" ]]; then
   export PATH="$HOME/go/bin:$PATH"
   export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
   export PATH="$JAVA_HOME/bin:$PATH"
+  export PATH="/Users/vacwin/.terragrunt/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
   export NOTES_DIR=~/obsidian-notes
   export MOZ_ENABLE_WAYLAND=1
@@ -48,9 +49,27 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 ssh() {
-  tmux rename-window "${1##*@}"
+  if [[ -n "$TMUX" ]]; then
+    trap 'tmux rename-window "shell"' EXIT INT TERM
+    tmux rename-window "${1##*@}"
+  fi
   command ssh "$@"
-  tmux rename-window "shell"
+}
+
+wssh() {
+  if ! gpg-connect-agent /bye >/dev/null 2>&1; then
+    gpgconf --kill gpg-agent
+    gpgconf --launch gpg-agent
+  fi
+  export GPG_TTY="$(tty)"
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+
+  if [[ -n "$TMUX" ]]; then
+    trap 'tmux rename-window "shell"' EXIT INT TERM
+    tmux rename-window "${1##*@}"
+  fi
+  command ssh "$@"
 }
 
 function gitstatus_stop_p9k_() { }
