@@ -69,7 +69,7 @@ wssh() {
     trap 'tmux rename-window "shell"' EXIT INT TERM
     tmux rename-window "${1##*@}"
   fi
-  command ssh "$@"
+  command ssh -p 2424 "$@"
 }
 
 function gitstatus_stop_p9k_() { }
