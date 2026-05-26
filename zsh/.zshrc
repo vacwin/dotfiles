@@ -55,7 +55,7 @@ ssh() {
   fi
   command ssh "$@"
 }
-
+# WORK
 wssh() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
     gpgconf --kill gpg-agent
@@ -71,6 +71,52 @@ wssh() {
   fi
   command ssh -p 2424 "$@"
 }
+
+_docker_ansible_combine.sh() {
+  if (( CURRENT == 2 )); then
+    local -a vals
+    vals=("${(@s: :)$(
+      awk -F'[()]' '/^readonly VALID_PLATFORMS=\(/ {print $2; exit}' $HOME/wd/ansible/docker_ansible_combine.sh
+    )}")
+    _describe -t values 'values' vals
+    return 0
+  fi
+  if (( CURRENT == 4 )); then
+    local -a vals
+    vals=("${(@s: :)$(
+      grep -oP "^  [a-z_]+\)" $HOME/wd/ansible/docker_ansible_combine.sh | grep -oP "[a-z_]+" | tr '\n' ' '
+    )}")
+    _describe -t values 'values' vals
+    return 0
+  fi
+ 
+  return 0
+}
+
+compdef _docker_ansible_combine.sh docker_ansible_combine.sh
+
+_docker_fronts.sh() {
+  if (( CURRENT == 2 )); then
+    local -a vals
+    vals=("${(@s: :)$(
+      awk -F'[()]' '/^readonly VALID_PLATFORMS=\(/ {print $2; exit}' $HOME/wd/ansible/docker_fronts.sh
+    )}")
+    _describe -t values 'values' vals
+    return 0
+  fi
+  if (( CURRENT == 3 )); then
+    local -a vals
+    vals=("${(@s: :)$(
+      grep -oP "^  [a-z_]+\)" $HOME/wd/ansible/docker_fronts.sh | grep -oP "[a-z_]+" | tr '\n' ' '
+    )}")
+    _describe -t values 'values' vals
+    return 0
+  fi
+ 
+  return 0
+}
+
+compdef _docker_fronts.sh docker_fronts.sh
 
 function gitstatus_stop_p9k_() { }
 
