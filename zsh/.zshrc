@@ -9,7 +9,7 @@ esac
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="bira"
 
 plugins=(
   git
@@ -46,15 +46,8 @@ elif [[ "$OS" == "Linux" ]]; then
   export MOZ_ENABLE_WAYLAND=1
   export PATH=$PATH:/usr/local/go/bin
 fi
-export PATH="$HOME/.local/bin:$PATH"
 
-ssh() {
-  if [[ -n "$TMUX" ]]; then
-    trap 'tmux rename-window "shell"' EXIT INT TERM
-    tmux rename-window "${1##*@}"
-  fi
-  command ssh "$@"
-}
+export PATH="$HOME/.local/bin:$PATH"
 # WORK
 wssh() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
@@ -84,7 +77,7 @@ _docker_ansible_combine.sh() {
   if (( CURRENT == 4 )); then
     local -a vals
     vals=("${(@s: :)$(
-      grep -oP "^  [a-z_]+\)" $HOME/wd/ansible/docker_ansible_combine.sh | grep -oP "[a-z_]+" | tr '\n' ' '
+      grep -oE "^  [a-z_]+\)" $HOME/wd/ansible/docker_ansible_combine.sh | grep -oE "[a-z_]+" | tr '\n' ' '
     )}")
     _describe -t values 'values' vals
     return 0
@@ -107,7 +100,7 @@ _docker_fronts.sh() {
   if (( CURRENT == 3 )); then
     local -a vals
     vals=("${(@s: :)$(
-      grep -oP "^  [a-z_]+\)" $HOME/wd/ansible/docker_fronts.sh | grep -oP "[a-z_]+" | tr '\n' ' '
+      grep -oE "^  [a-z_]+\)" $HOME/wd/ansible/docker_fronts.sh | grep -oE "[a-z_]+" | tr '\n' ' '
     )}")
     _describe -t values 'values' vals
     return 0
@@ -119,19 +112,6 @@ _docker_fronts.sh() {
 compdef _docker_fronts.sh docker_fronts.sh
 
 function gitstatus_stop_p9k_() { }
-
-# zsh-syntax-highlighting colors (Khold-friendly)
-typeset -gA ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[comment]='fg=#888888'
-ZSH_HIGHLIGHT_STYLES[default]='fg=#c1c1c1'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#974b46'
-ZSH_HIGHLIGHT_STYLES[command]='fg=#5f8787'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=#5f8787'
-ZSH_HIGHLIGHT_STYLES[function]='fg=#5f8787'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#5f8787'
-ZSH_HIGHLIGHT_STYLES[path]='fg=#c1c1c1,underline'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#eceee3'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#eceee3'
 
 # cargo / rust
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
@@ -146,6 +126,3 @@ showpkm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# p10k prompt
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh

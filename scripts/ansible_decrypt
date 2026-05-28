@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+input="${1:-$(cat)}"
+
+decrypted=$(printf '%s\n' "$input" | sed 's/^[[:space:]]*//' | ansible-vault decrypt --output=-)
+
+printf '%s' "$decrypted" | pbcopy
+echo "Decrypted ($(printf '%s' "$decrypted" | wc -c | tr -d ' ') chars) copied to clipboard."

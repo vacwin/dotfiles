@@ -34,9 +34,8 @@ chmod +x "$DOTFILES/scripts/copy"
 link scripts/paste "$HOME/.local/bin/paste"
 chmod +x "$DOTFILES/scripts/paste"
 
-# nvim
-link nvim "$HOME/.config/nvim"
-nvim --headless "+Lazy! sync" +qa 2>&1
+link scripts/ansible_decrypt "$HOME/.local/bin/ansible_decrypt"
+chmod +x "$DOTFILES/scripts/ansible_decrypt"
 
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
