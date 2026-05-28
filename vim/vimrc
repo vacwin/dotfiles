@@ -5,6 +5,8 @@ execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
 " plugins
 call plug#begin(expand('~/dotfiles/vim/plugged'))
 	Plug 'utensils/colors.vim'
+  Plug 'sainnhe/everforest'
+  Plug 'rebelot/kanagawa.nvim'
 call plug#end()
 " basics
 set nocompatible
@@ -23,7 +25,9 @@ set wildmenu
 set wildmode=longest,list,full
 " theme
 set termguicolors
-colorscheme base16-black-metal-mayhem
+set background=dark
+let g:everforest_background='soft'
+colorscheme everforest
 " transparent bg
 augroup TransparentBG
   autocmd!
