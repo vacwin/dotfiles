@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export PATH="$HOME/.ansible-venv/bin:$PATH"
+
 input="${1:-$(cat)}"
 
 decrypted=$(printf '%s\n' "$input" | sed 's/^[[:space:]]*//' | ansible-vault decrypt --output=-)
