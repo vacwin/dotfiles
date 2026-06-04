@@ -1,0 +1,123 @@
+/* Kanagawa Wave */
+@define-color bg        #1f1f28;
+@define-color bg-raised #2a2a37;
+@define-color fg        #dcd7ba;
+@define-color gray      #727169;
+@define-color blue      #7e9cd8;
+@define-color light-blue #7fb4ca;
+@define-color teal      #7aa89f;
+@define-color green     #98bb6c;
+@define-color yellow    #e6c384;
+@define-color orange    #ffa066;
+@define-color red       #e46876;
+
+* {
+    font-family: "Iosevka Nerd Font Mono", sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+}
+
+button {
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+/* workspaces */
+#workspaces button {
+    padding: 0 7px;
+    color: @gray;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: @bg-raised;
+}
+
+#workspaces button.active {
+    color: @fg;
+    background-color: @bg-raised;
+    border-bottom: 2px solid @red;
+}
+
+#workspaces button.urgent {
+    color: @bg;
+    background-color: @red;
+}
+
+#window {
+    color: @gray;
+    padding: 0 8px;
+}
+
+/* clock in center */
+#clock {
+    color: @light-blue;
+    font-weight: bold;
+    padding: 0 12px;
+}
+
+/* right-side pill modules */
+#wireplumber,
+#backlight,
+#bluetooth,
+#network,
+#battery,
+#language,
+#submap {
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin: 4px 3px;
+    background: @bg-raised;
+    color: @fg;
+}
+
+#wireplumber        { color: @teal; }
+#wireplumber.muted  { color: @gray; }
+#backlight          { color: @yellow; }
+#bluetooth          { color: @blue; }
+#bluetooth.disabled { color: @gray; }
+#network            { color: @blue; }
+#network.disconnected { color: @gray; }
+#language           { color: @light-blue; min-width: 20px; }
+
+#battery            { color: @green; }
+#battery.warning    { color: @orange; }
+#battery.critical:not(.charging) {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#submap {
+    background: @red;
+    color: @bg;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    to { color: @bg; background-color: @red; }
+}
+
+#tray { padding: 0 6px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { background-color: @red; color: @bg; border-radius: 8px; }
+
+tooltip {
+    background: @bg-raised;
+    border-radius: 6px;
+    border: 1px solid @gray;
+}
+tooltip label { color: @fg; }
