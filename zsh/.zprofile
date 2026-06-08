@@ -12,11 +12,11 @@ if [ "$(uname -s)" = "Linux" ] && [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
     read -r _choice
     case "$_choice" in
       2|sway) exec sway ;;
-      *)      exec hyprland ;;
+      *)      exec start-hyprland ;;
     esac
   elif [ -n "$_has_sway" ]; then
     exec sway
   elif [ -n "$_has_hypr" ]; then
-    exec hyprland
+    exec start-hyprland
   fi
 fi
