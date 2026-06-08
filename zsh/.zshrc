@@ -44,7 +44,6 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   export NOTES_DIR=~/obsidian-notes
   export MOZ_ENABLE_WAYLAND=1
-  export PATH=$PATH:/usr/local/go/bin
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
