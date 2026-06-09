@@ -33,20 +33,12 @@ alias sp="spotify"
 alias vim="nvim"
 alias fix-gpg='gpgconf --kill gpg-agent && export GPG_TTY="$(tty)" && export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && gpgconf --launch gpg-agent && gpg-connect-agent updatestartuptty /bye > /dev/null && echo "done"'
 
-# system's path
 if [[ "$OS" == "Mac" ]]; then
   export NOTES_DIR=~/pd/obsidian-notes
-  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-  export PATH="$HOME/go/bin:$PATH"
-  export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
-  export PATH="$JAVA_HOME/bin:$PATH"
-  export PATH="/Users/vacwin/.terragrunt/bin:$PATH"
 elif [[ "$OS" == "Linux" ]]; then
   export NOTES_DIR=~/obsidian-notes
   export MOZ_ENABLE_WAYLAND=1
 fi
-
-export PATH="$HOME/.local/bin:$PATH"
 # WORK
 wssh() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
