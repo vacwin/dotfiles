@@ -1,8 +1,8 @@
 [http]
 	version = HTTP/1.1
 [user]
-	name = Pavel Nikirofov
-	email = nikif.app@icloud.com
+	name = Pavel Nikiforov
+	email = vacwin@24h.tv
 [alias]
   # info
   st = status -s
