@@ -21,10 +21,12 @@ link zsh/.zprofile "$HOME/.zprofile"
 link git/.gitconfig "$HOME/.gitconfig"
 
 # ghostty — Ghostty owns ~/.config/ghostty, so link individual files
+# Remove old full-dir symlink if present (re-running ln -sf into a symlinked dir creates self-refs)
+[[ -L "$HOME/.config/ghostty" ]] && rm "$HOME/.config/ghostty"
 mkdir -p "$HOME/.config/ghostty"
-ln -sf "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
-ln -sf "$DOTFILES/ghostty/config.d" "$HOME/.config/ghostty/config.d"
-ln -sf "$DOTFILES/ghostty/themes" "$HOME/.config/ghostty/themes"
+ln -sfn "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
+ln -sfn "$DOTFILES/ghostty/config.d" "$HOME/.config/ghostty/config.d"
+ln -sfn "$DOTFILES/ghostty/themes" "$HOME/.config/ghostty/themes"
 SHADERS_DIR="$DOTFILES/ghostty/shaders"
 if [[ ! -d "$SHADERS_DIR" ]]; then
   git clone https://github.com/sahaj-b/ghostty-cursor-shaders "$SHADERS_DIR"
