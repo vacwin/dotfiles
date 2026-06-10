@@ -58,6 +58,7 @@ if [[ "$OS" == "Linux" ]]; then
   # Hyprland owns ~/.config/hypr, so we source our config from dotfiles instead of symlinking the dir
   mkdir -p "$HOME/.config/hypr"
   echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"
+  ln -sfn "$DOTFILES/hyprlock/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
   link waybar "$HOME/.config/waybar"
   link eww "$HOME/.config/eww"
   chmod +x "$DOTFILES/eww/osd.sh"
