@@ -1,0 +1,172 @@
+/* Kanagawa Wave — matching Waybar */
+@define-color bg        #1f1f28;
+@define-color bg-raised #2a2a37;
+@define-color fg        #dcd7ba;
+@define-color gray      #727169;
+@define-color blue      #7e9cd8;
+@define-color light-blue #7fb4ca;
+@define-color teal      #7aa89f;
+@define-color green     #98bb6c;
+@define-color yellow    #e6c384;
+@define-color orange    #ffa066;
+@define-color red       #e46876;
+
+* {
+    font-family: "Iosevka Nerd Font Mono", sans-serif;
+    font-size: 14px;
+}
+
+.notification-row {
+    outline: none;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+    background: @bg-raised;
+}
+
+.notification {
+    border-radius: 6px;
+    margin: 6px;
+    padding: 0;
+    border: 1px solid @gray;
+    background: @bg;
+}
+
+.notification-content {
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.notification-default-action {
+    border-radius: 6px 6px 0 0;
+}
+
+.notification-default-action:hover {
+    background: @bg-raised;
+}
+
+.close-button {
+    background: transparent;
+    color: @gray;
+    border-radius: 3px;
+    margin: 6px 6px 0 0;
+    padding: 2px;
+}
+
+.close-button:hover {
+    background: @red;
+    color: @bg;
+}
+
+.notification-action {
+    border-top: 1px solid @gray;
+    border-radius: 0;
+    color: @fg;
+}
+
+.notification-action:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.notification-action:hover {
+    background: @bg-raised;
+}
+
+.notification-default-action,
+.notification-action {
+    padding: 6px 14px;
+}
+
+.summary {
+    font-size: 15px;
+    font-weight: bold;
+    color: @fg;
+}
+
+.time {
+    font-size: 12px;
+    color: @gray;
+}
+
+.body {
+    font-size: 14px;
+    color: @fg;
+}
+
+.app-name {
+    font-size: 12px;
+    color: @gray;
+}
+
+.critical {
+    border-color: @red;
+}
+
+.low {
+    border-color: @gray;
+    opacity: 0.85;
+}
+
+/* Control Center */
+.control-center {
+    background: @bg;
+    border: 1px solid @gray;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+.control-center-list-placeholder {
+    color: @gray;
+    font-size: 14px;
+}
+
+.header-title {
+    color: @fg;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 14px;
+}
+
+.clear-all-button {
+    background: @bg-raised;
+    color: @gray;
+    border-radius: 6px;
+    border: none;
+    padding: 4px 10px;
+    margin: 6px;
+}
+
+.clear-all-button:hover {
+    color: @red;
+}
+
+/* DND toggle */
+.widget-dnd {
+    padding: 6px 14px;
+    border-bottom: 1px solid @gray;
+    margin-bottom: 6px;
+}
+
+.widget-dnd > switch {
+    border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+    background: @red;
+}
+
+/* Title widget */
+.widget-title {
+    padding: 6px 14px;
+}
+
+.widget-title > label {
+    color: @fg;
+    font-size: 16px;
+    font-weight: bold;
+}

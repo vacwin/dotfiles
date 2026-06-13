@@ -17,6 +17,7 @@
         "network",
         "battery",
         "hyprland/language",
+        "custom/notification",
         "tray"
     ],
     "hyprland/workspaces": {

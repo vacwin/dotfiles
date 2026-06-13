@@ -61,5 +61,6 @@ if [[ "$OS" == "Linux" ]]; then
   ln -sfn "$DOTFILES/hyprlock/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
   link waybar "$HOME/.config/waybar"
   link eww "$HOME/.config/eww"
+  link swaync "$HOME/.config/swaync"
   chmod +x "$DOTFILES/eww/osd.sh"
 fi
