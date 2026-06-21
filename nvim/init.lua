@@ -15,7 +15,7 @@ require("options")
 require("lazy").setup("plugins")
 require("mappings")
 
-vim.cmd("colorscheme deep-sea")
+vim.cmd("colorscheme everforest")
 
 local function transparent_bg()
   vim.cmd([[

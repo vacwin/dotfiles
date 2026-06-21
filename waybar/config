@@ -1,12 +1,13 @@
 {
     "layer": "top",
-    "height": 34,
+    "height": 37,
     "spacing": 4,
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
+        "hyprland/workspaces"
     ],
     "modules-center": [
+        "custom/cava",
+        "custom/playerctl",
         "clock"
     ],
     "modules-right": [
@@ -125,5 +126,20 @@
     },
     "tray": {
         "spacing": 10
+    },
+    "custom/cava": {
+        "exec": "$HOME/.local/bin/cava-waybar",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false
+    },
+    "custom/playerctl": {
+        "format": " {}",
+        "return-type": "json",
+        "max-length": 40,
+        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "on-click": "playerctl previous",
+        "on-click-middle": "playerctl play-pause",
+        "on-click-right": "playerctl next"
     }
 }

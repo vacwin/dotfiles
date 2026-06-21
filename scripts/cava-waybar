@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+BARS=" ▁▂▃▄▅▆▇█"
+
+cava -p <(printf '[general]\nbars = 10\n[output]\nmethod = raw\nraw_target = /dev/stdout\ndata_format = ascii\nascii_max_range = 8\n') | \
+while IFS= read -r line; do
+    line="${line%;}"
+    out=""
+    IFS=';' read -ra vals <<< "$line"
+    for n in "${vals[@]}"; do
+        out="${out}${BARS:$n:1}"
+    done
+    printf '{"text": "%s", "tooltip": false}\n' "$out"
+done
