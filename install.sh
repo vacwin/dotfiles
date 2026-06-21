@@ -66,6 +66,7 @@ if [[ "$OS" == "Linux" ]]; then
   echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"
   ln -sfn "$DOTFILES/hypr/conf.d" "$HOME/.config/hypr/conf.d"
   ln -sfn "$DOTFILES/hyprlock/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
+  ln -sfn "$DOTFILES/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
   link waybar "$HOME/.config/waybar"
   link eww "$HOME/.config/eww"
   link swaync "$HOME/.config/swaync"
