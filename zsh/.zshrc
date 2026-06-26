@@ -39,6 +39,18 @@ elif [[ "$OS" == "Linux" ]]; then
   export NOTES_DIR=~/obsidian-notes
   export MOZ_ENABLE_WAYLAND=1
 fi
+
+# fzf
+if [[ "$OS" == "Mac" ]]; then
+  FZF_SHELL="$(brew --prefix 2>/dev/null)/opt/fzf/shell"
+elif [[ "$OS" == "Linux" ]]; then
+  FZF_SHELL="/usr/share/fzf"
+fi
+if [[ -d "$FZF_SHELL" ]]; then
+  source "$FZF_SHELL/key-bindings.zsh"
+  source "$FZF_SHELL/completion.zsh"
+fi
+unset FZF_SHELL
 # WORK
 wssh() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
