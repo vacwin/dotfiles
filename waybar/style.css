@@ -73,6 +73,7 @@ button {
 #network,
 #battery,
 #language,
+#custom-language,
 #submap {
     border-radius: 8px;
     padding: 4px 10px;
@@ -88,7 +89,8 @@ button {
 #bluetooth.disabled { color: @gray; }
 #network            { color: @blue; }
 #network.disconnected { color: @gray; }
-#language           { color: @light-blue; min-width: 20px; }
+#language,
+#custom-language    { color: @light-blue; min-width: 20px; }
 
 #battery            { color: @green; }
 #battery.warning    { color: @orange; }

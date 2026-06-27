@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "height": 37,
+    "height": 46,
     "spacing": 4,
     "modules-left": [
         "hyprland/workspaces"
@@ -17,7 +17,7 @@
         "bluetooth",
         "network",
         "battery",
-        "hyprland/language",
+        "custom/language",
         "custom/notification",
         "tray"
     ],
@@ -34,8 +34,10 @@
         "max-length": 12,
         "tooltip": false
     },
-    "hyprland/language": {
-        "format": "{short}"
+    "custom/language": {
+        "exec": "hyprctl -j devices | jq -r '[.keyboards[] | select(.active_keymap != \"\")] | .[0].active_keymap | if . == \"Russian\" then \"RU\" else \"EN\" end'",
+        "interval": 1,
+        "format": "{}"
     },
     "clock": {
         "format": "<span size='x-large'>󰥔</span> {:%a, %d %b  %I:%M %p}",
