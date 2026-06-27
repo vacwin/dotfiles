@@ -30,7 +30,7 @@
         "separate-outputs": true
     },
     "hyprland/submap": {
-        "format": "󰚾 {}",
+        "format": "<span size='x-large'>󰚾</span> {}",
         "max-length": 12,
         "tooltip": false
     },
@@ -38,7 +38,7 @@
         "format": "{short}"
     },
     "clock": {
-        "format": "󰥔 {:%a, %d %b  %I:%M %p}",
+        "format": "<span size='x-large'>󰥔</span> {:%a, %d %b  %I:%M %p}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "month",
@@ -57,10 +57,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% {icon}",
-        "format-plugged": "{capacity}% 󰚥",
-        "format-alt": "{time} {icon}",
+        "format": "{capacity}% <span size='x-large'>{icon}</span>",
+        "format-charging": "{capacity}% <span size='x-large'>{icon}</span>",
+        "format-plugged": "{capacity}% <span size='x-large'>󰚥</span>",
+        "format-alt": "{time} <span size='x-large'>{icon}</span>",
         "format-icons": {
             "default": [
                 "󰂎",
@@ -91,9 +91,9 @@
         }
     },
     "bluetooth": {
-        "format": "󰂯",
+        "format": "<span size='x-large'>󰂯</span>",
         "format-disabled": "",
-        "format-connected": "󰂱 {num_connections}",
+        "format-connected": "<span size='x-large'>󰂱</span> {num_connections}",
         "tooltip-format": "{controller_alias}  {controller_address}",
         "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}  {device_battery_percentage}%  {device_address}",
@@ -101,16 +101,16 @@
     },
     "network": {
         "format": "",
-        "format-wifi": "󰤨",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰤭",
+        "format-wifi": "<span size='x-large'>󰤨</span>",
+        "format-ethernet": "<span size='x-large'>󰈀</span>",
+        "format-disconnected": "<span size='x-large'>󰤭</span>",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) 󰤨",
         "tooltip-format-ethernet": "{ifname}  {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected"
     },
     "wireplumber": {
-        "format": "{volume}% {icon}",
-        "format-muted": "󰝟 ",
+        "format": "{volume}% <span size='x-large'>{icon}</span>",
+        "format-muted": "<span size='x-large'>󰝟</span>",
         "format-icons": {
             "default": [
                 "󰕿",
@@ -122,7 +122,7 @@
     },
     "backlight": {
         "device": "intel_backlight",
-        "format": "{percent}% {icon}",
+        "format": "{percent}% <span size='x-large'>{icon}</span>",
         "format-icons": [
             "󰃞",
             "󰃠"
