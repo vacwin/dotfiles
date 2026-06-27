@@ -1,0 +1,7 @@
+#!/bin/bash
+current=$(hyprctl devices | awk '/at-translated-set-2-keyboard/{found=1} found && /active keymap/{print $NF; exit}')
+if [[ "$current" == "Russian" ]]; then
+    hyprctl switchxkblayout all 0
+else
+    hyprctl switchxkblayout all 1
+fi
