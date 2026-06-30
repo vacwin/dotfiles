@@ -1,6 +1,0 @@
-#!/bin/bash
-lid_state=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null || cat /proc/acpi/button/lid/LID/state 2>/dev/null)
-if echo "$lid_state" | grep -q "closed"; then
-    sleep 2
-    ~/dotfiles/scripts/lid-close
-fi
