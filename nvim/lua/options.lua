@@ -6,5 +6,6 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.wildmode = { "longest", "list", "full" }
+vim.opt.fixendofline = false
 vim.opt.termguicolors = true
 vim.opt.laststatus = 0
