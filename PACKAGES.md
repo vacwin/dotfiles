@@ -11,7 +11,6 @@
 | Инструмент | Пакет (Arch) | Зачем |
 |---|---|---|
 | Hyprland | `hyprland` | основной композитор (`hypr/`) |
-| Sway | `sway` | запасной WM (`sway/`) |
 | ly | `ly` | display manager / greeter (`ly/config.ini`) |
 | hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf) |
 | hypridle | `hypridle` | idle-демон (autostart, hypridle.conf) |

@@ -58,9 +58,8 @@ chmod +x "$DOTFILES/scripts/cava-waybar"
 
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
-  link sway "$HOME/.config/sway"
   mkdir -p "$HOME/.config/tofi"
-  ln -sf "$DOTFILES/sway/tofi/config" "$HOME/.config/tofi/config"
+  ln -sf "$DOTFILES/tofi/config" "$HOME/.config/tofi/config"
   # Hyprland owns ~/.config/hypr, so we source our config from dotfiles instead of symlinking the dir
   mkdir -p "$HOME/.config/hypr"
   echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"

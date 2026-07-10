@@ -1,7 +1,7 @@
 #!/bin/bash
 
 edp_enable() {
-    hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1.5"
+    hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1"
 }
 
 edp_disable() {
