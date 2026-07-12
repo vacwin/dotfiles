@@ -37,6 +37,8 @@ handle() {
                     systemctl suspend
                 else
                     edp_enable
+                    sleep 0.3
+                    hyprctl dispatch dpms on eDP-1
                 fi
             fi
             ;;

@@ -3,5 +3,5 @@ sleep 1
 hyprctl dispatch dpms on
 lid_state=$(cat /proc/acpi/button/lid/LID0/state 2>/dev/null || cat /proc/acpi/button/lid/LID/state 2>/dev/null)
 if echo "$lid_state" | grep -q "open"; then
-    hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1.5"
+    hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1"
 fi
