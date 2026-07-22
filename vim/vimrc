@@ -20,6 +20,8 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set noshowcmd
+" системный буфер: обычные y/p работают с clipboard
+set clipboard=unnamedplus
 " autocompletion
 set wildmenu
 set wildmode=longest,list,full
