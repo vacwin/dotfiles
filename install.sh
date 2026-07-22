@@ -35,7 +35,7 @@ else
 fi
 
 # nvim
-link nvim "$HOME/.config/nvim"
+link vim "$HOME/.config/nvim"
 
 # tmux
 link tmux/tmux.conf "$HOME/.tmux.conf"

@@ -1,1 +1,1 @@
-/Users/vacwin/dotfiles/vim/vimrc
+vimrc
