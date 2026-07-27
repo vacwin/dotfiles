@@ -119,11 +119,6 @@ function gitstatus_stop_p9k_() { }
 # cargo / rust
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
-# tmux autostart
-if [ -z "$TMUX" ]; then
-  ~/dotfiles/tmux/startup.sh
-fi
-
 showpkm
 
 export NVM_DIR="$HOME/.nvm"
