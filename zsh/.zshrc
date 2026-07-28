@@ -28,6 +28,8 @@ fi
 # reload config
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR='nvim'
+
 # aliases
 alias sp="spotify"
 alias vim="nvim"
