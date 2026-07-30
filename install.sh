@@ -70,5 +70,4 @@ if [[ "$OS" == "Linux" ]]; then
   link waybar "$HOME/.config/waybar"
   link swaync "$HOME/.config/swaync"
   link cava "$HOME/.config/cava"
-  chmod +x "$DOTFILES/eww/osd.sh"
 fi

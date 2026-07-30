@@ -11,7 +11,6 @@
 | Инструмент | Пакет (Arch) | Зачем |
 |---|---|---|
 | Hyprland | `hyprland` | основной композитор (`hypr/`) |
-| ly | `ly` | display manager / greeter (`ly/config.ini`) |
 | hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf) |
 | hypridle | `hypridle` | idle-демон (autostart, hypridle.conf) |
 | xdg-desktop-portal-hyprland | `xdg-desktop-portal-hyprland` | скриншеринг/порталы (рекомендуется) |
@@ -22,7 +21,6 @@
 |---|---|---|
 | Waybar | `waybar` | панель (`waybar/`) |
 | SwayNC | `swaync` | центр уведомлений (`swaync/`, `$mod+n`) |
-| eww | `eww` (AUR) | OSD громкости/яркости (`eww/osd.sh`) |
 | tofi | `tofi` (AUR) | лаунчер приложений (`tofi-drun`, `$mod+space`) |
 
 ## Обои
