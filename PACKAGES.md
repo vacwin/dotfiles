@@ -64,7 +64,6 @@
 | zsh-syntax-highlighting | `zsh-syntax-highlighting` | плагин omz |
 | fzf | `fzf` | fuzzy-поиск, биндинги в zsh |
 | tmux | `tmux` | мультиплексор (`tmux/`). TPM клонируется `install.sh` |
-| nvm | AUR / скрипт установки | Node-версии (`~/.nvm`) |
 
 ## Редактор
 
