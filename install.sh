@@ -70,4 +70,16 @@ if [[ "$OS" == "Linux" ]]; then
   link waybar "$HOME/.config/waybar"
   link swaync "$HOME/.config/swaync"
   link cava "$HOME/.config/cava"
+
+  # omz plugins — Arch packages install system-wide, omz looks in custom/plugins
+  ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+  if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+      src="/usr/share/zsh/plugins/$plugin"
+      if [[ -d "$src" ]]; then
+        ln -sfn "$src" "$ZSH_CUSTOM/plugins/$plugin"
+        echo "linked omz plugin $plugin"
+      fi
+    done
+  fi
 fi
