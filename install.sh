@@ -68,7 +68,6 @@ if [[ "$OS" == "Linux" ]]; then
   ln -sfn "$DOTFILES/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
   ln -sfn "$DOTFILES/hypr/hyprsunset.conf" "$HOME/.config/hypr/hyprsunset.conf"
   link waybar "$HOME/.config/waybar"
-  link eww "$HOME/.config/eww"
   link swaync "$HOME/.config/swaync"
   link cava "$HOME/.config/cava"
   chmod +x "$DOTFILES/eww/osd.sh"
