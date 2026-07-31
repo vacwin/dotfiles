@@ -1,0 +1,6 @@
+# Machine-specific overrides.
+# Copy this file to local.conf (untracked, see .gitignore) and adjust per host.
+# Used by both hyprland.conf and hyprlock.conf.
+
+$wallpaper = $HOME/Pictures/twin-snoopy.jpeg
+$avatar = $HOME/Pictures/ava.jpeg
