@@ -11,6 +11,7 @@
 | Инструмент | Пакет (Arch) | Зачем |
 |---|---|---|
 | Hyprland | `hyprland` | основной композитор (`hypr/`) |
+| ly | `ly` | display manager / greeter (`ly/config.ini`) |
 | hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf) |
 | hypridle | `hypridle` | idle-демон (autostart, hypridle.conf) |
 | xdg-desktop-portal-hyprland | `xdg-desktop-portal-hyprland` | скриншеринг/порталы (рекомендуется) |
