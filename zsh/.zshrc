@@ -4,8 +4,15 @@ case "$(uname -s)" in
   *)       OS=unknown ;;
 esac
 
+ZSH_THEME='traffic'
+if [[ -r "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh"
+else
+  source "${ZDOTDIR:-$HOME}/themes/ansi.zsh"
+fi
+
 # colors
-PS1='%B%F{red}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~${vcs_info_msg_0_}%F{red}]%f$%b '
+PS1="%B%F{$ZT_BRACKET}[%F{$ZT_USER}%n%F{$ZT_AT}@%F{$ZT_HOST}%m %F{$ZT_PATH}%~\${vcs_info_msg_0_}%F{$ZT_BRACKET}]%f\$%b "
 
 # history
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
@@ -59,7 +66,6 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
-# Shift+Tab — назад по кандидатам (^[[Z это terminfo kcbt)
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M viins      '^[[Z' reverse-menu-complete
 
@@ -67,10 +73,10 @@ bindkey -M viins      '^[[Z' reverse-menu-complete
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' unstagedstr '%F{red}● %F{yellow}'
-zstyle ':vcs_info:git:*' stagedstr   '%F{green}● %F{yellow}'
-zstyle ':vcs_info:git:*' formats       ' %F{yellow}‹%u%c%b›%f'
-zstyle ':vcs_info:git:*' actionformats ' %F{yellow}‹%u%c%b|%a›%f'
+zstyle ':vcs_info:git:*' unstagedstr "%F{$ZT_UNSTAGED}● %F{$ZT_GIT}"
+zstyle ':vcs_info:git:*' stagedstr   "%F{$ZT_STAGED}● %F{$ZT_GIT}"
+zstyle ':vcs_info:git:*' formats       " %F{$ZT_GIT}‹%u%c%b›%f"
+zstyle ':vcs_info:git:*' actionformats " %F{$ZT_GIT}‹%u%c%b|%a›%f"
 precmd_functions+=(vcs_info)
 setopt prompt_subst
 
