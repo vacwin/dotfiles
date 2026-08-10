@@ -55,8 +55,6 @@ zmodload zsh/complist
 compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
 _comp_options+=(globdots)
 
-# ходить по меню дополнения на hjkl.
-# раскладка menuselect появляется только после zmodload zsh/complist выше
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
@@ -73,6 +71,13 @@ zstyle ':vcs_info:git:*' actionformats ' %F{yellow}‹%u%c%b|%a›%f'
 precmd_functions+=(vcs_info)
 setopt prompt_subst
 
+# lf
+lfcd() {
+  local dir
+  dir="$(command lf -print-last-dir "$@")"
+  [[ -d "$dir" ]] && cd "$dir"
+}
+bindkey -M viins -s '^O' 'lfcd\n'
 
 # aliases
 if [[ "$OS" == "Mac" ]]; then
@@ -91,9 +96,8 @@ if [[ "$OS" == "Mac" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
   FZF_SHELL="/usr/share/fzf"
 fi
+
 if [[ -d "$FZF_SHELL" ]]; then
-  # fzf перебивает Tab на свой виджет и без триггера ** падает в фолбэк.
-  # По умолчанию там expand-or-complete, который не включает menu select
   fzf_default_completion='menu-select'
   source "$FZF_SHELL/key-bindings.zsh"
   source "$FZF_SHELL/completion.zsh"
