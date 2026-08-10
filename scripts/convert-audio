@@ -1,0 +1,153 @@
+#!/bin/bash
+
+echo "🎵 Audio Converter"
+echo "=================="
+echo ""
+
+# Из какого формата
+echo "Из какого формата конвертировать?"
+echo "  1) flac"
+echo "  2) m4a"
+echo "  3) mp3"
+echo "  4) wav"
+read -p "Выбери (1-4): " from_choice
+
+case $from_choice in
+  1) from="flac" ;;
+  2) from="m4a" ;;
+  3) from="mp3" ;;
+  4) from="wav" ;;
+  *) echo "Неверный выбор"; exit 1 ;;
+esac
+
+# В какой формат
+echo ""
+echo "В какой формат?"
+echo "  1) mp3"
+echo "  2) m4a (aac)"
+echo "  3) flac"
+echo "  4) wav"
+read -p "Выбери (1-4): " to_choice
+
+case $to_choice in
+  1) to="mp3" ;;
+  2) to="m4a" ;;
+  3) to="flac" ;;
+  4) to="wav" ;;
+  *) echo "Неверный выбор"; exit 1 ;;
+esac
+
+# Битрейт (только для lossy форматов)
+if [[ "$to" == "mp3" || "$to" == "m4a" ]]; then
+  echo ""
+  echo "Битрейт?"
+  echo "  1) 128k"
+  echo "  2) 192k"
+  echo "  3) 256k"
+  echo "  4) 320k"
+  read -p "Выбери (1-4) [по умолчанию 3 = 256k]: " bitrate_choice
+  case $bitrate_choice in
+    1) bitrate="128k" ;;
+    2) bitrate="192k" ;;
+    4) bitrate="320k" ;;
+    *) bitrate="256k" ;;
+  esac
+fi
+
+# Обложка
+echo ""
+read -p "Есть отдельный файл обложки? (cover.jpg / cover.png) [y/n]: " has_cover
+
+if [[ "$has_cover" == "y" || "$has_cover" == "Y" ]]; then
+  if [ -f "cover.jpg" ]; then
+    cover_file="cover.jpg"
+  elif [ -f "cover.png" ]; then
+    cover_file="cover.png"
+  else
+    read -p "Введи имя файла обложки: " cover_file
+  fi
+
+  if [ ! -f "$cover_file" ]; then
+    echo "⚠️  Файл обложки не найден, продолжаем без неё"
+    has_cover="n"
+  fi
+fi
+
+# Итог
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  $from → $to"
+[[ -n "$bitrate" ]] && echo "  Битрейт: $bitrate"
+[[ "$has_cover" == "y" || "$has_cover" == "Y" ]] && echo "  Обложка: $cover_file"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+read -p "Начать конвертацию? [y/n]: " confirm
+
+if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+  echo "Отменено."
+  exit 0
+fi
+
+# Конвертация
+count=0
+errors=0
+
+for f in *."$from"; do
+  [ -f "$f" ] || { echo "Файлов .$from не найдено"; exit 1; }
+
+  output="${f%.$from}.$to"
+  echo "⏳ $f"
+
+  # Собираем команду
+  if [[ "$has_cover" == "y" || "$has_cover" == "Y" ]]; then
+    cover_args="-i \"$cover_file\" -map 0:a -map 1:v -c:v copy"
+    if [[ "$to" == "mp3" ]]; then
+      cover_args="$cover_args -id3v2_version 3"
+    else
+      cover_args="$cover_args -disposition:v attached_pic"
+    fi
+  else
+    cover_args="-map 0:a -map 0:v?"
+    if [[ "$to" == "mp3" ]]; then
+      cover_args="$cover_args -id3v2_version 3"
+    elif [[ "$to" == "m4a" ]]; then
+      cover_args="$cover_args -disposition:v attached_pic"
+    fi
+  fi
+
+  # Аудио кодек
+  case $to in
+    mp3)  audio_args="-c:a libmp3lame -b:a $bitrate" ;;
+    m4a)  audio_args="-c:a aac -ac 2 -b:a $bitrate" ;;
+    flac) audio_args="-c:a flac" ;;
+    wav)  audio_args="-c:a pcm_s16le" ;;
+  esac
+
+  if [[ "$has_cover" == "y" || "$has_cover" == "Y" ]]; then
+    ffmpeg -y -i "$f" -i "$cover_file" \
+      -map 0:a -map 1:v -c:v copy \
+      $( [[ "$to" == "mp3" ]] && echo "-id3v2_version 3" ) \
+      $( [[ "$to" == "m4a" ]] && echo "-disposition:v attached_pic" ) \
+      $audio_args "$output" 2>/dev/null
+  else
+    ffmpeg -y -i "$f" \
+      -map 0:a \
+      $( [[ "$to" == "mp3" ]] && echo "-id3v2_version 3" ) \
+      $( [[ "$to" == "m4a" ]] && echo "-disposition:v attached_pic" ) \
+      $audio_args "$output" 2>/dev/null
+  fi
+
+  if [ $? -eq 0 ]; then
+    echo "  ✅ $output"
+    ((count++))
+  else
+    echo "  ❌ Ошибка: $f"
+    ((errors++))
+  fi
+done
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  Готово: $count файлов"
+[ $errors -gt 0 ] && echo "  Ошибок: $errors"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

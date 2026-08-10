@@ -8,21 +8,19 @@ link() {
   local src="$DOTFILES/$1"
   local dst="$2"
   mkdir -p "$(dirname "$dst")"
+  if [[ -L "$dst" || -e "$dst" ]]; then
+    rm -rf "$dst"
+  fi
   ln -sfn "$src" "$dst"
   echo "linked $dst"
 }
 
-# zsh — в $HOME нужен только .zshenv, он выставляет ZDOTDIR,
-# после чего zsh сам читает .zprofile и .zshrc из ~/.config/zsh
 link zsh "$HOME/.config/zsh"
 link zsh/.zshenv "$HOME/.zshenv"
 
-# git — XDG location; ~/.gitconfig must not exist for this to take effect
-[[ -e "$HOME/.gitconfig" ]] && rm "$HOME/.gitconfig"
+[[ -L "$HOME/.gitconfig" || -e "$HOME/.gitconfig" ]] && rm -f "$HOME/.gitconfig"
 link git "$HOME/.config/git"
 
-# ghostty — Ghostty owns ~/.config/ghostty, so link individual files
-# Remove old full-dir symlink if present (re-running ln -sf into a symlinked dir creates self-refs)
 [[ -L "$HOME/.config/ghostty" ]] && rm "$HOME/.config/ghostty"
 mkdir -p "$HOME/.config/ghostty"
 ln -sfn "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
@@ -35,8 +33,6 @@ else
   git -C "$SHADERS_DIR" pull --ff-only
 fi
 
-# vim — читает ~/.config/vim/vimrc и кладёт этот каталог в runtimepath сам,
-# начиная с 9.1.0327
 link vim "$HOME/.config/vim"
 
 # tmux
@@ -46,24 +42,16 @@ if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
   git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
 fi
 
-# scripts
-link scripts/copy "$HOME/.local/bin/copy"
-chmod +x "$DOTFILES/scripts/copy"
-
-link scripts/paste "$HOME/.local/bin/paste"
-chmod +x "$DOTFILES/scripts/paste"
-
-link scripts/ansible_decrypt "$HOME/.local/bin/ansible_decrypt"
-chmod +x "$DOTFILES/scripts/ansible_decrypt"
-
-link scripts/cava-waybar "$HOME/.local/bin/cava-waybar"
-chmod +x "$DOTFILES/scripts/cava-waybar"
+# scripts (the rest are called by path from hypr/waybar configs)
+for s in copy paste ansible_decrypt cava-waybar convert-audio; do
+  link "scripts/$s" "$HOME/.local/bin/$s"
+  chmod +x "$DOTFILES/scripts/$s"
+done
 
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
   mkdir -p "$HOME/.config/tofi"
   ln -sf "$DOTFILES/tofi/config" "$HOME/.config/tofi/config"
-  # Hyprland owns ~/.config/hypr, so we source our config from dotfiles instead of symlinking the dir
   mkdir -p "$HOME/.config/hypr"
   echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"
   ln -sfn "$DOTFILES/hypr/conf.d" "$HOME/.config/hypr/conf.d"
