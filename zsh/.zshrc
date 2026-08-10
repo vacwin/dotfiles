@@ -5,7 +5,7 @@ case "$(uname -s)" in
 esac
 
 # colors
-PS1='%B%F{red}[%F{yellow}%n%F{green}@%F{blue}%M %F{magenta}%~${vcs_info_msg_0_}%F{red}]%f$%b '
+PS1='%B%F{red}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~${vcs_info_msg_0_}%F{red}]%f$%b '
 
 # history
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
@@ -18,9 +18,36 @@ setopt hist_ignore_space
 setopt hist_verify           
 setopt share_history         
 
-setopt auto_cd               
-setopt interactive_comments  
+setopt auto_cd
+setopt interactive_comments
 
+# vi-mode
+bindkey -v
+KEYTIMEOUT=1
+
+_vi_cursor_shape() {
+  case $KEYMAP in
+    vicmd) printf '\e[2 q' ;;
+    *)     printf '\e[6 q' ;;
+  esac
+}
+_vi_cursor_reset() { printf '\e[6 q' }
+zle -N zle-keymap-select _vi_cursor_shape
+zle -N zle-line-init     _vi_cursor_shape
+preexec_functions+=(_vi_cursor_reset)
+
+# linux like hotkeys
+bindkey -M viins '^A' beginning-of-line
+bindkey -M viins '^E' end-of-line
+bindkey -M viins '^W' backward-kill-word
+bindkey -M viins '^U' backward-kill-line
+bindkey -M viins '^K' kill-line
+bindkey -M viins '^Y' yank
+bindkey -M viins '^P' up-line-or-history
+bindkey -M viins '^N' down-line-or-history
+bindkey -M viins '^?' backward-delete-char
+
+# tab completion
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -28,6 +55,14 @@ zmodload zsh/complist
 compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
 _comp_options+=(globdots)
 
+# ходить по меню дополнения на hjkl.
+# раскладка menuselect появляется только после zmodload zsh/complist выше
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+# promt line
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -57,6 +92,9 @@ elif [[ "$OS" == "Linux" ]]; then
   FZF_SHELL="/usr/share/fzf"
 fi
 if [[ -d "$FZF_SHELL" ]]; then
+  # fzf перебивает Tab на свой виджет и без триггера ** падает в фолбэк.
+  # По умолчанию там expand-or-complete, который не включает menu select
+  fzf_default_completion='menu-select'
   source "$FZF_SHELL/key-bindings.zsh"
   source "$FZF_SHELL/completion.zsh"
 fi

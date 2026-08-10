@@ -2,8 +2,6 @@
 let mapleader = " "
 " config dir
 execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
-" conf.d — источаем явно, а не через runtime!: этот каталог лежит в rtp дважды
-" (~/dotfiles/vim и симлинк ~/.config/vim), и runtime! сорсил бы всё по два раза
 let s:confd = expand('<sfile>:p:h') . '/conf.d'
 for s:f in sort(split(glob(s:confd . '/*.vim'), "\n"))
   execute 'source' fnameescape(s:f)
