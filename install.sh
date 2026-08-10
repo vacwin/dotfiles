@@ -17,8 +17,9 @@ link() {
 link zsh "$HOME/.config/zsh"
 link zsh/.zshenv "$HOME/.zshenv"
 
-# git
-link git/.gitconfig "$HOME/.gitconfig"
+# git — XDG location; ~/.gitconfig must not exist for this to take effect
+[[ -e "$HOME/.gitconfig" ]] && rm "$HOME/.gitconfig"
+link git "$HOME/.config/git"
 
 # ghostty — Ghostty owns ~/.config/ghostty, so link individual files
 # Remove old full-dir symlink if present (re-running ln -sf into a symlinked dir creates self-refs)
@@ -39,9 +40,10 @@ fi
 link vim "$HOME/.config/vim"
 
 # tmux
-link tmux/tmux.conf "$HOME/.tmux.conf"
-if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
-  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+[[ -L "$HOME/.tmux.conf" ]] && rm "$HOME/.tmux.conf"
+link tmux/tmux.conf "$HOME/.config/tmux/tmux.conf"
+if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
 fi
 
 # scripts
