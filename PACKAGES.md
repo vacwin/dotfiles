@@ -60,9 +60,8 @@
 |---|---|---|
 | Ghostty | `ghostty` | терминал (`$mod+Return`, `ghostty/`) |
 | zsh | `zsh` | шелл (`zsh/`) |
-| oh-my-zsh | AUR / скрипт установки | фреймворк для zsh |
-| zsh-autosuggestions | `zsh-autosuggestions` | плагин omz |
-| zsh-syntax-highlighting | `zsh-syntax-highlighting` | плагин omz |
+| zsh-autosuggestions | `zsh-autosuggestions` | источается напрямую из `.zshrc` |
+| zsh-syntax-highlighting | `zsh-syntax-highlighting` | источается напрямую из `.zshrc`, обязательно последним |
 | fzf | `fzf` | fuzzy-поиск, биндинги в zsh |
 | tmux | `tmux` | мультиплексор (`tmux/`). TPM клонируется `install.sh` |
 
