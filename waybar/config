@@ -44,7 +44,7 @@
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "format": {
-                "today": "<span color='#7e9cd8'><b>{}</b></span>"
+                "today": "<span color='#515e67'><b>{}</b></span>"
             }
         },
         "format-alt": "{:%Y-%m-%d}"

@@ -1,15 +1,15 @@
-/* Kanagawa Wave */
-@define-color bg        #1f1f28;
-@define-color bg-raised #2a2a37;
-@define-color fg        #dcd7ba;
-@define-color gray      #727169;
-@define-color blue      #7e9cd8;
-@define-color light-blue #7fb4ca;
-@define-color teal      #7aa89f;
-@define-color green     #98bb6c;
-@define-color yellow    #e6c384;
-@define-color orange    #ffa066;
-@define-color red       #e46876;
+/* Traffic */
+@define-color bg        #272c30;
+@define-color bg-raised #383a3c;
+@define-color fg        #cfb9a8;
+@define-color gray      #6e6762;
+@define-color blue      #515e67;
+@define-color light-blue #5c6f7d;
+@define-color teal      #637268;
+@define-color green     #637268;
+@define-color yellow    #c79e84;
+@define-color orange    #715f5e;
+@define-color red       #934e46;
 
 * {
     font-family: "Iosevka Nerd Font Mono", sans-serif;
