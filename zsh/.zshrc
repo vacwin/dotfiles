@@ -59,6 +59,9 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
+# Shift+Tab — назад по кандидатам (^[[Z это terminfo kcbt)
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+bindkey -M viins      '^[[Z' reverse-menu-complete
 
 # promt line
 autoload -Uz vcs_info
