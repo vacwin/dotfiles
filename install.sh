@@ -34,8 +34,9 @@ else
   git -C "$SHADERS_DIR" pull --ff-only
 fi
 
-# nvim
-link vim "$HOME/.config/nvim"
+# vim — читает ~/.config/vim/vimrc и кладёт этот каталог в runtimepath сам,
+# начиная с 9.1.0327
+link vim "$HOME/.config/vim"
 
 # tmux
 link tmux/tmux.conf "$HOME/.tmux.conf"

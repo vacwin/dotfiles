@@ -1,6 +1,4 @@
 hypr/conf.d/local.conf
-vim/.netrwhist
-vim/plugged/
 ghostty/.DS*
 ghostty/shaders/
 .DS*

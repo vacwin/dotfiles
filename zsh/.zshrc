@@ -28,11 +28,10 @@ fi
 # reload config
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # aliases
 alias sp="spotify"
-alias vim="nvim"
 alias fix-gpg='gpgconf --kill gpg-agent && export GPG_TTY="$(tty)" && export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && gpgconf --launch gpg-agent && gpg-connect-agent updatestartuptty /bye > /dev/null && echo "done"'
 
 if [[ "$OS" == "Mac" ]]; then
