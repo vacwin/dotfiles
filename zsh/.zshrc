@@ -1,45 +1,54 @@
-typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
-case "$(uname -s)" in 
-  Linux*) OS=Linux ;;
+case "$(uname -s)" in
+  Linux*)  OS=Linux ;;
   Darwin*) OS=Mac ;;
-  *) OS="unknown" ;;
+  *)       OS=unknown ;;
 esac
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="bira"
+# colors
+PS1='%B%F{red}[%F{yellow}%n%F{green}@%F{blue}%M %F{magenta}%~${vcs_info_msg_0_}%F{red}]%f$%b '
 
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+# history
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
 
-# mac plugins
-if [[ "$OS" == "Mac" ]]; then
-  plugins+=(
-    brew
-    macos
-  )
-fi
+setopt extended_history      
+setopt hist_ignore_dups      
+setopt hist_ignore_space     
+setopt hist_verify           
+setopt share_history         
 
-# reload config
-source $ZSH/oh-my-zsh.sh
+setopt auto_cd               
+setopt interactive_comments  
 
-export EDITOR='vim'
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zmodload zsh/complist
+compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+_comp_options+=(globdots)
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' unstagedstr '%F{red}● %F{yellow}'
+zstyle ':vcs_info:git:*' stagedstr   '%F{green}● %F{yellow}'
+zstyle ':vcs_info:git:*' formats       ' %F{yellow}‹%u%c%b›%f'
+zstyle ':vcs_info:git:*' actionformats ' %F{yellow}‹%u%c%b|%a›%f'
+precmd_functions+=(vcs_info)
+setopt prompt_subst
+
 
 # aliases
+if [[ "$OS" == "Mac" ]]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
+alias ll='ls -lah'
+alias -- -='cd -'
 alias sp="spotify"
 alias fix-gpg='gpgconf --kill gpg-agent && export GPG_TTY="$(tty)" && export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && gpgconf --launch gpg-agent && gpg-connect-agent updatestartuptty /bye > /dev/null && echo "done"'
-
-if [[ "$OS" == "Mac" ]]; then
-  export NOTES_DIR=~/pd/obsidian-notes
-elif [[ "$OS" == "Linux" ]]; then
-  export NOTES_DIR=~/obsidian-notes
-  export MOZ_ENABLE_WAYLAND=1
-fi
 
 # fzf
 if [[ "$OS" == "Mac" ]]; then
@@ -52,6 +61,7 @@ if [[ -d "$FZF_SHELL" ]]; then
   source "$FZF_SHELL/completion.zsh"
 fi
 unset FZF_SHELL
+
 # WORK
 wssh() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
@@ -86,7 +96,7 @@ _docker_ansible_combine.sh() {
     _describe -t values 'values' vals
     return 0
   fi
- 
+
   return 0
 }
 
@@ -109,15 +119,24 @@ _docker_fronts.sh() {
     _describe -t values 'values' vals
     return 0
   fi
- 
+
   return 0
 }
 
 compdef _docker_fronts.sh docker_fronts.sh
 
-function gitstatus_stop_p9k_() { }
-
-# cargo / rust
-[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+# плагины
+if [[ "$OS" == "Mac" ]]; then
+  ZSH_PLUGINS="/opt/homebrew/share"
+elif [[ "$OS" == "Linux" ]]; then
+  ZSH_PLUGINS="/usr/share/zsh/plugins"
+fi
+if [[ -r "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+if [[ -r "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+unset ZSH_PLUGINS
 
 showpkm

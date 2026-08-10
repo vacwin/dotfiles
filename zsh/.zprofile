@@ -7,16 +7,34 @@ if [ "$(uname -s)" = "Darwin" ]; then
   fi
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
   export PATH="$HOME/go/bin:$PATH"
-  export PATH="/Users/vacwin/.terragrunt/bin:$PATH"
+  export PATH="$HOME/.terragrunt/bin:$PATH"
 fi
+
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ "$(uname -s)" = "Linux" ] && [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-  if command -v flatpak >/dev/null 2>&1; then
-    export XDG_DATA_DIRS="$(GIO_USE_VFS=local flatpak --print-updated-env 2>/dev/null | sed -n 's/^XDG_DATA_DIRS=//p')"
-  fi
+# окружение сессии
+export EDITOR='vim'
+export VISUAL="$EDITOR"
+export TERMINAL='ghostty'
 
-  if command -v start-hyprland >/dev/null 2>&1; then
-    exec start-hyprland
+if [ "$(uname -s)" = "Darwin" ]; then
+  export NOTES_DIR="$HOME/pd/obsidian-notes"
+else
+  export NOTES_DIR="$HOME/obsidian-notes"
+fi
+
+# запуск графической сессии — строго последним блоком:
+# всё, что экспортировано выше, должно попасть в компоситор до exec
+if [ "$(uname -s)" = "Linux" ]; then
+  export MOZ_ENABLE_WAYLAND=1
+
+  if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+    if command -v flatpak >/dev/null 2>&1; then
+      export XDG_DATA_DIRS="$(GIO_USE_VFS=local flatpak --print-updated-env 2>/dev/null | sed -n 's/^XDG_DATA_DIRS=//p')"
+    fi
+
+    if command -v start-hyprland >/dev/null 2>&1; then
+      exec start-hyprland
+    fi
   fi
 fi
