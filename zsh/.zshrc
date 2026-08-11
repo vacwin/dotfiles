@@ -59,7 +59,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zmodload zsh/complist
-compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+compinit -d "${ZDOTDIR:-$HOME}/cache/zcompdump-$ZSH_VERSION"
 _comp_options+=(globdots)
 
 bindkey -M menuselect 'h' vi-backward-char
