@@ -15,3 +15,5 @@ set noshowcmd
 
 set wildmenu
 set wildmode=longest,list,full
+
+set viminfofile=~/.local/state/vim/viminfo
