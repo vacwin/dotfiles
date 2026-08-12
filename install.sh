@@ -61,4 +61,10 @@ if [[ "$OS" == "Linux" ]]; then
   link waybar "$HOME/.config/waybar"
   link swaync "$HOME/.config/swaync"
   link cava "$HOME/.config/cava"
+
+  if command -v go >/dev/null; then
+    go build -o "$HOME/.local/bin/shake-cursor" "$DOTFILES/scripts/shake-cursor.go" && echo "built shake-cursor"
+  else
+    echo "WARN: go not found — skipping shake-cursor build"
+  fi
 fi
