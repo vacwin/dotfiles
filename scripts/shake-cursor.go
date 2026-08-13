@@ -54,7 +54,7 @@ func main() {
 	poll := flag.Duration("poll", 16*time.Millisecond, "polling interval")
 	window := flag.Duration("window", 700*time.Millisecond, "shake detection window")
 	needed := flag.Int("needed", 4, "direction reversals needed to trigger")
-	seg := flag.Int("seg", 25, "min px per swing for a reversal to count")
+	seg := flag.Int("seg", 45, "min px per swing for a reversal to count")
 	flag.Parse()
 
 	setSize := func(size int) {
