@@ -9,5 +9,5 @@ method = ncurses
 [color]
 gradient = 1
 gradient_count = 2
-gradient_color_1 = '#515e67'
-gradient_color_2 = '#5c6f7d'
+gradient_color_1 = '#697a9a'
+gradient_color_2 = '#7a837c'

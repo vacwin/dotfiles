@@ -1,15 +1,15 @@
-/* Traffic — matching Waybar */
-@define-color bg        #272c30;
-@define-color bg-raised #383a3c;
-@define-color fg        #cfb9a8;
-@define-color gray      #6e6762;
-@define-color blue      #515e67;
-@define-color light-blue #5c6f7d;
-@define-color teal      #637268;
-@define-color green     #637268;
-@define-color yellow    #c79e84;
-@define-color orange    #715f5e;
-@define-color red       #934e46;
+/* Guts — matching Waybar */
+@define-color bg        #101113;
+@define-color bg-raised #161719;
+@define-color fg        #9f9e99;
+@define-color gray      #554a62;
+@define-color blue      #697a9a;
+@define-color light-blue #7a837c;
+@define-color teal      #51606a;
+@define-color green     #51606a;
+@define-color yellow    #ac7f7b;
+@define-color orange    #83799c;
+@define-color red       #93554b;
 
 * {
     font-family: "Iosevka Nerd Font Mono", sans-serif;

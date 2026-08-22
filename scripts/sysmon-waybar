@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CPU_ICON=$''
+MEM_ICON=$''
+
+s1=$(grep -E '^cpu' /proc/stat)
+sleep 0.3
+s2=$(grep -E '^cpu' /proc/stat)
+
+read -r total_pct core_line <<<"$(awk -v s1="$s1" -v s2="$s2" '
+BEGIN {
+    n1 = split(s1, l1, "\n")
+    split(s2, l2, "\n")
+    for (i = 1; i <= n1; i++) {
+        split(l1[i], a1, " ")
+        split(l2[i], a2, " ")
+        name = a1[1]
+        idle1 = a1[5] + a1[6]; idle2 = a2[5] + a2[6]
+        tot1 = 0; tot2 = 0
+        for (j = 2; j <= 9; j++) {
+            if (a1[j] != "") tot1 += a1[j]
+            if (a2[j] != "") tot2 += a2[j]
+        }
+        dtot = tot2 - tot1
+        didle = idle2 - idle1
+        pct = dtot > 0 ? int(100 * (dtot - didle) / dtot) : 0
+        if (name == "cpu") {
+            total = pct
+        } else {
+            n = substr(name, 4)
+            cores = cores sprintf("core%s: %d%%  ", n, pct)
+        }
+    }
+    printf "%d %s", total, cores
+}')"
+
+meminfo=$(</proc/meminfo)
+mem_total_kb=$(awk '/^MemTotal:/{print $2}' <<<"$meminfo")
+mem_avail_kb=$(awk '/^MemAvailable:/{print $2}' <<<"$meminfo")
+swap_total_kb=$(awk '/^SwapTotal:/{print $2}' <<<"$meminfo")
+swap_free_kb=$(awk '/^SwapFree:/{print $2}' <<<"$meminfo")
+mem_used_kb=$((mem_total_kb - mem_avail_kb))
+swap_used_kb=$((swap_total_kb - swap_free_kb))
+
+kb_to_g() { awk -v k="$1" 'BEGIN{printf "%.1f", k/1024/1024}'; }
+
+mem_total_g=$(kb_to_g "$mem_total_kb")
+mem_used_g=$(kb_to_g "$mem_used_kb")
+mem_avail_g=$(kb_to_g "$mem_avail_kb")
+swap_used_g=$(kb_to_g "$swap_used_kb")
+swap_total_g=$(kb_to_g "$swap_total_kb")
+
+text="${CPU_ICON} ${total_pct}%  ${MEM_ICON} ${mem_used_g}G"
+
+tooltip="CPU: ${total_pct}%\n${core_line}\nRAM: ${mem_used_g}G / ${mem_total_g}G\nAvail: ${mem_avail_g}G  Swap: ${swap_used_g}G/${swap_total_g}G"
+
+printf '{"text": "%s", "tooltip": "%s"}\n' "$text" "$tooltip"

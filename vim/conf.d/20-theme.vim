@@ -1,7 +1,7 @@
 set termguicolors
 set background=dark
 
-colorscheme traffic
+colorscheme guts
 
 " function! s:TransparentBG() abort
 "   highlight Normal           ctermbg=NONE guibg=NONE
