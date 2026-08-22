@@ -15,7 +15,11 @@ fi
 PS1="%B%F{$ZT_BRACKET}[%F{$ZT_USER}%n%F{$ZT_AT}@%F{$ZT_HOST}%m %F{$ZT_PATH}%~\${vcs_info_msg_0_}%F{$ZT_BRACKET}]%f\$%b "
 
 # history
-HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+ZSH_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+mkdir -p "$ZSH_CACHE_DIR" "$ZSH_STATE_DIR"
+
+HISTFILE="$ZSH_STATE_DIR/history"
 HISTSIZE=50000
 SAVEHIST=50000
 
@@ -59,7 +63,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zmodload zsh/complist
-compinit -d "${ZDOTDIR:-$HOME}/cache/zcompdump-$ZSH_VERSION"
+compinit -d "$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
 _comp_options+=(globdots)
 
 bindkey -M menuselect 'h' vi-backward-char

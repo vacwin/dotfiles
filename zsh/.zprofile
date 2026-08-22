@@ -23,8 +23,6 @@ else
   export NOTES_DIR="$HOME/obsidian-notes"
 fi
 
-# запуск графической сессии — строго последним блоком:
-# всё, что экспортировано выше, должно попасть в компоситор до exec
 if [ "$(uname -s)" = "Linux" ]; then
   export MOZ_ENABLE_WAYLAND=1
 
@@ -32,7 +30,6 @@ if [ "$(uname -s)" = "Linux" ]; then
     if command -v flatpak >/dev/null 2>&1; then
       export XDG_DATA_DIRS="$(GIO_USE_VFS=local flatpak --print-updated-env 2>/dev/null | sed -n 's/^XDG_DATA_DIRS=//p')"
     fi
-
     if command -v start-hyprland >/dev/null 2>&1; then
       exec start-hyprland
     fi

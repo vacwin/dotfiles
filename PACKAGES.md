@@ -113,7 +113,7 @@
   `cp`, отдельно на каждой машине:
   - zsh (своя тема `root.zsh`, чтобы отличать промпт от обычного юзера):
     ```
-    sudo mkdir -p /root/.config/zsh/themes /root/.config/zsh/cache
+    sudo mkdir -p /root/.config/zsh/themes /root/.cache/zsh /root/.local/state/zsh
     sudo cp /home/vacwin/dotfiles/zsh/.zshrc    /root/.config/zsh/.zshrc
     sudo cp /home/vacwin/dotfiles/zsh/.zprofile /root/.config/zsh/.zprofile
     sudo cp /home/vacwin/dotfiles/zsh/.zshenv   /root/.config/zsh/.zshenv

@@ -4,10 +4,5 @@ ghostty/shaders/
 .DS*
 
 # zsh runtime
-zsh/.zsh_history
 zsh/.zsh_sessions/
-zsh/.zcompdump*
-zsh/.zcompcache
 zsh/*.bak.*
-zsh/cache/*
-!zsh/cache/.gitignore
