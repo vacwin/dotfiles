@@ -33,7 +33,7 @@ else
   git -C "$SHADERS_DIR" pull --ff-only
 fi
 
-link vim "$HOME/.config/vim"
+link nvim "$HOME/.config/nvim"
 
 # tmux
 [[ -L "$HOME/.tmux.conf" ]] && rm "$HOME/.tmux.conf"

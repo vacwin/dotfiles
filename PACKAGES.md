@@ -69,7 +69,17 @@
 
 | Инструмент | Пакет | Зачем |
 |---|---|---|
-| Vim | `vim` | конфиг `vim/`, без плагинов. Нужна сборка с клипбордом: на Arch это `gvim`, на маке `brew install vim` |
+| Neovim | `neovim` (на маке `brew install neovim`) | конфиг `nvim/`, без плагин-менеджеров — только нативный `vim.lsp` + regex-подсветка. `vim/` в репе оставлен для истории/отката, но `install.sh` его больше не линкует |
+| bash-language-server | `bash-language-server` (на маке `npm i -g bash-language-server`) | LSP для `.sh` |
+| yaml-language-server | `yaml-language-server` (на маке `npm i -g yaml-language-server`) | LSP для YAML |
+| ansible-language-server | AUR `ansible-language-server` (на маке `npm i -g @ansible/ansible-language-server`) | LSP для ansible-плейбуков/ролей (работает поверх YAML) |
+| dockerfile-language-server | `dockerfile-language-server` (на маке `npm i -g dockerfile-language-server-nodejs`) | LSP для `Dockerfile` |
+| terraform-ls | AUR `terraform-ls-bin` (на маке `brew install hashicorp/tap/terraform-ls`) | LSP для `.tf` |
+| pyright | `pyright` (на маке `brew install pyright` или `npm i -g pyright`) | LSP для Python |
+| lua-language-server | `lua-language-server` (на маке `brew install lua-language-server`) | LSP для правки самого nvim-конфига |
+
+Все LSP включаются в `nvim/lua/config/lsp.lua` только если бинарь найден в `$PATH`
+(`vim.fn.executable`) — отсутствие любого из них не ломает остальной конфиг.
 
 ## Утилиты (нужны скриптам/модулям)
 
@@ -84,7 +94,7 @@
 | Ресурс | Пакет | Зачем |
 |---|---|---|
 | Iosevka Nerd Font | `ttf-iosevka-nerd` | шрифт терминала + иконки waybar |
-| ComixCursors-Blue | `xcursor-comix` (AUR) | тема курсора (`hyprctl setcursor ComixCursors-Blue`) |
+| ComixCursors-Orange | `xcursor-comix` (AUR) | тема курсора (`hyprctl setcursor ComixCursors-Orange`) |
 
 ---
 
@@ -96,3 +106,28 @@
   (в биндах не задействован, лаунчер сейчас — tofi).
 - После `install.sh` симлинки расставляются автоматически; этот файл — только
   про то, что должно быть установлено в системе.
+- **root**: `install.sh` под root не гонять (`sudo -H`) — симлинки на `dotfiles/`
+  внутри `/home/vacwin` означают, что root исполняет файлы, которые может
+  редактировать обычный юзер (privilege escalation при компрометации аккаунта).
+  Вместо этого — вручную копировать (не симлинтить) нужные конфиги разовым
+  `cp`, отдельно на каждой машине:
+  - zsh (своя тема `root.zsh`, чтобы отличать промпт от обычного юзера):
+    ```
+    sudo mkdir -p /root/.config/zsh/themes /root/.config/zsh/cache
+    sudo cp /home/vacwin/dotfiles/zsh/.zshrc    /root/.config/zsh/.zshrc
+    sudo cp /home/vacwin/dotfiles/zsh/.zprofile /root/.config/zsh/.zprofile
+    sudo cp /home/vacwin/dotfiles/zsh/.zshenv   /root/.config/zsh/.zshenv
+    sudo cp /home/vacwin/dotfiles/zsh/themes/*.zsh /root/.config/zsh/themes/
+    sudo sed -i "s/^ZSH_THEME='guts'/ZSH_THEME='root'/" /root/.config/zsh/.zshrc
+    echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee /root/.zshenv
+    sudo chsh -s /usr/bin/zsh root
+    sudo chown -R root:root /root/.config/zsh
+    ```
+  - nvim:
+    ```
+    sudo mkdir -p /root/.config/nvim
+    sudo cp -r /home/vacwin/dotfiles/nvim/. /root/.config/nvim/
+    sudo chown -R root:root /root/.config/nvim
+    ```
+  После копирования правки в `dotfiles/` под vacwin **не долетают** до root —
+  это осознанный трейд-офф ради безопасности, обновлять руками по мере надобности.
