@@ -1,0 +1,8 @@
+ZT_BRACKET='#ff0000'
+ZT_USER='#ffcc00'
+ZT_AT='#ff5555'
+ZT_HOST='#ff0000'
+ZT_PATH='#ffaa00'
+ZT_GIT='#ffcc00'
+ZT_UNSTAGED='#ff0000'
+ZT_STAGED='#ff5555'
