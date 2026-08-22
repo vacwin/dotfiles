@@ -47,8 +47,17 @@ func cursorX() (int, bool) {
 }
 
 func main() {
-	theme := flag.String("theme", "ComixCursors-Blue", "cursor theme")
-	normal := flag.Int("normal", 30, "normal cursor size")
+	defaultTheme := os.Getenv("XCURSOR_THEME")
+	if defaultTheme == "" {
+		defaultTheme = "default"
+	}
+	defaultSize := 30
+	if s, err := strconv.Atoi(os.Getenv("XCURSOR_SIZE")); err == nil && s > 0 {
+		defaultSize = s
+	}
+
+	theme := flag.String("theme", defaultTheme, "cursor theme")
+	normal := flag.Int("normal", defaultSize, "normal cursor size")
 	big := flag.Int("big", 64, "enlarged cursor size")
 	hold := flag.Duration("hold", 1500*time.Millisecond, "how long to stay big")
 	poll := flag.Duration("poll", 16*time.Millisecond, "polling interval")

@@ -60,7 +60,7 @@ button {
 
 /* clock in center */
 #clock {
-    color: @sage;
+    color: @clay;
     font-weight: bold;
     padding: 0 12px;
 }
@@ -83,6 +83,7 @@ button {
 }
 
 #custom-sysmon      { color: @lavender; }
+#custom-cava        { color: @lavender; }
 #wireplumber        { color: @slate; }
 #wireplumber.muted  { color: @plum; }
 #backlight          { color: @clay; }
