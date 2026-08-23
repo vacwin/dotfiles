@@ -7,7 +7,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
   fi
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
   export PATH="$HOME/go/bin:$PATH"
-  export PATH="$HOME/.terragrunt/bin:$PATH"
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
