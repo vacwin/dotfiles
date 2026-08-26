@@ -100,9 +100,9 @@ else
 fi
 alias ll='ls -lah'
 alias -- -='cd -'
-alias sp="spotify"
 alias fix-gpg='gpgconf --kill gpg-agent && export GPG_TTY="$(tty)" && export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && gpgconf --launch gpg-agent && gpg-connect-agent updatestartuptty /bye > /dev/null && echo "done"'
 alias tssh='tsh ssh'
+alias tlogin='tsh login --proxy=tp.24h.tv:443'
 
 # fzf
 if [[ "$OS" == "Mac" ]]; then
