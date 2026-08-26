@@ -11,8 +11,7 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# окружение сессии
-export EDITOR='vim'
+export EDITOR='nvim'
 export VISUAL="$EDITOR"
 export TERMINAL='ghostty'
 
