@@ -62,6 +62,11 @@ if [[ "$OS" == "Linux" ]]; then
   link swaync "$HOME/.config/swaync"
   link cava "$HOME/.config/cava"
 
+  if command -v gsettings >/dev/null; then
+    gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+    echo "enabled middle-click paste"
+  fi
+
   if command -v go >/dev/null; then
     go build -o "$HOME/.local/bin/shake-cursor" "$DOTFILES/scripts/shake-cursor.go" && echo "built shake-cursor"
   else
