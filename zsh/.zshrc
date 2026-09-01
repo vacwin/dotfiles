@@ -128,10 +128,6 @@ wssh() {
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpg-connect-agent updatestartuptty /bye >/dev/null
 
-  if [[ -n "$TMUX" ]]; then
-    trap 'tmux rename-window "shell"' EXIT INT TERM
-    tmux rename-window "${1##*@}"
-  fi
   command ssh -p 2424 "$@"
 }
 
