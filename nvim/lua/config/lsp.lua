@@ -50,12 +50,7 @@ for name, cfg in pairs(servers) do
   end
 end
 
-vim.diagnostic.config({
-  virtual_text = true,
-  underline = true,
-  signs = true,
-  float = { border = 'rounded' },
-})
+vim.diagnostic.enable(false)
 
 vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
 
