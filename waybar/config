@@ -116,12 +116,10 @@
     },
     "wireplumber": {
         "format": "{volume}% <span size='x-large'>{icon}</span>",
-        "format-muted": "<span size='x-large'>󰝟</span>",
+        "format-muted": "<span size='x-large'>󰓄</span>",
         "format-icons": {
             "default": [
-                "󰕿",
-                "󰖀",
-                "󰕾"
+                "󰓃"
             ]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
