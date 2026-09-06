@@ -19,11 +19,17 @@
         "network",
         "battery",
         "custom/language",
-        "custom/notification",
         "tray"
     ],
     "hyprland/workspaces": {
-        "format": "{id}",
+        "format": "{icon}: {windows}",
+        "workspace-taskbar": {
+            "enable": true,
+            "update-active-window": true,
+            "format": "{icon}",
+            "icon-size": 18,
+            "on-click-window": "hyprctl dispatch focuswindow address:{address}"
+        },
         "on-click": "activate"
     },
     "hyprland/window": {

@@ -1,5 +1,20 @@
 #!/bin/bash
 
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+
+# awww paints only the outputs that exist when it's called, so a monitor that
+# appears later stays black until the wallpaper is re-applied.
+set_wallpaper() {
+    command -v awww >/dev/null || return 0
+    local img
+    img=$(sed -n 's/^\$wallpaper[[:space:]]*=[[:space:]]*//p' \
+        "$DOTFILES/hypr/conf.d/local.conf" 2>/dev/null | head -1)
+    img=${img/\$HOME/$HOME}
+    [ -n "$img" ] && [ -f "$img" ] || return 0
+    sleep 0.5
+    awww img "$img" >/dev/null 2>&1
+}
+
 edp_enable() {
     hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1"
 }
@@ -28,6 +43,7 @@ handle() {
                 dp=$(hyprctl monitors all | grep "^Monitor DP-" | head -1 | awk '{print $2}')
                 hyprctl dispatch moveworkspacetomonitor "$active_ws $dp"
                 hyprctl dispatch workspace "$active_ws"
+                set_wallpaper
             fi
             ;;
         monitorremoved*)
@@ -39,6 +55,7 @@ handle() {
                     edp_enable
                     sleep 0.3
                     hyprctl dispatch dpms on eDP-1
+                    set_wallpaper
                 fi
             fi
             ;;
@@ -49,6 +66,7 @@ case "$1" in
     close)
         if has_dp; then
             edp_disable
+            set_wallpaper
         else
             systemctl suspend
         fi
@@ -57,6 +75,7 @@ case "$1" in
         edp_enable
         sleep 0.3
         hyprctl dispatch dpms on eDP-1
+        set_wallpaper
         ;;
     watch)
         if lid_closed; then
