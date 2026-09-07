@@ -50,8 +50,7 @@ done
 
 # OS-specific
 if [[ "$OS" == "Linux" ]]; then
-  mkdir -p "$HOME/.config/tofi"
-  ln -sf "$DOTFILES/tofi/config" "$HOME/.config/tofi/config"
+  ln -sfn "$DOTFILES/tofi" "$HOME/.config/tofi"
   mkdir -p "$HOME/.config/hypr"
   echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"
   ln -sfn "$DOTFILES/hypr/conf.d" "$HOME/.config/hypr/conf.d"
