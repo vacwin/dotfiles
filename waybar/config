@@ -7,8 +7,7 @@
     ],
     "modules-center": [
         "custom/cava",
-        "custom/playerctl",
-        "clock"
+        "custom/playerctl"
     ],
     "modules-right": [
         "hyprland/submap",
@@ -19,6 +18,7 @@
         "network",
         "battery",
         "custom/language",
+        "clock",
         "tray"
     ],
     "hyprland/workspaces": {
@@ -47,7 +47,7 @@
         "format": "{}"
     },
     "clock": {
-        "format": "<span size='x-large'>󰥔</span> {:%a, %d %b  %I:%M %p}",
+        "format": "{:%a, %d %b  %I:%M %p}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "format": {
