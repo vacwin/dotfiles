@@ -150,10 +150,10 @@
         "tooltip": false
     },
     "custom/playerctl": {
-        "format": " {}",
+        "format": "{}",
         "return-type": "json",
         "max-length": 40,
-        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "exec": "playerctl -a metadata --format '{\"text\": \" {{markup_escape(artist)}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F | jq --unbuffered -c 'if .alt == \"Playing\" or .alt == \"Paused\" then . else {text:\"\",tooltip:\"\",alt:.alt,class:.alt} end'",
         "on-click": "playerctl previous",
         "on-click-middle": "playerctl play-pause",
         "on-click-right": "playerctl next"
