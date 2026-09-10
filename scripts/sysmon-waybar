@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CPU_ICON=$''
-MEM_ICON=$''
+CPU_ICON=$'󰍛'
+MEM_ICON=$'󰆼'
 
 s1=$(grep -E '^cpu' /proc/stat)
 sleep 0.3
