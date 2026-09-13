@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+curl -sf --max-time 5 'wttr.in/moscow?format=1' | tr -s ' '

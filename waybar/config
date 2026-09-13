@@ -18,6 +18,7 @@
         "network",
         "battery",
         "custom/language",
+        "custom/weather",
         "clock",
         "tray"
     ],
@@ -157,5 +158,11 @@
         "on-click": "playerctl previous",
         "on-click-middle": "playerctl play-pause",
         "on-click-right": "playerctl next"
+    },
+    "custom/weather": {
+        "exec": "$HOME/.local/bin/weather-waybar",
+        "format": "{}",
+        "interval": 900,
+        "tooltip": false
     }
 }

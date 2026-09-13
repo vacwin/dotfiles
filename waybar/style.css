@@ -67,6 +67,7 @@ button {
 
 /* right-side pill modules */
 #custom-sysmon,
+#custom-weather,
 #wireplumber,
 #backlight,
 #bluetooth,
@@ -83,6 +84,7 @@ button {
 }
 
 #custom-sysmon      { color: @lavender; }
+#custom-weather     { color: @sage; }
 #custom-cava        { color: @lavender; }
 #wireplumber        { color: @slate; }
 #wireplumber.muted  { color: @plum; }
