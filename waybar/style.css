@@ -1,14 +1,14 @@
-/* Guts */
-@define-color bg        #101113;
-@define-color bg-raised #161719;
-@define-color fg        #9f9e99;
-@define-color plum      #554a62;
-@define-color blue      #697a9a;
-@define-color sage      #7a837c;
-@define-color slate     #51606a;
-@define-color clay      #ac7f7b;
-@define-color lavender  #83799c;
-@define-color rust      #93554b;
+/* Black Metal (Immortal) */
+@define-color bg        #000000;
+@define-color bg-raised #121212;
+@define-color fg        #c1c1c1;
+@define-color ash       #444444;
+@define-color dim       #999999;
+@define-color steel     #888888;
+@define-color silver    #aaaaaa;
+@define-color slate     #556677;
+@define-color frost     #7799bb;
+@define-color teal      #5f8787;
 
 * {
     font-family: "Iosevka Nerd Font", sans-serif;
@@ -32,7 +32,7 @@ button {
 /* workspaces */
 #workspaces button {
     padding: 0 7px;
-    color: @plum;
+    color: @ash;
     background-color: transparent;
     border-radius: 0;
 }
@@ -45,22 +45,22 @@ button {
 #workspaces button.active {
     color: @fg;
     background-color: @bg-raised;
-    border-bottom: 2px solid @rust;
+    border-bottom: 2px solid @frost;
 }
 
 #workspaces button.urgent {
     color: @bg;
-    background-color: @rust;
+    background-color: @teal;
 }
 
 #window {
-    color: @plum;
+    color: @ash;
     padding: 0 8px;
 }
 
 /* clock in center */
 #clock {
-    color: @clay;
+    color: @frost;
     font-weight: bold;
     padding: 0 12px;
 }
@@ -83,23 +83,23 @@ button {
     color: @fg;
 }
 
-#custom-sysmon      { color: @lavender; }
-#custom-weather     { color: @sage; }
-#custom-cava        { color: @lavender; }
-#wireplumber        { color: @slate; }
-#wireplumber.muted  { color: @plum; }
-#backlight          { color: @clay; }
-#bluetooth          { color: @blue; }
-#bluetooth.disabled { color: @plum; }
-#network            { color: @blue; }
-#network.disconnected { color: @plum; }
+#custom-sysmon      { color: @slate; }
+#custom-weather     { color: @silver; }
+#custom-cava        { color: @slate; }
+#wireplumber        { color: @steel; }
+#wireplumber.muted  { color: @ash; }
+#backlight          { color: @dim; }
+#bluetooth          { color: @frost; }
+#bluetooth.disabled { color: @ash; }
+#network            { color: @frost; }
+#network.disconnected { color: @ash; }
 #language,
-#custom-language    { color: @sage; min-width: 20px; }
+#custom-language    { color: @teal; min-width: 20px; }
 
-#battery            { color: @slate; }
-#battery.warning    { color: @lavender; }
+#battery            { color: @steel; }
+#battery.warning    { color: @slate; }
 #battery.critical:not(.charging) {
-    color: @rust;
+    color: @teal;
     animation-name: blink;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -108,22 +108,22 @@ button {
 }
 
 #submap {
-    background: @rust;
+    background: @teal;
     color: @bg;
     font-weight: bold;
 }
 
 @keyframes blink {
-    to { color: @bg; background-color: @rust; }
+    to { color: @bg; background-color: @teal; }
 }
 
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }
-#tray > .needs-attention { background-color: @rust; color: @bg; border-radius: 8px; }
+#tray > .needs-attention { background-color: @teal; color: @bg; border-radius: 8px; }
 
 tooltip {
     background: @bg-raised;
     border-radius: 6px;
-    border: 1px solid @plum;
+    border: 1px solid @ash;
 }
 tooltip label { color: @fg; }

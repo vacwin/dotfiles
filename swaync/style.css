@@ -1,15 +1,14 @@
-/* Guts — matching Waybar */
-@define-color bg        #101113;
-@define-color bg-raised #161719;
-@define-color fg        #9f9e99;
-@define-color gray      #554a62;
-@define-color blue      #697a9a;
-@define-color light-blue #7a837c;
-@define-color teal      #51606a;
-@define-color green     #51606a;
-@define-color yellow    #ac7f7b;
-@define-color orange    #83799c;
-@define-color red       #93554b;
+/* Black Metal (Immortal) — matching Waybar */
+@define-color bg        #000000;
+@define-color bg-raised #121212;
+@define-color fg        #c1c1c1;
+@define-color ash       #444444;
+@define-color dim       #999999;
+@define-color steel     #888888;
+@define-color silver    #aaaaaa;
+@define-color slate     #556677;
+@define-color frost     #7799bb;
+@define-color teal      #5f8787;
 
 * {
     font-family: "Iosevka Nerd Font Mono", sans-serif;
@@ -29,7 +28,7 @@
     border-radius: 6px;
     margin: 6px;
     padding: 0;
-    border: 1px solid @gray;
+    border: 1px solid @ash;
     background: @bg;
 }
 
@@ -48,19 +47,19 @@
 
 .close-button {
     background: transparent;
-    color: @gray;
+    color: @ash;
     border-radius: 3px;
     margin: 6px 6px 0 0;
     padding: 2px;
 }
 
 .close-button:hover {
-    background: @red;
+    background: @teal;
     color: @bg;
 }
 
 .notification-action {
-    border-top: 1px solid @gray;
+    border-top: 1px solid @ash;
     border-radius: 0;
     color: @fg;
 }
@@ -86,7 +85,7 @@
 
 .time {
     font-size: 12px;
-    color: @gray;
+    color: @ash;
 }
 
 .body {
@@ -96,22 +95,22 @@
 
 .app-name {
     font-size: 12px;
-    color: @gray;
+    color: @ash;
 }
 
 .critical {
-    border-color: @red;
+    border-color: @teal;
 }
 
 .low {
-    border-color: @gray;
+    border-color: @ash;
     opacity: 0.85;
 }
 
 /* Control Center */
 .control-center {
     background: @bg;
-    border: 1px solid @gray;
+    border: 1px solid @ash;
     border-radius: 8px;
     padding: 6px;
 }
@@ -121,7 +120,7 @@
 }
 
 .control-center-list-placeholder {
-    color: @gray;
+    color: @ash;
     font-size: 14px;
 }
 
@@ -134,7 +133,7 @@
 
 .clear-all-button {
     background: @bg-raised;
-    color: @gray;
+    color: @ash;
     border-radius: 6px;
     border: none;
     padding: 4px 10px;
@@ -142,13 +141,13 @@
 }
 
 .clear-all-button:hover {
-    color: @red;
+    color: @teal;
 }
 
 /* DND toggle */
 .widget-dnd {
     padding: 6px 14px;
-    border-bottom: 1px solid @gray;
+    border-bottom: 1px solid @ash;
     margin-bottom: 6px;
 }
 
@@ -157,7 +156,7 @@
 }
 
 .widget-dnd > switch:checked {
-    background: @red;
+    background: @teal;
 }
 
 /* Title widget */

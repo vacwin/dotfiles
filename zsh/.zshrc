@@ -4,7 +4,7 @@ case "$(uname -s)" in
   *)       OS=unknown ;;
 esac
 
-ZSH_THEME='guts'
+ZSH_THEME='black-metal-immortal'
 if [[ -r "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh"
 else

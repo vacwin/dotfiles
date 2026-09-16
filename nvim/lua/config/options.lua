@@ -46,4 +46,4 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
-vim.cmd.colorscheme('guts')
+vim.cmd.colorscheme('immortal')

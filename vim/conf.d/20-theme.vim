@@ -1,7 +1,7 @@
 set termguicolors
 set background=dark
 
-colorscheme guts
+colorscheme base16-black-metal-immortal
 
 " function! s:TransparentBG() abort
 "   highlight Normal           ctermbg=NONE guibg=NONE
