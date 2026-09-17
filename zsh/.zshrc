@@ -62,6 +62,7 @@ bindkey -M viins '^?' backward-delete-char
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/zcompcache"
 zmodload zsh/complist
 compinit -d "$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
 _comp_options+=(globdots)

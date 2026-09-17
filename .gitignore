@@ -5,6 +5,7 @@ ghostty/shaders/
 
 # zsh runtime
 zsh/.zsh_sessions/
+zsh/.zcompcache/
 zsh/*.bak.*
 
 # nvim vim.pack plugin downloads
