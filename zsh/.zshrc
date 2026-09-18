@@ -20,10 +20,7 @@ ZSH_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
 mkdir -p "$ZSH_CACHE_DIR" "$ZSH_STATE_DIR"
 
 HISTFILE="$ZSH_STATE_DIR/history"
-HISTSIZE=50000
-SAVEHIST=50000
-
-setopt extended_history      
+HISTSIZE=50000 SAVEHIST=50000 setopt extended_history      
 setopt hist_ignore_dups      
 setopt hist_ignore_space     
 setopt hist_verify           
@@ -177,12 +174,15 @@ _docker_fronts.sh() {
 
 compdef _docker_fronts.sh docker_fronts.sh
 
-# teleport
-source "${ZDOTDIR:-$HOME}/teleport.zsh"
-
 # плагины
 if [[ "$OS" == "Mac" ]]; then
   ZSH_PLUGINS="/opt/homebrew/share"
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+#  plugins=(ansible git kubectl fluxcd docker terragrunt)
+  source "${ZDOTDIR:-$HOME}/teleport.zsh"
+  # terragrunt
+  export  "AWS_REQUEST_CHECKSUM_CALCULATION=when_required"
+  export  "AWS_RESPONSE_CHECKSUM_VALIDATION=when_required"
 elif [[ "$OS" == "Linux" ]]; then
   ZSH_PLUGINS="/usr/share/zsh/plugins"
 fi
