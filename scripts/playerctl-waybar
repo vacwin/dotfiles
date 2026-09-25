@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# waybar media module: shows the track of the active MPRIS player.
+#
+# Polled instead of `playerctl -F`: follow mode stays silent when a player goes
+# away, so a finished telegram voice/video note kept hanging on the bar until
+# the next waybar reload. Re-asking every tick can never go stale.
+
+FMT='{{status}}|{{markup_escape(artist)}}|{{markup_escape(title)}}|{{playerName}}'
+
+mapfile -t players < <(playerctl -a metadata --format "$FMT" 2>/dev/null)
+
+pick=""
+for p in "${players[@]}"; do
+    case "$p" in
+        Playing\|*) pick="$p"; break ;;
+        Paused\|*)  [[ -z "$pick" ]] && pick="$p" ;;
+    esac
+done
+
+if [[ -z "$pick" ]]; then
+    printf '{"text":"","tooltip":"","class":"stopped"}\n'
+    exit 0
+fi
+
+IFS='|' read -r status artist title player <<< "$pick"
+
+# markup_escape leaves backslashes alone, and they would break the JSON
+json() { local s=${1//\\/\\\\}; printf '%s' "${s//\"/\\\"}"; }
+
+if [[ -n "$artist" ]]; then
+    text=" $(json "$artist")  $(json "$title")"
+else
+    text=" $(json "$title")"
+fi
+
+printf '{"text":"%s","tooltip":"%s : %s","class":"%s"}\n' \
+    "$text" "$(json "$player")" "$(json "$title")" "$status"

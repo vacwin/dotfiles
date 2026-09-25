@@ -3,14 +3,14 @@
     "height": 46,
     "spacing": 4,
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "hyprland/submap"
     ],
     "modules-center": [
         "custom/cava",
         "custom/playerctl"
     ],
     "modules-right": [
-        "hyprland/submap",
         "custom/sysmon",
         "wireplumber",
         "backlight",
@@ -38,8 +38,7 @@
         "separate-outputs": true
     },
     "hyprland/submap": {
-        "format": "󰚾 {}",
-        "max-length": 12,
+        "format": "{}",
         "tooltip": false
     },
     "custom/language": {
@@ -151,10 +150,11 @@
         "tooltip": false
     },
     "custom/playerctl": {
-        "format": "{}",
+        "exec": "$HOME/.local/bin/playerctl-waybar",
         "return-type": "json",
+        "interval": 2,
+        "format": "{}",
         "max-length": 40,
-        "exec": "playerctl -a metadata --format '{\"text\": \" {{markup_escape(artist)}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F | jq --unbuffered -c 'if .alt == \"Playing\" or .alt == \"Paused\" then . else {text:\"\",tooltip:\"\",alt:.alt,class:.alt} end'",
         "on-click": "playerctl previous",
         "on-click-middle": "playerctl play-pause",
         "on-click-right": "playerctl next"
