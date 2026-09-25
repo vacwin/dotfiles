@@ -1,5 +1,5 @@
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
@@ -13,6 +13,7 @@ vim.opt.wildmenu = true
 vim.opt.wildmode = { 'longest', 'list', 'full' }
 
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a'
 
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'

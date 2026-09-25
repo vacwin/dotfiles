@@ -4,6 +4,7 @@ set -eu
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
 
+# link func
 link() {
   local src="$DOTFILES/$1"
   local dst="$2"
@@ -15,12 +16,15 @@ link() {
   echo "linked $dst"
 }
 
+# zsh
 link zsh "$HOME/.config/zsh"
 link zsh/.zshenv "$HOME/.zshenv"
 
+# git
 [[ -L "$HOME/.gitconfig" || -e "$HOME/.gitconfig" ]] && rm -f "$HOME/.gitconfig"
 link git "$HOME/.config/git"
 
+# ghostty
 [[ -L "$HOME/.config/ghostty" ]] && rm "$HOME/.config/ghostty"
 mkdir -p "$HOME/.config/ghostty"
 ln -sfn "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
@@ -33,6 +37,7 @@ else
   git -C "$SHADERS_DIR" pull --ff-only
 fi
 
+# editor
 link nvim "$HOME/.config/nvim"
 
 # tmux
@@ -66,9 +71,14 @@ if [[ "$OS" == "Linux" ]]; then
     echo "enabled middle-click paste"
   fi
 
-  if command -v go >/dev/null; then
-    go build -o "$HOME/.local/bin/shake-cursor" "$DOTFILES/scripts/shake-cursor.go" && echo "built shake-cursor"
-  else
-    echo "WARN: go not found — skipping shake-cursor build"
+  # cursor theme
+  if [[ ! -d "$HOME/.local/share/icons/Banana" ]]; then
+    mkdir -p "$HOME/.local/share/icons"
+    curl -fsSL https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana.tar.xz |
+      tar -xJ -C "$HOME/.local/share/icons/" && echo "installed Banana cursor"
+  fi
+  if command -v gsettings >/dev/null; then
+    gsettings set org.gnome.desktop.interface cursor-theme 'Banana'
+    gsettings set org.gnome.desktop.interface cursor-size 32
   fi
 fi
