@@ -10,9 +10,9 @@
 
 | Инструмент | Пакет (Arch) | Зачем |
 |---|---|---|
-| Hyprland | `hyprland` | основной композитор (`hypr/`) |
+| Hyprland | `hyprland` (≥ 0.55, нужен Lua-конфиг) | основной композитор (`hypr/hyprland.lua` + модули `hypr/lua/cfg/`) |
 | ly | `ly` | display manager / greeter (`ly/config.ini`) |
-| hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf) |
+| hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf; `$wallpaper`/`$avatar` из `hypr/conf.d/local.conf`) |
 | hypridle | `hypridle` | idle-демон (autostart, hypridle.conf) |
 | xdg-desktop-portal-hyprland | `xdg-desktop-portal-hyprland` | скриншеринг/порталы (рекомендуется) |
 
@@ -28,7 +28,7 @@
 
 | Инструмент | Пакет | Зачем |
 |---|---|---|
-| awww | `awww` (AUR, форк swww) | демон обоев (`awww-daemon`, autostart). Альтернатива — `swww`, тогда поправь autostart.conf |
+| awww | `awww` (AUR, форк swww) | демон обоев (`awww-daemon`, autostart). Альтернатива — `swww`, тогда поправь `hypr/lua/cfg/autostart.lua` |
 
 ## Скриншоты / буфер
 
@@ -76,7 +76,7 @@
 | dockerfile-language-server | `dockerfile-language-server` (на маке `npm i -g dockerfile-language-server-nodejs`) | LSP для `Dockerfile` |
 | terraform-ls | AUR `terraform-ls-bin` (на маке `brew install hashicorp/tap/terraform-ls`) | LSP для `.tf` |
 | pyright | `pyright` (на маке `brew install pyright` или `npm i -g pyright`) | LSP для Python |
-| lua-language-server | `lua-language-server` (на маке `brew install lua-language-server`) | LSP для правки самого nvim-конфига |
+| lua-language-server | `lua-language-server` (на маке `brew install lua-language-server`) | LSP для правки nvim- и Hyprland-конфига (стабы API Hyprland: `/usr/share/hypr/stubs/hl.meta.lua`) |
 
 Все LSP включаются в `nvim/lua/config/lsp.lua` только если бинарь найден в `$PATH`
 (`vim.fn.executable`) — отсутствие любого из них не ломает остальной конфиг.
@@ -94,14 +94,17 @@
 | Ресурс | Пакет | Зачем |
 |---|---|---|
 | Iosevka Nerd Font | `ttf-iosevka-nerd` | шрифт терминала + иконки waybar |
-| ComixCursors-Orange | `xcursor-comix` (AUR) | тема курсора (`hyprctl setcursor ComixCursors-Orange`) |
+| Banana | не пакет — `install.sh` качает релиз [banana-cursor](https://github.com/ful1e5/banana-cursor) в `~/.local/share/icons/` (есть и AUR `banana-cursor-bin`) | тема курсора (`XCURSOR_THEME` в `hypr/hyprland.lua`, `hyprctl setcursor Banana 32` в `hypr/lua/cfg/vars.lua`) |
 
 ---
 
 ### Заметки
 
 - `scripts/monitor-ctl`, `switch-layout`, `resume` используют только `hyprctl`
-  (идёт с Hyprland) — доп. пакетов не требуют.
+  (идёт с Hyprland) — доп. пакетов не требуют. Команды в Lua-синтаксисе
+  (`hyprctl eval 'hl.monitor(...)'`, `hyprctl dispatch 'hl.dsp....'`), поэтому
+  работают только с Lua-конфигом: старых `hyprctl keyword` / `dispatch workspace 1` нет.
+- Конфиг проверяется без перезапуска сессии: `Hyprland --verify-config`.
 - После `install.sh` симлинки расставляются автоматически; этот файл — только
   про то, что должно быть установлено в системе.
 - **root**: `install.sh` под root не гонять (`sudo -H`) — симлинки на `dotfiles/`
