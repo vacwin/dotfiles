@@ -1,0 +1,32 @@
+hl.config({
+    general = {
+        gaps_in     = 8,
+        gaps_out    = 8,
+        border_size = 1,
+
+        -- Black Metal (Immortal)
+        col = {
+            active_border   = "rgb(7799bb)",
+            inactive_border = "rgb(222222)",
+        },
+    },
+
+    dwindle = {
+        preserve_split = true,
+    },
+
+    decoration = {
+        rounding         = 4,
+        active_opacity   = 1,
+        inactive_opacity = 0.5,
+    },
+
+    animations = {
+        enabled = true,
+    },
+
+    misc = {
+        disable_hyprland_logo    = true,
+        disable_splash_rendering = true,
+    },
+})

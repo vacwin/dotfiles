@@ -16,11 +16,11 @@ set_wallpaper() {
 }
 
 edp_enable() {
-    hyprctl keyword monitor "eDP-1, 1920x1080@59.98, 0x0, 1"
+    hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1080@59.98", position = "0x0", scale = 1 })'
 }
 
 edp_disable() {
-    hyprctl keyword monitor "eDP-1, disable"
+    hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'
 }
 
 has_dp() {
@@ -41,8 +41,8 @@ handle() {
                 edp_disable
                 sleep 0.3
                 dp=$(hyprctl monitors all | grep "^Monitor DP-" | head -1 | awk '{print $2}')
-                hyprctl dispatch moveworkspacetomonitor "$active_ws $dp"
-                hyprctl dispatch workspace "$active_ws"
+                hyprctl dispatch "hl.dsp.workspace.move({ workspace = \"$active_ws\", monitor = \"$dp\" })"
+                hyprctl dispatch "hl.dsp.focus({ workspace = \"$active_ws\" })"
                 set_wallpaper
             fi
             ;;
@@ -54,7 +54,7 @@ handle() {
                 else
                     edp_enable
                     sleep 0.3
-                    hyprctl dispatch dpms on eDP-1
+                    hyprctl dispatch 'hl.dsp.dpms({ monitor = "eDP-1", action = "enable" })'
                     set_wallpaper
                 fi
             fi
@@ -74,7 +74,7 @@ case "$1" in
     open)
         edp_enable
         sleep 0.3
-        hyprctl dispatch dpms on eDP-1
+        hyprctl dispatch 'hl.dsp.dpms({ monitor = "eDP-1", action = "enable" })'
         set_wallpaper
         ;;
     watch)

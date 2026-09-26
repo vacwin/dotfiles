@@ -1,0 +1,18 @@
+hl.config({
+    input = {
+        kb_layout  = "us,ru",
+        kb_options = "ctrl:swapcaps,altwin:swap_alt_win",
+
+        touchpad = {
+            tap_to_click         = true,
+            tap_button_map       = "lrm",
+            drag_lock            = true,
+            natural_scroll       = false,
+            disable_while_typing = true,
+            scroll_factor        = 1.0,
+        },
+
+        accel_profile = "adaptive",
+        sensitivity   = -0.1,
+    },
+})

@@ -57,7 +57,9 @@ done
 if [[ "$OS" == "Linux" ]]; then
   ln -sfn "$DOTFILES/tofi" "$HOME/.config/tofi"
   mkdir -p "$HOME/.config/hypr"
-  echo "source = $DOTFILES/hypr/hyprland.conf" > "$HOME/.config/hypr/hyprland.conf"
+  rm -f "$HOME/.config/hypr/hyprland.conf"
+  ln -sfn "$DOTFILES/hypr/hyprland.lua" "$HOME/.config/hypr/hyprland.lua"
+  ln -sfn "$DOTFILES/hypr/lua" "$HOME/.config/hypr/lua"
   ln -sfn "$DOTFILES/hypr/conf.d" "$HOME/.config/hypr/conf.d"
   ln -sfn "$DOTFILES/hyprlock/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
   ln -sfn "$DOTFILES/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
