@@ -12,7 +12,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("mpris-proxy")
-    hl.exec_cmd("~/dotfiles/scripts/monitor-ctl watch")
     hl.exec_cmd("solaar -w hide")
     hl.exec_cmd("hyprsunset")
 

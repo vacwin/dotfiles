@@ -29,7 +29,7 @@
             "update-active-window": true,
             "format": "{icon}",
             "icon-size": 18,
-            "on-click-window": "hyprctl dispatch 'hl.dsp.focus({ window = \"address:{address}\" })'"
+            "on-click-window": "$HOME/.local/bin/waybar-focus-ws {address}"
         },
         "on-click": "activate"
     },

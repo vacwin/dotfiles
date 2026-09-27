@@ -1,0 +1,4 @@
+#!/bin/bash
+addr="0x${1#0x}"
+ws=$(hyprctl clients -j | jq -r --arg a "$addr" '.[] | select(.address == $a) | .workspace.name')
+[[ -n "$ws" ]] && hyprctl dispatch "hl.dsp.focus({ workspace = \"$ws\" })"

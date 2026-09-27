@@ -48,7 +48,7 @@ if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
 fi
 
 # scripts (the rest are called by path from hypr/waybar configs)
-for s in copy paste ansible_decrypt cava-waybar sysmon-waybar convert-audio weather-waybar playerctl-waybar; do
+for s in copy paste ansible_decrypt cava-waybar sysmon-waybar convert-audio weather-waybar playerctl-waybar waybar-focus-ws; do
   link "scripts/$s" "$HOME/.local/bin/$s"
   chmod +x "$DOTFILES/scripts/$s"
 done
