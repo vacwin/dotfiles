@@ -11,3 +11,6 @@ zsh/*.bak.*
 # nvim vim.pack plugin downloads
 nvim/nvim-pack-lock.json
 nvim/pack/
+
+# leaf runtime
+leaf/history.toml
