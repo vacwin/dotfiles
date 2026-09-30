@@ -20,7 +20,10 @@ ZSH_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
 mkdir -p "$ZSH_CACHE_DIR" "$ZSH_STATE_DIR"
 
 HISTFILE="$ZSH_STATE_DIR/history"
-HISTSIZE=50000 SAVEHIST=50000 setopt extended_history      
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt extended_history
 setopt hist_ignore_dups      
 setopt hist_ignore_space     
 setopt hist_verify           
