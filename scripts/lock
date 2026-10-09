@@ -1,0 +1,6 @@
+#!/bin/bash
+# hyprlock spins at 100% CPU if an output disappears under it, so monitor.lua
+# keeps eDP-1 on while locked. Re-apply the monitor policy once unlocked.
+pidof hyprlock >/dev/null && exit 0
+hyprlock "$@"
+hyprctl eval 'monitor_policy("unlock")' >/dev/null

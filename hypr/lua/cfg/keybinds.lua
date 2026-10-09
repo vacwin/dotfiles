@@ -10,7 +10,7 @@ hl.bind(mod .. " + space",  exec(vars.search))
 hl.bind(mod .. " + v", exec('cliphist list | tofi --prompt-text "clip: " | cliphist decode | wl-copy'))
 
 -- lock
-hl.bind(mod .. " + CTRL + q", exec("hyprlock"))
+hl.bind(mod .. " + CTRL + q", exec("~/dotfiles/scripts/lock"))
 
 -- window management
 hl.bind(mod .. " + q", hl.dsp.window.close())

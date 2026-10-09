@@ -28,5 +28,7 @@ hl.config({
     misc = {
         disable_hyprland_logo    = true,
         disable_splash_rendering = true,
+        -- lets a hung hyprlock be killed and relaunched instead of the red "lockscreen died" screen
+        allow_session_lock_restore = true,
     },
 })

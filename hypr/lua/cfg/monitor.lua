@@ -44,7 +44,14 @@ local function set_edp(on)
     return true
 end
 
--- reason: "load" | "lid" | "hotplug" | "resume"
+local function locked()
+    local p = io.popen("pidof hyprlock")
+    local s = p:read("a")
+    p:close()
+    return s ~= ""
+end
+
+-- reason: "load" | "lid" | "hotplug" | "resume" | "unlock"
 local function apply(reason)
     local ext, closed = external_connected(), lid_closed()
 
@@ -56,7 +63,13 @@ local function apply(reason)
         return
     end
 
-    local changed = set_edp(not (ext and closed))
+    local want = not (ext and closed)
+    -- hyprlock spins at 100% CPU if an output vanishes under it;
+    -- scripts/lock calls us again with "unlock" to finish the job
+    if not want and locked() then
+        want = edp_on
+    end
+    local changed = set_edp(want)
     if reason ~= "load" then
         hl.dispatch(hl.dsp.dpms({ action = "enable" }))
         if changed or reason == "resume" then
