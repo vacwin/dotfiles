@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 BARS=" ▁▂▃▄▅▆▇█"
+CONF='[general]\nbars = 10\n[output]\nmethod = raw\nraw_target = /dev/stdout\ndata_format = ascii\nascii_max_range = 8\n'
 
-cava -p <(printf '[general]\nbars = 10\n[output]\nmethod = raw\nraw_target = /dev/stdout\ndata_format = ascii\nascii_max_range = 8\n') | \
-while IFS= read -r line; do
+# cava runs as a direct child of this shell and gets SIGTERM when we die
+# (waybar only kills the script, so a piped cava used to be orphaned)
+trap 'kill $cava_pid 2>/dev/null' EXIT
+exec {fd}< <(exec setpriv --pdeathsig TERM cava -p <(printf "$CONF"))
+cava_pid=$!
+
+while IFS= read -r -u "$fd" line; do
     line="${line%;}"
     out=""
     IFS=';' read -ra vals <<< "$line"
