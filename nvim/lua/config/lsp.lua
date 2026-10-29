@@ -9,11 +9,6 @@ local servers = {
     filetypes = { 'yaml', 'yaml.docker-compose' },
     root_markers = { '.git' },
   },
-  ansiblels = {
-    cmd = { 'ansible-language-server', '--stdio' },
-    filetypes = { 'yaml', 'yaml.ansible' },
-    root_markers = { '.git', 'ansible.cfg' },
-  },
   dockerls = {
     cmd = { 'docker-langserver', '--stdio' },
     filetypes = { 'dockerfile' },

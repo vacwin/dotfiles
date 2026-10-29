@@ -72,7 +72,6 @@
 | Neovim | `neovim` (на маке `brew install neovim`) | конфиг `nvim/`, без плагин-менеджеров — только нативный `vim.lsp` + regex-подсветка. `vim/` в репе оставлен для истории/отката, но `install.sh` его больше не линкует |
 | bash-language-server | `bash-language-server` (на маке `npm i -g bash-language-server`) | LSP для `.sh` |
 | yaml-language-server | `yaml-language-server` (на маке `npm i -g yaml-language-server`) | LSP для YAML |
-| ansible-language-server | AUR `ansible-language-server` (на маке `npm i -g @ansible/ansible-language-server`) | LSP для ansible-плейбуков/ролей (работает поверх YAML) |
 | dockerfile-language-server | `dockerfile-language-server` (на маке `npm i -g dockerfile-language-server-nodejs`) | LSP для `Dockerfile` |
 | terraform-ls | AUR `terraform-ls-bin` (на маке `brew install hashicorp/tap/terraform-ls`) | LSP для `.tf` |
 | pyright | `pyright` (на маке `brew install pyright` или `npm i -g pyright`) | LSP для Python |
