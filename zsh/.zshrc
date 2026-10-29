@@ -119,7 +119,7 @@ fi
 unset FZF_SHELL
 
 # WORK
-wssh() {
+_yk_agent() {
   if ! gpg-connect-agent /bye >/dev/null 2>&1; then
     gpgconf --kill gpg-agent
     gpgconf --launch gpg-agent
@@ -127,9 +127,11 @@ wssh() {
   export GPG_TTY="$(tty)"
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpg-connect-agent updatestartuptty /bye >/dev/null
-
-  command ssh -p 2424 "$@"
 }
+
+wssh() { _yk_agent; command ssh -p 2424 "$@"; }
+yssh() { _yk_agent; command ssh "$@"; }
+yscp() { _yk_agent; command scp "$@"; }
 
 _docker_ansible_combine.sh() {
   if (( CURRENT == 2 )); then
