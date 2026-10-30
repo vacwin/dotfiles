@@ -16,7 +16,6 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
 
 vim.opt.termguicolors = true
-vim.opt.background = 'dark'
 
 local transparent_groups = {
   'Normal',
@@ -47,4 +46,4 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
-vim.cmd.colorscheme('immortal')
+vim.cmd.colorscheme(vim.o.background == 'light' and 'solarized' or 'immortal')
