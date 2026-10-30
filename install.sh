@@ -51,7 +51,7 @@ if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
 fi
 
 # scripts (the rest are called by path from hypr/waybar configs)
-for s in copy paste ansible_decrypt cava-waybar sysmon-waybar convert-audio weather-waybar playerctl-waybar waybar-focus-ws; do
+for s in theme copy paste ansible_decrypt cava-waybar sysmon-waybar convert-audio weather-waybar playerctl-waybar waybar-focus-ws; do
   link "scripts/$s" "$HOME/.local/bin/$s"
   chmod +x "$DOTFILES/scripts/$s"
 done
@@ -75,6 +75,9 @@ if [[ "$OS" == "Linux" ]]; then
     gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
     echo "enabled middle-click paste"
   fi
+
+  # create active palette symlinks for the current color-scheme
+  "$DOTFILES/scripts/theme" sync
 
   # cursor theme
   if [[ ! -d "$HOME/.local/share/icons/Banana" ]]; then

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Manual light/dark switch (Linux). gsettings color-scheme is the source of truth:
+# ghostty and GTK apps follow it via the portal, tmux and nvim follow ghostty.
+# Everything with hardcoded colors gets its active palette symlink swapped here.
+set -u
+
+DOTFILES="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+IFACE=org.gnome.desktop.interface
+
+current() {
+  gsettings get "$IFACE" color-scheme 2>/dev/null | grep -q light && echo light || echo dark
+}
+
+mode="${1:-toggle}"
+case "$mode" in
+  toggle) [[ "$(current)" == light ]] && mode=dark || mode=light ;;
+  sync)   mode="$(current)" ;;
+  light|dark) ;;
+  *) echo "usage: theme [toggle|light|dark|sync]" >&2; exit 1 ;;
+esac
+
+if [[ "$mode" == light ]]; then
+  gsettings set "$IFACE" color-scheme prefer-light
+  gsettings set "$IFACE" gtk-theme Adwaita
+else
+  gsettings set "$IFACE" color-scheme prefer-dark
+  gsettings set "$IFACE" gtk-theme Adwaita-dark
+fi
+
+ln -sfn "colors-$mode.css"  "$DOTFILES/waybar/colors.css"
+ln -sfn "colors-$mode.css"  "$DOTFILES/swaync/colors.css"
+ln -sfn "colors-$mode"      "$DOTFILES/tofi/colors"
+ln -sfn "colors-$mode.conf" "$DOTFILES/hyprlock/colors.conf"
+ln -sfn "config-$mode"      "$DOTFILES/cava/config"
+
+# reload whatever is running
+pkill -USR2 -x waybar
+pkill -USR2 -x cava
+command -v swaync-client >/dev/null && swaync-client -rs >/dev/null 2>&1
+command -v hyprctl >/dev/null && hyprctl eval 'apply_theme()' >/dev/null 2>&1
+exit 0

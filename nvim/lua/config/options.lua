@@ -46,4 +46,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
-vim.cmd.colorscheme(vim.o.background == 'light' and 'solarized' or 'immortal')
+local function apply_colorscheme()
+  vim.cmd.colorscheme(vim.o.background == 'light' and 'solarized' or 'immortal')
+end
+
+-- follow terminal light/dark switches while running
+vim.api.nvim_create_autocmd('OptionSet', {
+  pattern = 'background',
+  callback = apply_colorscheme,
+})
+
+apply_colorscheme()

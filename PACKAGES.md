@@ -15,6 +15,7 @@
 | hyprlock | `hyprlock` | блокировка экрана (`$mod CTRL+q`, hyprlock.conf; `$wallpaper`/`$avatar` из `hypr/conf.d/local.conf`) |
 | hypridle | `hypridle` | idle-демон (autostart, hypridle.conf) |
 | xdg-desktop-portal-hyprland | `xdg-desktop-portal-hyprland` | скриншеринг/порталы (рекомендуется) |
+| xdg-desktop-portal-gtk | `xdg-desktop-portal-gtk` | отдаёт `color-scheme` через портал — ghostty по нему переключает light/dark (`scripts/theme`, `$mod SHIFT+.`) |
 
 ## Панель / уведомления / лаунчер
 

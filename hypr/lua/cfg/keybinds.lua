@@ -12,6 +12,9 @@ hl.bind(mod .. " + v", exec('cliphist list | tofi --prompt-text "clip: " | cliph
 -- lock
 hl.bind(mod .. " + CTRL + q", exec("~/dotfiles/scripts/lock"))
 
+-- light/dark theme
+hl.bind(mod .. " + SHIFT + period", exec("~/dotfiles/scripts/theme"))
+
 -- window management
 hl.bind(mod .. " + q", hl.dsp.window.close())
 hl.bind(mod .. " + f", hl.dsp.window.fullscreen({ mode = "fullscreen" }))

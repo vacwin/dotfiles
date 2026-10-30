@@ -14,3 +14,10 @@ nvim/pack/
 
 # leaf runtime
 leaf/history.toml
+
+# active theme palettes (symlinks managed by scripts/theme)
+waybar/colors.css
+swaync/colors.css
+tofi/colors
+hyprlock/colors.conf
+cava/config

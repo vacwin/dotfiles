@@ -1,14 +1,4 @@
-/* Black Metal (Immortal) */
-@define-color bg        #000000;
-@define-color bg-raised #121212;
-@define-color fg        #c1c1c1;
-@define-color ash       #444444;
-@define-color dim       #999999;
-@define-color steel     #888888;
-@define-color silver    #aaaaaa;
-@define-color slate     #556677;
-@define-color frost     #7799bb;
-@define-color teal      #5f8787;
+@import url("colors.css");
 
 * {
     font-family: "Iosevka Nerd Font", sans-serif;
