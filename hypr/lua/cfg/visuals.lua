@@ -22,13 +22,10 @@ hl.config({
     misc = {
         disable_hyprland_logo    = true,
         disable_splash_rendering = true,
-        -- lets a hung hyprlock be killed and relaunched instead of the red "lockscreen died" screen
         allow_session_lock_restore = true,
     },
 })
 
--- Border colors follow gsettings color-scheme (set by scripts/theme, which
--- re-applies them via `hyprctl eval 'apply_theme()'`).
 local borders = {
     dark  = { active_border = "rgb(7799bb)", inactive_border = "rgb(222222)" }, -- Black Metal (Immortal)
     light = { active_border = "rgb(268bd2)", inactive_border = "rgb(93a1a1)" }, -- Solarized Light

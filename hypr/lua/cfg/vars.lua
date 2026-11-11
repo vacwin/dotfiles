@@ -1,8 +1,5 @@
--- Shared variables for all config modules.
 local dir = debug.getinfo(1, "S").source:match("^@(.*)/lua/cfg/[^/]*$")
 
--- Machine-specific values live in conf.d/local.conf (hyprlang syntax), because
--- hyprlock and scripts/monitor-ctl read the same file.
 local function read_local_conf(path)
     local vars = {}
     local f = io.open(path, "r")
