@@ -1,0 +1,23 @@
+# Generated from themes/mono.conf (dark) by scripts/theme. Do not edit.
+background = #1b1b1a
+foreground = #e6e5e2
+cursor-color = #e6e5e2
+cursor-text = #1b1b1a
+selection-background = #2e2e2d
+selection-foreground = #e6e5e2
+palette = 0=#101010
+palette = 1=#a4a4a0
+palette = 2=#8a8a86
+palette = 3=#c4c4c0
+palette = 4=#fbfaf7
+palette = 5=#6d6d6a
+palette = 6=#b9b8b5
+palette = 7=#e6e5e2
+palette = 8=#555553
+palette = 9=#a4a4a0
+palette = 10=#8a8a86
+palette = 11=#c4c4c0
+palette = 12=#ffffff
+palette = 13=#6d6d6a
+palette = 14=#b9b8b5
+palette = 15=#ffffff

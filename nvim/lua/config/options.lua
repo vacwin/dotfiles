@@ -46,8 +46,26 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
+-- the active light/dark mode is written by ~/dotfiles/scripts/theme
+local function detect_background()
+  local state = (os.getenv('XDG_STATE_HOME') or (os.getenv('HOME') .. '/.local/state')) .. '/theme/mode'
+  local f = io.open(state, 'r')
+  if not f then
+    return vim.o.background
+  end
+  local mode = f:read('*l') or ''
+  f:close()
+  if mode == 'light' or mode == 'dark' then
+    return mode
+  end
+  return vim.o.background
+end
+
+vim.o.background = detect_background()
+
 local function apply_colorscheme()
-  vim.cmd.colorscheme(vim.o.background == 'light' and 'solarized' or 'immortal')
+  -- nvim/colors/mono.vim is generated from themes/mono.conf by scripts/theme
+  vim.cmd.colorscheme('mono')
 end
 
 -- follow terminal light/dark switches while running

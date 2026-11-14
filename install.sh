@@ -40,9 +40,6 @@ fi
 # editor
 link nvim "$HOME/.config/nvim"
 
-# leaf
-link leaf "$HOME/.config/leaf"
-
 # tmux
 [[ -L "$HOME/.tmux.conf" ]] && rm "$HOME/.tmux.conf"
 link tmux/tmux.conf "$HOME/.config/tmux/tmux.conf"

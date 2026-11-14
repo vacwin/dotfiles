@@ -1,8 +1,8 @@
-# Solarized Light
-background-color = #fdf6e3
-text-color = #586e75
-prompt-color = #268bd2
-selection-color = #586e75
-selection-background = #eee8d5
-input-color = #586e75
-default-result-color = #93a1a1
+# Generated from themes/mono.conf (light) by scripts/theme. Do not edit.
+background-color = #e7e6e3
+text-color = #1c1b19
+prompt-color = #000000
+selection-color = #e7e6e3
+selection-background = #000000
+input-color = #1c1b19
+default-result-color = #9a9996

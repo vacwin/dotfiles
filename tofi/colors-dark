@@ -1,8 +1,8 @@
-# Black Metal (Immortal)
-background-color = #000000
-text-color = #c1c1c1
-prompt-color = #7799bb
-selection-color = #c1c1c1
-selection-background = #121212
-input-color = #c1c1c1
-default-result-color = #444444
+# Generated from themes/mono.conf (dark) by scripts/theme. Do not edit.
+background-color = #1b1b1a
+text-color = #e6e5e2
+prompt-color = #fbfaf7
+selection-color = #1b1b1a
+selection-background = #fbfaf7
+input-color = #e6e5e2
+default-result-color = #555553

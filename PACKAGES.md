@@ -70,7 +70,7 @@
 
 | Инструмент | Пакет | Зачем |
 |---|---|---|
-| Neovim | `neovim` (на маке `brew install neovim`) | конфиг `nvim/`, без плагин-менеджеров — только нативный `vim.lsp` + regex-подсветка. `vim/` в репе оставлен для истории/отката, но `install.sh` его больше не линкует |
+| Neovim | `neovim` (на маке `brew install neovim`) | конфиг `nvim/`, без плагин-менеджеров — только нативный `vim.lsp` + regex-подсветка. Цвета — сгенерированный `nvim/colors/mono.vim` из `themes/mono.conf` |
 | bash-language-server | `bash-language-server` (на маке `npm i -g bash-language-server`) | LSP для `.sh` |
 | yaml-language-server | `yaml-language-server` (на маке `npm i -g yaml-language-server`) | LSP для YAML |
 | dockerfile-language-server | `dockerfile-language-server` (на маке `npm i -g dockerfile-language-server-nodejs`) | LSP для `Dockerfile` |
@@ -112,18 +112,21 @@
   редактировать обычный юзер (privilege escalation при компрометации аккаунта).
   Вместо этого — вручную копировать (не симлинтить) нужные конфиги разовым
   `cp`, отдельно на каждой машине:
-  - zsh (своя тема `root.zsh`, чтобы отличать промпт от обычного юзера):
+  - zsh:
     ```
     sudo mkdir -p /root/.config/zsh/themes /root/.cache/zsh /root/.local/state/zsh
     sudo cp /home/vacwin/dotfiles/zsh/.zshrc    /root/.config/zsh/.zshrc
     sudo cp /home/vacwin/dotfiles/zsh/.zprofile /root/.config/zsh/.zprofile
     sudo cp /home/vacwin/dotfiles/zsh/.zshenv   /root/.config/zsh/.zshenv
-    sudo cp /home/vacwin/dotfiles/zsh/themes/*.zsh /root/.config/zsh/themes/
-    sudo sed -i "s/^ZSH_THEME='guts'/ZSH_THEME='root'/" /root/.config/zsh/.zshrc
+    sudo cp /home/vacwin/dotfiles/zsh/themes/mono-*.zsh /root/.config/zsh/themes/
     echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee /root/.zshenv
     sudo chsh -s /usr/bin/zsh root
     sudo chown -R root:root /root/.config/zsh
     ```
+    Промпт берёт палитру из `themes/<theme>-<mode>.zsh`, имя темы — `ZSH_THEME`
+    (по умолчанию `mono`). При `EUID == 0` автоматически подхватывается
+    `themes/<theme>-root-<mode>.zsh` (красный промпт), отдельная настройка
+    root не нужна — достаточно скопировать `mono-*.zsh`.
   - nvim:
     ```
     sudo mkdir -p /root/.config/nvim

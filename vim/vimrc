@@ -1,8 +1,0 @@
-" leader
-let mapleader = " "
-" config dir
-execute 'set runtimepath^=' . fnameescape(expand('~/dotfiles/vim'))
-let s:confd = expand('<sfile>:p:h') . '/conf.d'
-for s:f in sort(split(glob(s:confd . '/*.vim'), "\n"))
-  execute 'source' fnameescape(s:f)
-endfor

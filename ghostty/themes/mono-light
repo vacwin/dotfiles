@@ -1,0 +1,23 @@
+# Generated from themes/mono.conf (light) by scripts/theme. Do not edit.
+background = #e7e6e3
+foreground = #1c1b19
+cursor-color = #1c1b19
+cursor-text = #e7e6e3
+selection-background = #d4d3d0
+selection-foreground = #1c1b19
+palette = 0=#1c1b19
+palette = 1=#4f4e4a
+palette = 2=#666560
+palette = 3=#7d7c79
+palette = 4=#3a3936
+palette = 5=#8f8e8b
+palette = 6=#565550
+palette = 7=#a5a4a0
+palette = 8=#3a3936
+palette = 9=#4f4e4a
+palette = 10=#666560
+palette = 11=#7d7c79
+palette = 12=#2a2927
+palette = 13=#8f8e8b
+palette = 14=#565550
+palette = 15=#cfcecb

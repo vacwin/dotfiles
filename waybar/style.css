@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background-color: @bg;
+    background-color: @bar-bg;
     color: @fg;
 }
 
@@ -29,12 +29,12 @@ button {
 
 #workspaces button:hover {
     color: @fg;
-    background: @bg-raised;
+    background: @pill-bg;
 }
 
 #workspaces button.active {
     color: @fg;
-    background-color: @bg-raised;
+    background-color: @pill-bg;
     border-bottom: 2px solid @frost;
 }
 
@@ -69,7 +69,7 @@ button {
     border-radius: 8px;
     padding: 4px 10px;
     margin: 4px 3px;
-    background: @bg-raised;
+    background: @pill-bg;
     color: @fg;
 }
 
@@ -112,7 +112,7 @@ button {
 #tray > .needs-attention { background-color: @teal; color: @bg; border-radius: 8px; }
 
 tooltip {
-    background: @bg-raised;
+    background: @tooltip-bg;
     border-radius: 6px;
     border: 1px solid @ash;
 }

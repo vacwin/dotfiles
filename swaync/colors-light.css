@@ -1,11 +1,18 @@
-/* Solarized Light */
-@define-color bg        #fdf6e3;
-@define-color bg-raised #eee8d5;
-@define-color fg        #586e75;
-@define-color ash       #93a1a1;
-@define-color dim       #657b83;
-@define-color steel     #839496;
-@define-color silver    #657b83;
-@define-color slate     #93a1a1;
-@define-color frost     #268bd2;
-@define-color teal      #2aa198;
+/* Generated from themes/mono.conf (light) by scripts/theme. Do not edit. */
+@define-color bg        #e7e6e3;
+@define-color bg-raised #deddda;
+@define-color bg-hover  #d4d3d0;
+@define-color border    #c8c7c4;
+@define-color ash       #9a9996;
+@define-color slate     #7c7b78;
+@define-color steel     #65645f;
+@define-color dim       #4f4e4a;
+@define-color silver    #3a3936;
+@define-color teal      #4c4b48;
+@define-color frost     #000000;
+@define-color fg        #1c1b19;
+@define-color urgent    #000000;
+@define-color root      #b5433f;
+@define-color bar-bg    rgba(231, 230, 227, 0.72);
+@define-color pill-bg   rgba(222, 221, 218, 0.5);
+@define-color tooltip-bg rgba(222, 221, 218, 0.94);

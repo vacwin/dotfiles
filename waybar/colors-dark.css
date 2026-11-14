@@ -1,11 +1,18 @@
-/* Black Metal (Immortal) */
-@define-color bg        #000000;
-@define-color bg-raised #121212;
-@define-color fg        #c1c1c1;
-@define-color ash       #444444;
-@define-color dim       #999999;
-@define-color steel     #888888;
-@define-color silver    #aaaaaa;
-@define-color slate     #556677;
-@define-color frost     #7799bb;
-@define-color teal      #5f8787;
+/* Generated from themes/mono.conf (dark) by scripts/theme. Do not edit. */
+@define-color bg        #1b1b1a;
+@define-color bg-raised #242423;
+@define-color bg-hover  #2e2e2d;
+@define-color border    #363635;
+@define-color ash       #555553;
+@define-color slate     #6d6d6a;
+@define-color steel     #8a8a86;
+@define-color dim       #a4a4a0;
+@define-color silver    #c4c4c0;
+@define-color teal      #b9b8b5;
+@define-color frost     #fbfaf7;
+@define-color fg        #e6e5e2;
+@define-color urgent    #ffffff;
+@define-color root      #d75f5f;
+@define-color bar-bg    rgba(27, 27, 26, 0.65);
+@define-color pill-bg   rgba(36, 36, 35, 0.5);
+@define-color tooltip-bg rgba(36, 36, 35, 0.92);

@@ -1,41 +1,324 @@
 #!/usr/bin/env bash
-# Manual light/dark switch (Linux). gsettings color-scheme is the source of truth:
-# ghostty and GTK apps follow it via the portal, tmux and nvim follow ghostty.
-# Everything with hardcoded colors gets its active palette symlink swapped here.
+# One palette, every app.
+#
+# Source of truth: themes/<name>.conf (bash syntax, see themes/mono.conf).
+# This script expands it into every format that can't read it directly:
+# CSS, tofi, hyprlock, cava, ghostty, tmux, zsh, ly, nvim, hyprland lua.
+#
+# usage:
+#   theme            toggle light/dark (SUPER+SHIFT+.)
+#   theme light
+#   theme dark
+#   theme sync       follow gsettings color-scheme
+#   theme render     only regenerate files, don't touch gsettings/apps
+#
+# env:
+#   THEME=mono            palette name -> themes/mono.conf
+#   THEME_PALETTE=path    explicit palette path
 set -u
 
 DOTFILES="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+THEME="${THEME:-mono}"
+PALETTE="${THEME_PALETTE:-$DOTFILES/themes/$THEME.conf}"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 IFACE=org.gnome.desktop.interface
+
+[[ -r "$PALETTE" ]] || {
+  echo "theme: palette not found: $PALETTE" >&2
+  exit 1
+}
+# shellcheck disable=SC1090
+source "$PALETTE"
+
+[[ ${#tokens[@]} -gt 0 ]] || {
+  echo "theme: $PALETTE defines no tokens" >&2
+  exit 1
+}
+
+# ───────────────────────────── helpers ──────────────────────────────
+
+tok() { # tok <mode> <token>
+  local var="${1}_${2}"
+  printf '%s' "${!var}"
+}
+
+alpha() { # alpha <mode> <bar|pill|tooltip>
+  local var="${1}_alpha_${2}"
+  printf '%s' "${!var}"
+}
+
+hex() { printf '%s' "${1#\#}"; }
+
+rgb() { # #rrggbb -> "r, g, b"
+  local h
+  h="$(hex "$1")"
+  printf '%d, %d, %d' "0x${h:0:2}" "0x${h:2:2}" "0x${h:4:2}"
+}
+
+rgba() { # #rrggbb alpha -> "rgba(r, g, b, a)"
+  printf 'rgba(%s, %s)' "$(rgb "$1")" "$2"
+}
+
+hypr_rgb() { printf 'rgb(%s)' "$(hex "$1")"; }
+
+ansi() { # ansi <mode> <0..15>
+  local -n _palette_ansi="${1}_ansi"
+  printf '%s' "${_palette_ansi[$2]}"
+}
+
+render_template() { # render_template <tpl> <out> <mode>
+  local tpl="$1" out="$2" mode="$3" content m t i val
+  content="$(<"$tpl")"
+  # {{dark_bg}}, {{light_bg_rgb}}, {{dark_ansi4}} — any mode, any token
+  for m in dark light; do
+    for t in "${tokens[@]}"; do
+      val="$(tok "$m" "$t")"
+      content="${content//"{{${m}_${t}}}"/"$val"}"
+      content="${content//"{{${m}_${t}_rgb}}"/"${val#\#}"}"
+    done
+    for i in "${!dark_ansi[@]}"; do
+      val="$(ansi "$m" "$i")"
+      content="${content//"{{${m}_ansi${i}}}"/"$val"}"
+    done
+  done
+  # {{bg}}, {{bg_rgb}} — current mode
+  for t in "${tokens[@]}"; do
+    val="$(tok "$mode" "$t")"
+    content="${content//"{{${t}}}"/"$val"}"
+    content="${content//"{{${t}_rgb}}"/"${val#\#}"}"
+  done
+  content="${content//"{{mode}}"/"$mode"}"
+  content="${content//"{{name}}"/"$name"}"
+  printf '%s\n' "$content" >"$out"
+}
+
+css_tokens() { # css_tokens <mode>
+  local mode="$1" t name
+  for t in "${tokens[@]}"; do
+    name="${t//_/-}"
+    printf '@define-color %-9s %s;\n' "$name" "$(tok "$mode" "$t")"
+  done
+  printf '@define-color %-9s %s;\n' "bar-bg" "$(rgba "$(tok "$mode" bg)" "$(alpha "$mode" bar)")"
+  printf '@define-color %-9s %s;\n' "pill-bg" "$(rgba "$(tok "$mode" bg_raised)" "$(alpha "$mode" pill)")"
+  printf '@define-color %-9s %s;\n' "tooltip-bg" "$(rgba "$(tok "$mode" bg_raised)" "$(alpha "$mode" tooltip)")"
+}
+
+# ───────────────────────────── render ───────────────────────────────
+
+render_css() {
+  local mode="$1" f
+  for f in waybar swaync; do
+    {
+      echo "/* Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit. */"
+      css_tokens "$mode"
+    } >"$DOTFILES/$f/colors-$mode.css"
+  done
+}
+
+render_tofi() {
+  local mode="$1"
+  cat >"$DOTFILES/tofi/colors-$mode" <<EOF
+# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
+background-color = $(tok "$mode" bg)
+text-color = $(tok "$mode" fg)
+prompt-color = $(tok "$mode" frost)
+selection-color = $(tok "$mode" bg)
+selection-background = $(tok "$mode" frost)
+input-color = $(tok "$mode" fg)
+default-result-color = $(tok "$mode" ash)
+EOF
+}
+
+render_hyprlock() {
+  local mode="$1" alpha brightness
+  if [[ "$mode" == light ]]; then
+    alpha=0.4
+    brightness=1.0
+  else
+    alpha=0.2
+    brightness=0.7
+  fi
+  cat >"$DOTFILES/hyprlock/colors-$mode.conf" <<EOF
+# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
+\$fg         = $(hypr_rgb "$(tok "$mode" fg)")
+\$ash        = $(hypr_rgb "$(tok "$mode" ash)")
+\$teal       = $(hypr_rgb "$(tok "$mode" teal)")
+\$inner      = $(rgba "$(tok "$mode" bg)" "$alpha")
+\$brightness = $brightness
+EOF
+}
+
+render_cava() {
+  local mode="$1"
+  render_template "$DOTFILES/templates/cava.conf" "$DOTFILES/cava/config-$mode" "$mode"
+}
+
+render_ghostty() {
+  local mode="$1" i
+  {
+    echo "# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit."
+    echo "background = $(tok "$mode" bg)"
+    echo "foreground = $(tok "$mode" fg)"
+    echo "cursor-color = $(tok "$mode" fg)"
+    echo "cursor-text = $(tok "$mode" bg)"
+    echo "selection-background = $(tok "$mode" bg_hover)"
+    echo "selection-foreground = $(tok "$mode" fg)"
+    for i in "${!dark_ansi[@]}"; do
+      echo "palette = $i=$(ansi "$mode" "$i")"
+    done
+  } >"$DOTFILES/ghostty/themes/$THEME-$mode"
+}
+
+render_tmux() {
+  local mode="$1"
+  cat >"$DOTFILES/tmux/themes/$THEME-$mode.conf" <<EOF
+# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
+set -g status-bg '$(tok "$mode" bg)'
+set -g status-fg '$(tok "$mode" fg)'
+set -g status-left '#[fg=$(tok "$mode" frost),bold]#S #[default]'
+set -g status-right '#[fg=$(tok "$mode" teal)]#(\$HOME/dotfiles/tmux/network.sh) #[fg=$(tok "$mode" ash)]%a %d %b #[fg=$(tok "$mode" fg)]%I:%M %p'
+set -g window-status-style 'fg=$(tok "$mode" ash),bg=default'
+set -g window-status-format '#[fg=$(tok "$mode" ash)]#I #[fg=$(tok "$mode" ash)]#W'
+set -g window-status-current-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised),bold'
+set -g window-status-current-format '#[fg=$(tok "$mode" frost),bg=$(tok "$mode" bg_raised)] #I:#W #[default]'
+set -g pane-border-style 'fg=$(tok "$mode" bg_raised)'
+set -g pane-active-border-style 'fg=$(tok "$mode" frost)'
+set -g message-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised)'
+set -g message-command-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised)'
+setw -g mode-style 'fg=$(tok "$mode" bg),bg=$(tok "$mode" frost)'
+EOF
+}
+
+render_zsh() {
+  local mode="$1"
+  cat >"$DOTFILES/zsh/themes/$THEME-$mode.zsh" <<EOF
+# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
+ZT_BRACKET='$(tok "$mode" ash)'
+ZT_USER='$(tok "$mode" fg)'
+ZT_AT='$(tok "$mode" ash)'
+ZT_HOST='$(tok "$mode" frost)'
+ZT_PATH='$(tok "$mode" silver)'
+ZT_GIT='$(tok "$mode" slate)'
+ZT_UNSTAGED='$(tok "$mode" dim)'
+ZT_STAGED='$(tok "$mode" frost)'
+EOF
+  # root prompt: one distinct color everywhere, so it can't be confused
+  # with a normal user shell (see EUID check in zsh/.zshrc)
+  cat >"$DOTFILES/zsh/themes/$THEME-root-$mode.zsh" <<EOF
+# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
+ZT_BRACKET='$(tok "$mode" root)'
+ZT_USER='$(tok "$mode" root)'
+ZT_AT='$(tok "$mode" root)'
+ZT_HOST='$(tok "$mode" root)'
+ZT_PATH='$(tok "$mode" root)'
+ZT_GIT='$(tok "$mode" root)'
+ZT_UNSTAGED='$(tok "$mode" root)'
+ZT_STAGED='$(tok "$mode" root)'
+EOF
+}
+
+render_ly() { # ly reads a single config.ini, so it only follows the active mode
+  local mode="$1"
+  render_template "$DOTFILES/templates/ly.conf" "$DOTFILES/ly/config.ini" "$mode"
+}
+
+render_nvim() {
+  mkdir -p "$DOTFILES/nvim/colors"
+  render_template "$DOTFILES/templates/colorscheme.vim" "$DOTFILES/nvim/colors/$THEME.vim" "dark"
+}
+
+render_hypr_palette() {
+  cat >"$DOTFILES/hypr/lua/cfg/palette.lua" <<EOF
+-- Generated from themes/$THEME.conf by scripts/theme. Do not edit.
+return {
+    dark = {
+        active_border = "$(hypr_rgb "$(tok dark frost)")",
+        inactive_border = "$(hypr_rgb "$(tok dark border)")",
+    },
+    light = {
+        active_border = "$(hypr_rgb "$(tok light frost)")",
+        inactive_border = "$(hypr_rgb "$(tok light border)")",
+    },
+}
+EOF
+}
+
+render_all() {
+  local mode
+  for mode in dark light; do
+    render_css "$mode"
+    render_tofi "$mode"
+    render_hyprlock "$mode"
+    render_cava "$mode"
+    render_ghostty "$mode"
+    render_tmux "$mode"
+    render_zsh "$mode"
+  done
+  render_nvim
+  render_hypr_palette
+  # ly has a single config file: it follows the active mode, set below
+}
+
+# ───────────────────────────── apply ────────────────────────────────
 
 current() {
   gsettings get "$IFACE" color-scheme 2>/dev/null | grep -q light && echo light || echo dark
 }
 
+reload() {
+  pkill -USR2 -x waybar 2>/dev/null || true
+  pkill -USR2 -x cava 2>/dev/null || true
+  if command -v swaync-client >/dev/null 2>&1; then
+    swaync-client -rs >/dev/null 2>&1 || true
+  fi
+  if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl eval 'apply_theme()' >/dev/null 2>&1 || true
+  fi
+}
+
+set_mode() { # set_mode <light|dark>
+  local mode="$1"
+
+  if command -v gsettings >/dev/null 2>&1; then
+    if [[ "$mode" == light ]]; then
+      gsettings set "$IFACE" color-scheme prefer-light
+      gsettings set "$IFACE" gtk-theme Adwaita
+    else
+      gsettings set "$IFACE" color-scheme prefer-dark
+      gsettings set "$IFACE" gtk-theme Adwaita-dark
+    fi
+  fi
+
+  mkdir -p "$STATE_DIR"
+  printf '%s\n' "$mode" >"$STATE_DIR/mode"
+
+  ln -sfn "colors-$mode.css" "$DOTFILES/waybar/colors.css"
+  ln -sfn "colors-$mode.css" "$DOTFILES/swaync/colors.css"
+  ln -sfn "colors-$mode" "$DOTFILES/tofi/colors"
+  ln -sfn "colors-$mode.conf" "$DOTFILES/hyprlock/colors.conf"
+  ln -sfn "config-$mode" "$DOTFILES/cava/config"
+
+  render_ly "$mode"
+  reload
+}
+
 mode="${1:-toggle}"
 case "$mode" in
   toggle) [[ "$(current)" == light ]] && mode=dark || mode=light ;;
-  sync)   mode="$(current)" ;;
-  light|dark) ;;
-  *) echo "usage: theme [toggle|light|dark|sync]" >&2; exit 1 ;;
+  sync) mode="$(current)" ;;
+  light | dark) ;;
+  render)
+    render_all
+    render_ly "$(current)"
+    echo "theme: rendered from $PALETTE"
+    exit 0
+    ;;
+  *)
+    echo "usage: theme [toggle|light|dark|sync|render]" >&2
+    exit 1
+    ;;
 esac
 
-if [[ "$mode" == light ]]; then
-  gsettings set "$IFACE" color-scheme prefer-light
-  gsettings set "$IFACE" gtk-theme Adwaita
-else
-  gsettings set "$IFACE" color-scheme prefer-dark
-  gsettings set "$IFACE" gtk-theme Adwaita-dark
-fi
-
-ln -sfn "colors-$mode.css"  "$DOTFILES/waybar/colors.css"
-ln -sfn "colors-$mode.css"  "$DOTFILES/swaync/colors.css"
-ln -sfn "colors-$mode"      "$DOTFILES/tofi/colors"
-ln -sfn "colors-$mode.conf" "$DOTFILES/hyprlock/colors.conf"
-ln -sfn "config-$mode"      "$DOTFILES/cava/config"
-
-# reload whatever is running
-pkill -USR2 -x waybar
-pkill -USR2 -x cava
-command -v swaync-client >/dev/null && swaync-client -rs >/dev/null 2>&1
-command -v hyprctl >/dev/null && hyprctl eval 'apply_theme()' >/dev/null 2>&1
-exit 0
+render_all
+set_mode "$mode"
+echo "theme: $name ($mode)"

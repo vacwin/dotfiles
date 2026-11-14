@@ -1,3 +1,5 @@
+# Generated from themes/mono.conf (light) by scripts/theme. Do not edit.
+
 [general]
 bars = 20
 bar_width = 2
@@ -9,5 +11,5 @@ method = ncurses
 [color]
 gradient = 1
 gradient_count = 2
-gradient_color_1 = '#2aa198'
-gradient_color_2 = '#268bd2'
+gradient_color_1 = '#4c4b48'
+gradient_color_2 = '#000000'
