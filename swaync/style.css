@@ -11,14 +11,14 @@
 
 .notification-row:focus,
 .notification-row:hover {
-    background: @bg-raised;
+    background: @surface;
 }
 
 .notification {
     border-radius: 6px;
     margin: 6px;
     padding: 0;
-    border: 1px solid @ash;
+    border: 1px solid @text-faint;
     background: @bg;
 }
 
@@ -32,26 +32,26 @@
 }
 
 .notification-default-action:hover {
-    background: @bg-raised;
+    background: @surface;
 }
 
 .close-button {
     background: transparent;
-    color: @ash;
+    color: @text-faint;
     border-radius: 3px;
     margin: 6px 6px 0 0;
     padding: 2px;
 }
 
 .close-button:hover {
-    background: @teal;
+    background: @accent-muted;
     color: @bg;
 }
 
 .notification-action {
-    border-top: 1px solid @ash;
+    border-top: 1px solid @text-faint;
     border-radius: 0;
-    color: @fg;
+    color: @text;
 }
 
 .notification-action:last-child {
@@ -59,7 +59,7 @@
 }
 
 .notification-action:hover {
-    background: @bg-raised;
+    background: @surface;
 }
 
 .notification-default-action,
@@ -70,37 +70,37 @@
 .summary {
     font-size: 15px;
     font-weight: bold;
-    color: @fg;
+    color: @text;
 }
 
 .time {
     font-size: 12px;
-    color: @ash;
+    color: @text-faint;
 }
 
 .body {
     font-size: 14px;
-    color: @fg;
+    color: @text;
 }
 
 .app-name {
     font-size: 12px;
-    color: @ash;
+    color: @text-faint;
 }
 
 .critical {
-    border-color: @teal;
+    border-color: @accent-muted;
 }
 
 .low {
-    border-color: @ash;
+    border-color: @text-faint;
     opacity: 0.85;
 }
 
 /* Control Center */
 .control-center {
     background: @bg;
-    border: 1px solid @ash;
+    border: 1px solid @text-faint;
     border-radius: 8px;
     padding: 6px;
 }
@@ -110,20 +110,20 @@
 }
 
 .control-center-list-placeholder {
-    color: @ash;
+    color: @text-faint;
     font-size: 14px;
 }
 
 .header-title {
-    color: @fg;
+    color: @text;
     font-size: 16px;
     font-weight: bold;
     padding: 6px 14px;
 }
 
 .clear-all-button {
-    background: @bg-raised;
-    color: @ash;
+    background: @surface;
+    color: @text-faint;
     border-radius: 6px;
     border: none;
     padding: 4px 10px;
@@ -131,13 +131,13 @@
 }
 
 .clear-all-button:hover {
-    color: @teal;
+    color: @accent-muted;
 }
 
 /* DND toggle */
 .widget-dnd {
     padding: 6px 14px;
-    border-bottom: 1px solid @ash;
+    border-bottom: 1px solid @text-faint;
     margin-bottom: 6px;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .widget-dnd > switch:checked {
-    background: @teal;
+    background: @accent-muted;
 }
 
 /* Title widget */
@@ -155,7 +155,7 @@
 }
 
 .widget-title > label {
-    color: @fg;
+    color: @text;
     font-size: 16px;
     font-weight: bold;
 }

@@ -8,32 +8,32 @@ let g:colors_name = 'mono'
 
 if &background == 'light'
   let s:bg        = '{{light_bg}}'
-  let s:bg_raised = '{{light_bg_raised}}'
-  let s:bg_hover  = '{{light_bg_hover}}'
+  let s:surface = '{{light_surface}}'
+  let s:surface_hover  = '{{light_surface_hover}}'
   let s:border    = '{{light_border}}'
-  let s:ash       = '{{light_ash}}'
-  let s:slate     = '{{light_slate}}'
-  let s:steel     = '{{light_steel}}'
-  let s:dim       = '{{light_dim}}'
-  let s:silver    = '{{light_silver}}'
-  let s:teal      = '{{light_teal}}'
-  let s:frost     = '{{light_frost}}'
-  let s:fg        = '{{light_fg}}'
-  let s:urgent    = '{{light_urgent}}'
+  let s:text_faint       = '{{light_text_faint}}'
+  let s:text_subtle     = '{{light_text_subtle}}'
+  let s:text_muted     = '{{light_text_muted}}'
+  let s:text_tertiary       = '{{light_text_tertiary}}'
+  let s:text_secondary    = '{{light_text_secondary}}'
+  let s:accent_muted      = '{{light_accent_muted}}'
+  let s:accent     = '{{light_accent}}'
+  let s:text        = '{{light_text}}'
+  let s:critical    = '{{light_critical}}'
 else
   let s:bg        = '{{dark_bg}}'
-  let s:bg_raised = '{{dark_bg_raised}}'
-  let s:bg_hover  = '{{dark_bg_hover}}'
+  let s:surface = '{{dark_surface}}'
+  let s:surface_hover  = '{{dark_surface_hover}}'
   let s:border    = '{{dark_border}}'
-  let s:ash       = '{{dark_ash}}'
-  let s:slate     = '{{dark_slate}}'
-  let s:steel     = '{{dark_steel}}'
-  let s:dim       = '{{dark_dim}}'
-  let s:silver    = '{{dark_silver}}'
-  let s:teal      = '{{dark_teal}}'
-  let s:frost     = '{{dark_frost}}'
-  let s:fg        = '{{dark_fg}}'
-  let s:urgent    = '{{dark_urgent}}'
+  let s:text_faint       = '{{dark_text_faint}}'
+  let s:text_subtle     = '{{dark_text_subtle}}'
+  let s:text_muted     = '{{dark_text_muted}}'
+  let s:text_tertiary       = '{{dark_text_tertiary}}'
+  let s:text_secondary    = '{{dark_text_secondary}}'
+  let s:accent_muted      = '{{dark_accent_muted}}'
+  let s:accent     = '{{dark_accent}}'
+  let s:text        = '{{dark_text}}'
+  let s:critical    = '{{dark_critical}}'
 endif
 
 function! s:hi(group, fg, bg, attr) abort
@@ -51,109 +51,109 @@ function! s:hi(group, fg, bg, attr) abort
 endfunction
 
 " base
-call s:hi('Normal', s:fg, s:bg, '')
-call s:hi('NormalNC', s:fg, '', '')
-call s:hi('NormalFloat', s:fg, s:bg_raised, '')
-call s:hi('FloatBorder', s:border, s:bg_raised, '')
-call s:hi('FloatTitle', s:frost, s:bg_raised, 'bold')
-call s:hi('Cursor', s:bg, s:fg, '')
-call s:hi('lCursor', s:bg, s:fg, '')
-call s:hi('CursorLine', '', s:bg_hover, '')
-call s:hi('CursorColumn', '', s:bg_hover, '')
-call s:hi('ColorColumn', '', s:bg_hover, '')
-call s:hi('LineNr', s:ash, '', '')
-call s:hi('CursorLineNr', s:frost, '', 'bold')
-call s:hi('SignColumn', s:ash, '', '')
-call s:hi('FoldColumn', s:ash, '', '')
-call s:hi('Folded', s:ash, s:bg_raised, '')
+call s:hi('Normal', s:text, s:bg, '')
+call s:hi('NormalNC', s:text, '', '')
+call s:hi('NormalFloat', s:text, s:surface, '')
+call s:hi('FloatBorder', s:border, s:surface, '')
+call s:hi('FloatTitle', s:accent, s:surface, 'bold')
+call s:hi('Cursor', s:bg, s:text, '')
+call s:hi('lCursor', s:bg, s:text, '')
+call s:hi('CursorLine', '', s:surface_hover, '')
+call s:hi('CursorColumn', '', s:surface_hover, '')
+call s:hi('ColorColumn', '', s:surface_hover, '')
+call s:hi('LineNr', s:text_faint, '', '')
+call s:hi('CursorLineNr', s:accent, '', 'bold')
+call s:hi('SignColumn', s:text_faint, '', '')
+call s:hi('FoldColumn', s:text_faint, '', '')
+call s:hi('Folded', s:text_faint, s:surface, '')
 call s:hi('VertSplit', s:border, '', '')
 call s:hi('WinSeparator', s:border, '', '')
-call s:hi('StatusLine', s:fg, s:bg_raised, '')
-call s:hi('StatusLineNC', s:ash, s:bg, '')
-call s:hi('TabLine', s:ash, s:bg_raised, '')
-call s:hi('TabLineFill', s:bg_raised, '', '')
-call s:hi('TabLineSel', s:fg, s:bg, 'bold')
-call s:hi('Pmenu', s:fg, s:bg_raised, '')
-call s:hi('PmenuSel', s:bg, s:frost, '')
-call s:hi('PmenuSbar', '', s:bg_raised, '')
-call s:hi('PmenuThumb', '', s:ash, '')
-call s:hi('Visual', '', s:bg_hover, '')
-call s:hi('VisualNOS', '', s:bg_hover, '')
+call s:hi('StatusLine', s:text, s:surface, '')
+call s:hi('StatusLineNC', s:text_faint, s:bg, '')
+call s:hi('TabLine', s:text_faint, s:surface, '')
+call s:hi('TabLineFill', s:surface, '', '')
+call s:hi('TabLineSel', s:text, s:bg, 'bold')
+call s:hi('Pmenu', s:text, s:surface, '')
+call s:hi('PmenuSel', s:bg, s:accent, '')
+call s:hi('PmenuSbar', '', s:surface, '')
+call s:hi('PmenuThumb', '', s:text_faint, '')
+call s:hi('Visual', '', s:surface_hover, '')
+call s:hi('VisualNOS', '', s:surface_hover, '')
 call s:hi('Search', '', s:border, '')
-call s:hi('IncSearch', s:bg, s:frost, '')
-call s:hi('CurSearch', s:bg, s:frost, '')
-call s:hi('MatchParen', s:frost, '', 'bold,underline')
-call s:hi('Directory', s:frost, '', '')
-call s:hi('Title', s:fg, '', 'bold')
-call s:hi('NonText', s:ash, '', '')
-call s:hi('Whitespace', s:ash, '', '')
+call s:hi('IncSearch', s:bg, s:accent, '')
+call s:hi('CurSearch', s:bg, s:accent, '')
+call s:hi('MatchParen', s:accent, '', 'bold,underline')
+call s:hi('Directory', s:accent, '', '')
+call s:hi('Title', s:text, '', 'bold')
+call s:hi('NonText', s:text_faint, '', '')
+call s:hi('Whitespace', s:text_faint, '', '')
 call s:hi('EndOfBuffer', s:bg, '', '')
-call s:hi('QuickFixLine', '', s:bg_hover, '')
-call s:hi('WildMenu', s:bg, s:frost, '')
-call s:hi('Question', s:frost, '', '')
-call s:hi('MoreMsg', s:frost, '', '')
-call s:hi('ModeMsg', s:fg, '', 'bold')
-call s:hi('ErrorMsg', s:urgent, '', 'bold')
-call s:hi('WarningMsg', s:silver, '', '')
+call s:hi('QuickFixLine', '', s:surface_hover, '')
+call s:hi('WildMenu', s:bg, s:accent, '')
+call s:hi('Question', s:accent, '', '')
+call s:hi('MoreMsg', s:accent, '', '')
+call s:hi('ModeMsg', s:text, '', 'bold')
+call s:hi('ErrorMsg', s:critical, '', 'bold')
+call s:hi('WarningMsg', s:text_secondary, '', '')
 
 " syntax
-call s:hi('Comment', s:slate, '', 'italic')
-call s:hi('Constant', s:silver, '', '')
-call s:hi('String', s:silver, '', '')
-call s:hi('Character', s:silver, '', '')
-call s:hi('Number', s:teal, '', '')
-call s:hi('Boolean', s:teal, '', '')
-call s:hi('Float', s:teal, '', '')
-call s:hi('Identifier', s:fg, '', '')
-call s:hi('Function', s:frost, '', '')
-call s:hi('Statement', s:fg, '', 'bold')
-call s:hi('Conditional', s:fg, '', 'bold')
-call s:hi('Repeat', s:fg, '', 'bold')
-call s:hi('Label', s:fg, '', 'bold')
-call s:hi('Keyword', s:fg, '', 'bold')
-call s:hi('Exception', s:fg, '', 'bold')
-call s:hi('Operator', s:dim, '', '')
-call s:hi('PreProc', s:teal, '', '')
-call s:hi('Include', s:teal, '', '')
-call s:hi('Define', s:teal, '', '')
-call s:hi('Macro', s:teal, '', '')
-call s:hi('PreCondit', s:teal, '', '')
-call s:hi('Type', s:silver, '', '')
-call s:hi('StorageClass', s:silver, '', '')
-call s:hi('Structure', s:silver, '', '')
-call s:hi('Typedef', s:silver, '', '')
-call s:hi('Special', s:steel, '', '')
-call s:hi('SpecialChar', s:steel, '', '')
-call s:hi('Tag', s:steel, '', '')
-call s:hi('Delimiter', s:dim, '', '')
-call s:hi('SpecialComment', s:slate, '', 'italic')
-call s:hi('Debug', s:steel, '', '')
-call s:hi('Underlined', s:frost, '', 'underline')
-call s:hi('Ignore', s:ash, '', '')
-call s:hi('Error', s:urgent, '', 'bold')
-call s:hi('Todo', s:silver, '', 'bold')
+call s:hi('Comment', s:text_subtle, '', 'italic')
+call s:hi('Constant', s:text_secondary, '', '')
+call s:hi('String', s:text_secondary, '', '')
+call s:hi('Character', s:text_secondary, '', '')
+call s:hi('Number', s:accent_muted, '', '')
+call s:hi('Boolean', s:accent_muted, '', '')
+call s:hi('Float', s:accent_muted, '', '')
+call s:hi('Identifier', s:text, '', '')
+call s:hi('Function', s:accent, '', '')
+call s:hi('Statement', s:text, '', 'bold')
+call s:hi('Conditional', s:text, '', 'bold')
+call s:hi('Repeat', s:text, '', 'bold')
+call s:hi('Label', s:text, '', 'bold')
+call s:hi('Keyword', s:text, '', 'bold')
+call s:hi('Exception', s:text, '', 'bold')
+call s:hi('Operator', s:text_tertiary, '', '')
+call s:hi('PreProc', s:accent_muted, '', '')
+call s:hi('Include', s:accent_muted, '', '')
+call s:hi('Define', s:accent_muted, '', '')
+call s:hi('Macro', s:accent_muted, '', '')
+call s:hi('PreCondit', s:accent_muted, '', '')
+call s:hi('Type', s:text_secondary, '', '')
+call s:hi('StorageClass', s:text_secondary, '', '')
+call s:hi('Structure', s:text_secondary, '', '')
+call s:hi('Typedef', s:text_secondary, '', '')
+call s:hi('Special', s:text_muted, '', '')
+call s:hi('SpecialChar', s:text_muted, '', '')
+call s:hi('Tag', s:text_muted, '', '')
+call s:hi('Delimiter', s:text_tertiary, '', '')
+call s:hi('SpecialComment', s:text_subtle, '', 'italic')
+call s:hi('Debug', s:text_muted, '', '')
+call s:hi('Underlined', s:accent, '', 'underline')
+call s:hi('Ignore', s:text_faint, '', '')
+call s:hi('Error', s:critical, '', 'bold')
+call s:hi('Todo', s:text_secondary, '', 'bold')
 
 " diff
-call s:hi('DiffAdd', s:teal, '', '')
-call s:hi('DiffChange', s:silver, '', '')
-call s:hi('DiffDelete', s:dim, s:bg_raised, '')
-call s:hi('DiffText', s:frost, s:bg_hover, 'bold')
+call s:hi('DiffAdd', s:accent_muted, '', '')
+call s:hi('DiffChange', s:text_secondary, '', '')
+call s:hi('DiffDelete', s:text_tertiary, s:surface, '')
+call s:hi('DiffText', s:accent, s:surface_hover, 'bold')
 
 " diagnostics
-call s:hi('DiagnosticError', s:urgent, '', '')
-call s:hi('DiagnosticWarn', s:silver, '', '')
-call s:hi('DiagnosticInfo', s:steel, '', '')
-call s:hi('DiagnosticHint', s:slate, '', '')
-call s:hi('DiagnosticOk', s:teal, '', '')
-call s:hi('DiagnosticUnderlineError', s:urgent, '', 'underline')
-call s:hi('DiagnosticUnderlineWarn', s:silver, '', 'underline')
-call s:hi('DiagnosticUnderlineInfo', s:steel, '', 'underline')
-call s:hi('DiagnosticUnderlineHint', s:slate, '', 'underline')
+call s:hi('DiagnosticError', s:critical, '', '')
+call s:hi('DiagnosticWarn', s:text_secondary, '', '')
+call s:hi('DiagnosticInfo', s:text_muted, '', '')
+call s:hi('DiagnosticHint', s:text_subtle, '', '')
+call s:hi('DiagnosticOk', s:accent_muted, '', '')
+call s:hi('DiagnosticUnderlineError', s:critical, '', 'underline')
+call s:hi('DiagnosticUnderlineWarn', s:text_secondary, '', 'underline')
+call s:hi('DiagnosticUnderlineInfo', s:text_muted, '', 'underline')
+call s:hi('DiagnosticUnderlineHint', s:text_subtle, '', 'underline')
 
 " references
-call s:hi('LspReferenceText', '', s:bg_hover, '')
-call s:hi('LspReferenceRead', '', s:bg_hover, '')
-call s:hi('LspReferenceWrite', '', s:bg_hover, '')
+call s:hi('LspReferenceText', '', s:surface_hover, '')
+call s:hi('LspReferenceRead', '', s:surface_hover, '')
+call s:hi('LspReferenceWrite', '', s:surface_hover, '')
 
 " terminal palette (neovim)
 if has('nvim')

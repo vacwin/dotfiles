@@ -140,8 +140,8 @@ css_tokens() { # css_tokens <mode>
     printf '@define-color %-9s %s;\n' "$name" "$(tok "$mode" "$t")"
   done
   printf '@define-color %-9s %s;\n' "bar-bg" "$(rgba "$(tok "$mode" bg)" "$(alpha "$mode" bar)")"
-  printf '@define-color %-9s %s;\n' "pill-bg" "$(rgba "$(tok "$mode" bg_raised)" "$(alpha "$mode" pill)")"
-  printf '@define-color %-9s %s;\n' "tooltip-bg" "$(rgba "$(tok "$mode" bg_raised)" "$(alpha "$mode" tooltip)")"
+  printf '@define-color %-9s %s;\n' "pill-bg" "$(rgba "$(tok "$mode" surface)" "$(alpha "$mode" pill)")"
+  printf '@define-color %-9s %s;\n' "tooltip-bg" "$(rgba "$(tok "$mode" surface)" "$(alpha "$mode" tooltip)")"
 }
 
 # ───────────────────────────── render ───────────────────────────────
@@ -161,12 +161,12 @@ render_tofi() {
   cat >"$DOTFILES/tofi/colors-$mode" <<EOF
 # Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
 background-color = $(tok "$mode" bg)
-text-color = $(tok "$mode" fg)
-prompt-color = $(tok "$mode" frost)
+text-color = $(tok "$mode" text)
+prompt-color = $(tok "$mode" accent)
 selection-color = $(tok "$mode" bg)
-selection-background = $(tok "$mode" frost)
-input-color = $(tok "$mode" fg)
-default-result-color = $(tok "$mode" ash)
+selection-background = $(tok "$mode" accent)
+input-color = $(tok "$mode" text)
+default-result-color = $(tok "$mode" text_faint)
 EOF
 }
 
@@ -181,10 +181,10 @@ render_hyprlock() {
   fi
   cat >"$DOTFILES/hyprlock/colors-$mode.conf" <<EOF
 # Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
-\$fg         = $(hypr_rgb "$(tok "$mode" fg)")
-\$ash        = $(hypr_rgb "$(tok "$mode" ash)")
-\$teal       = $(hypr_rgb "$(tok "$mode" teal)")
-\$inner      = $(rgba "$(tok "$mode" bg)" "$alpha")
+\$text        = $(hypr_rgb "$(tok "$mode" text)")
+\$text_faint  = $(hypr_rgb "$(tok "$mode" text_faint)")
+\$accent_muted = $(hypr_rgb "$(tok "$mode" accent_muted)")
+\$inner       = $(rgba "$(tok "$mode" bg)" "$alpha")
 \$brightness = $brightness
 EOF
 }
@@ -199,11 +199,11 @@ render_ghostty() {
   {
     echo "# Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit."
     echo "background = $(tok "$mode" bg)"
-    echo "foreground = $(tok "$mode" fg)"
-    echo "cursor-color = $(tok "$mode" fg)"
+    echo "foreground = $(tok "$mode" text)"
+    echo "cursor-color = $(tok "$mode" text)"
     echo "cursor-text = $(tok "$mode" bg)"
-    echo "selection-background = $(tok "$mode" bg_hover)"
-    echo "selection-foreground = $(tok "$mode" fg)"
+    echo "selection-background = $(tok "$mode" surface_hover)"
+    echo "selection-foreground = $(tok "$mode" text)"
     for i in "${!dark_ansi[@]}"; do
       echo "palette = $i=$(ansi "$mode" "$i")"
     done
@@ -215,18 +215,18 @@ render_tmux() {
   cat >"$DOTFILES/tmux/themes/$THEME-$mode.conf" <<EOF
 # Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
 set -g status-bg '$(tok "$mode" bg)'
-set -g status-fg '$(tok "$mode" fg)'
-set -g status-left '#[fg=$(tok "$mode" frost),bold]#S #[default]'
-set -g status-right '#[fg=$(tok "$mode" teal)]#(\$HOME/dotfiles/tmux/network.sh) #[fg=$(tok "$mode" ash)]%a %d %b #[fg=$(tok "$mode" fg)]%I:%M %p'
-set -g window-status-style 'fg=$(tok "$mode" ash),bg=default'
-set -g window-status-format '#[fg=$(tok "$mode" ash)]#I #[fg=$(tok "$mode" ash)]#W'
-set -g window-status-current-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised),bold'
-set -g window-status-current-format '#[fg=$(tok "$mode" frost),bg=$(tok "$mode" bg_raised)] #I:#W #[default]'
-set -g pane-border-style 'fg=$(tok "$mode" bg_raised)'
-set -g pane-active-border-style 'fg=$(tok "$mode" frost)'
-set -g message-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised)'
-set -g message-command-style 'fg=$(tok "$mode" fg),bg=$(tok "$mode" bg_raised)'
-setw -g mode-style 'fg=$(tok "$mode" bg),bg=$(tok "$mode" frost)'
+set -g status-fg '$(tok "$mode" text)'
+set -g status-left '#[fg=$(tok "$mode" accent),bold]#S #[default]'
+set -g status-right '#[fg=$(tok "$mode" accent_muted)]#(\$HOME/dotfiles/tmux/network.sh) #[fg=$(tok "$mode" text_faint)]%a %d %b #[fg=$(tok "$mode" text)]%I:%M %p'
+set -g window-status-style 'fg=$(tok "$mode" text_faint),bg=default'
+set -g window-status-format '#[fg=$(tok "$mode" text_faint)]#I #[fg=$(tok "$mode" text_faint)]#W'
+set -g window-status-current-style 'fg=$(tok "$mode" text),bg=$(tok "$mode" surface),bold'
+set -g window-status-current-format '#[fg=$(tok "$mode" accent),bg=$(tok "$mode" surface)] #I:#W #[default]'
+set -g pane-border-style 'fg=$(tok "$mode" surface)'
+set -g pane-active-border-style 'fg=$(tok "$mode" accent)'
+set -g message-style 'fg=$(tok "$mode" text),bg=$(tok "$mode" surface)'
+set -g message-command-style 'fg=$(tok "$mode" text),bg=$(tok "$mode" surface)'
+setw -g mode-style 'fg=$(tok "$mode" bg),bg=$(tok "$mode" accent)'
 EOF
 }
 
@@ -234,14 +234,14 @@ render_zsh() {
   local mode="$1"
   cat >"$DOTFILES/zsh/themes/$THEME-$mode.zsh" <<EOF
 # Generated from themes/$THEME.conf ($mode) by scripts/theme. Do not edit.
-ZT_BRACKET='$(tok "$mode" ash)'
-ZT_USER='$(tok "$mode" fg)'
-ZT_AT='$(tok "$mode" ash)'
-ZT_HOST='$(tok "$mode" frost)'
-ZT_PATH='$(tok "$mode" silver)'
-ZT_GIT='$(tok "$mode" slate)'
-ZT_UNSTAGED='$(tok "$mode" dim)'
-ZT_STAGED='$(tok "$mode" frost)'
+ZT_BRACKET='$(tok "$mode" text_faint)'
+ZT_USER='$(tok "$mode" text)'
+ZT_AT='$(tok "$mode" text_faint)'
+ZT_HOST='$(tok "$mode" accent)'
+ZT_PATH='$(tok "$mode" text_secondary)'
+ZT_GIT='$(tok "$mode" text_subtle)'
+ZT_UNSTAGED='$(tok "$mode" text_tertiary)'
+ZT_STAGED='$(tok "$mode" accent)'
 EOF
   # root prompt: one distinct color everywhere, so it can't be confused
   # with a normal user shell (see EUID check in zsh/.zshrc)
@@ -268,16 +268,21 @@ render_nvim() {
   render_template "$DOTFILES/templates/colorscheme.vim" "$DOTFILES/nvim/colors/$THEME.vim" "dark"
 }
 
+render_opencode() {
+  mkdir -p "$DOTFILES/opencode/themes"
+  render_template "$DOTFILES/templates/opencode-theme.json" "$DOTFILES/opencode/themes/$THEME.json" "dark"
+}
+
 render_hypr_palette() {
   cat >"$DOTFILES/hypr/lua/cfg/palette.lua" <<EOF
 -- Generated from themes/$THEME.conf by scripts/theme. Do not edit.
 return {
     dark = {
-        active_border = "$(hypr_rgb "$(tok dark frost)")",
+        active_border = "$(hypr_rgb "$(tok dark accent)")",
         inactive_border = "$(hypr_rgb "$(tok dark border)")",
     },
     light = {
-        active_border = "$(hypr_rgb "$(tok light frost)")",
+        active_border = "$(hypr_rgb "$(tok light accent)")",
         inactive_border = "$(hypr_rgb "$(tok light border)")",
     },
 }
@@ -305,6 +310,7 @@ render_all() {
     render_zsh "$mode"
   done
   render_nvim
+  render_opencode
   render_hypr_palette
   # ly has a single config file: it follows the active mode, set below
 }

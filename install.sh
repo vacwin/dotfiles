@@ -40,6 +40,11 @@ fi
 # editor
 link nvim "$HOME/.config/nvim"
 
+# opencode: CLI settings + generated mono theme
+mkdir -p "$HOME/.config/opencode"
+ln -sfn "$DOTFILES/opencode/cli.json" "$HOME/.config/opencode/cli.json"
+ln -sfn "$DOTFILES/opencode/themes" "$HOME/.config/opencode/themes"
+
 # tmux
 [[ -L "$HOME/.tmux.conf" ]] && rm "$HOME/.tmux.conf"
 link tmux/tmux.conf "$HOME/.config/tmux/tmux.conf"

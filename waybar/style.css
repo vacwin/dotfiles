@@ -9,7 +9,7 @@
 
 window#waybar {
     background-color: @bar-bg;
-    color: @fg;
+    color: @text;
 }
 
 button {
@@ -22,35 +22,35 @@ button {
 /* workspaces */
 #workspaces button {
     padding: 0 7px;
-    color: @ash;
+    color: @text-faint;
     background-color: transparent;
     border-radius: 0;
 }
 
 #workspaces button:hover {
-    color: @fg;
+    color: @text;
     background: @pill-bg;
 }
 
 #workspaces button.active {
-    color: @fg;
+    color: @text;
     background-color: @pill-bg;
-    border-bottom: 2px solid @frost;
+    border-bottom: 2px solid @accent;
 }
 
 #workspaces button.urgent {
     color: @bg;
-    background-color: @teal;
+    background-color: @accent-muted;
 }
 
 #window {
-    color: @ash;
+    color: @text-faint;
     padding: 0 8px;
 }
 
 /* clock in center */
 #clock {
-    color: @frost;
+    color: @accent;
     font-weight: bold;
     padding: 0 12px;
 }
@@ -70,14 +70,14 @@ button {
     padding: 4px 10px;
     margin: 4px 3px;
     background: @pill-bg;
-    color: @fg;
+    color: @text;
 }
 
-#custom-sysmon      { color: @slate; }
+#custom-sysmon      { color: @text-subtle; }
 /* hardware drawer: chevron shows the state, collapsed "<" -> expanded ">" */
 #custom-hardware,
 #custom-hardware-open {
-    color: @frost;
+    color: @accent;
     font-size: 18px;
     font-weight: bold;
     padding: 0 8px;
@@ -85,23 +85,23 @@ button {
     background: transparent;
 }
 #custom-hardware:hover,
-#custom-hardware-open:hover { color: @fg; }
-#custom-weather     { color: @silver; }
-#custom-cava        { color: @slate; }
-#wireplumber        { color: @steel; }
-#wireplumber.muted  { color: @ash; }
-#backlight          { color: @dim; }
-#bluetooth          { color: @frost; }
-#bluetooth.disabled { color: @ash; }
-#network            { color: @frost; }
-#network.disconnected { color: @ash; }
+#custom-hardware-open:hover { color: @text; }
+#custom-weather     { color: @text-secondary; }
+#custom-cava        { color: @text-subtle; }
+#wireplumber        { color: @text-muted; }
+#wireplumber.muted  { color: @text-faint; }
+#backlight          { color: @text-tertiary; }
+#bluetooth          { color: @accent; }
+#bluetooth.disabled { color: @text-faint; }
+#network            { color: @accent; }
+#network.disconnected { color: @text-faint; }
 #language,
-#custom-language    { color: @teal; min-width: 20px; }
+#custom-language    { color: @accent-muted; min-width: 20px; }
 
-#battery            { color: @steel; }
-#battery.warning    { color: @slate; }
+#battery            { color: @text-muted; }
+#battery.warning    { color: @text-subtle; }
 #battery.critical:not(.charging) {
-    color: @teal;
+    color: @accent-muted;
     animation-name: blink;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -110,22 +110,22 @@ button {
 }
 
 #submap {
-    background: @teal;
+    background: @accent-muted;
     color: @bg;
     font-weight: bold;
 }
 
 @keyframes blink {
-    to { color: @bg; background-color: @teal; }
+    to { color: @bg; background-color: @accent-muted; }
 }
 
 #tray { padding: 0 6px; }
 #tray > .passive { -gtk-icon-effect: dim; }
-#tray > .needs-attention { background-color: @teal; color: @bg; border-radius: 8px; }
+#tray > .needs-attention { background-color: @accent-muted; color: @bg; border-radius: 8px; }
 
 tooltip {
     background: @tooltip-bg;
     border-radius: 6px;
-    border: 1px solid @ash;
+    border: 1px solid @text-faint;
 }
-tooltip label { color: @fg; }
+tooltip label { color: @text; }
