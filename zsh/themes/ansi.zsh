@@ -1,8 +1,0 @@
-ZT_BRACKET='red'
-ZT_USER='yellow'
-ZT_AT='green'
-ZT_HOST='blue'
-ZT_PATH='magenta'
-ZT_GIT='yellow'
-ZT_UNSTAGED='red'
-ZT_STAGED='green'

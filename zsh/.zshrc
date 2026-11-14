@@ -4,15 +4,6 @@ case "$(uname -s)" in
   *)       OS=unknown ;;
 esac
 
-ZSH_THEME='black-metal-immortal'
-if [[ -r "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/themes/$ZSH_THEME.zsh"
-else
-  source "${ZDOTDIR:-$HOME}/themes/ansi.zsh"
-fi
-
-# colors
-PS1="%B%F{$ZT_BRACKET}[%F{$ZT_USER}%n%F{$ZT_AT}@%F{$ZT_HOST}%m %F{$ZT_PATH}%~\${vcs_info_msg_0_}%F{$ZT_BRACKET}]%f\$%b "
 
 # history
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
@@ -84,6 +75,29 @@ zstyle ':vcs_info:git:*' formats       " %F{$ZT_GIT}‹%u%c%b›%f"
 zstyle ':vcs_info:git:*' actionformats " %F{$ZT_GIT}‹%u%c%b|%a›%f"
 precmd_functions+=(vcs_info)
 setopt prompt_subst
+
+# prompt colors follow the active palette written by scripts/theme.
+# generated: zsh/themes/<theme>-<mode>.zsh — re-sourced every prompt,
+# so `theme toggle` recolors the prompt without restarting the shell.
+zsh_theme_prompt() {
+  local state="${XDG_STATE_HOME:-$HOME/.local/state}/theme/mode"
+  local mode=dark theme="${ZSH_THEME:-mono}"
+  # root: fall back to the invoking user's mode (sudo -i) so a root shell in a
+  # light session still uses the light palette
+  if (( EUID == 0 )) && [[ ! -r "$state" && -n "${SUDO_USER:-}" ]]; then
+    state="/home/$SUDO_USER/.local/state/theme/mode"
+  fi
+  [[ -r "$state" ]] && mode="$(<"$state")"
+  [[ "$mode" == light ]] || mode=dark
+  # root gets its own palette: all-red prompt, impossible to confuse
+  (( EUID == 0 )) && theme="$theme-root"
+  # ansi fallbacks in case the generated theme is missing
+  ZT_BRACKET=8 ZT_USER=7 ZT_AT=8 ZT_HOST=4 ZT_PATH=7 ZT_GIT=8 ZT_UNSTAGED=9 ZT_STAGED=15
+  source "${ZDOTDIR:-$HOME}/themes/$theme-$mode.zsh" 2>/dev/null
+  PS1="%B%F{$ZT_BRACKET}[%F{$ZT_USER}%n%F{$ZT_AT}@%F{$ZT_HOST}%m %F{$ZT_PATH}%~\${vcs_info_msg_0_}%F{$ZT_BRACKET}]%f\$%b "
+}
+zsh_theme_prompt
+precmd_functions+=(zsh_theme_prompt)
 
 # lf
 lfcd() {
