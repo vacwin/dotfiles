@@ -29,7 +29,7 @@
 
 | Инструмент | Пакет | Зачем |
 |---|---|---|
-| awww | `awww` (AUR, форк swww) | демон обоев (`awww-daemon`, autostart). Альтернатива — `swww`, тогда поправь `hypr/lua/cfg/autostart.lua` |
+| awww | `awww` (AUR, форк swww) | демон обоев (`awww-daemon`, autostart) + смена обоев по теме через `scripts/theme` (`wallpaper_<mode>` в `hypr/conf.d/local.conf`). Альтернатива — `swww`, скрипт сам её подхватит |
 
 ## Скриншоты / буфер
 

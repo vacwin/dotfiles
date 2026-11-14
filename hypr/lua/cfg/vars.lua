@@ -23,6 +23,5 @@ return {
     terminal  = "ghostty",
     search    = "tofi-drun --drun-launch=true",
     cursor    = "hyprctl setcursor Banana 32",
-    wallpaper = localconf.wallpaper,
     avatar    = localconf.avatar,
 }

@@ -11,6 +11,7 @@
 #   theme dark
 #   theme sync       follow gsettings color-scheme
 #   theme render     only regenerate files, don't touch gsettings/apps
+#   theme wallpaper [light|dark]   apply wallpaper only
 #
 # env:
 #   THEME=mono            palette name -> themes/mono.conf
@@ -20,6 +21,7 @@ set -u
 DOTFILES="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
 THEME="${THEME:-mono}"
 PALETTE="${THEME_PALETTE:-$DOTFILES/themes/$THEME.conf}"
+LOCAL_CONF="$DOTFILES/hypr/conf.d/local.conf"
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 IFACE=org.gnome.desktop.interface
 
@@ -45,6 +47,45 @@ tok() { # tok <mode> <token>
 alpha() { # alpha <mode> <bar|pill|tooltip>
   local var="${1}_alpha_${2}"
   printf '%s' "${!var}"
+}
+
+# ─────────────────────── local.conf ($var = value) ──────────────────
+
+local_conf_get() { # <var> -> value, with $HOME/~ expanded
+  local key="$1" val
+  [[ -r "$LOCAL_CONF" ]] || return 1
+  val="$(awk -v k="$key" '
+        $0 ~ "^[[:space:]]*\\$" k "[[:space:]]*=" {
+            sub("^[[:space:]]*\\$" k "[[:space:]]*=[[:space:]]*", "", $0)
+            print
+            exit
+        }' "$LOCAL_CONF")"
+  [[ -n "$val" ]] || return 1
+  val="${val%%[[:space:]]#*}" # strip a trailing " # comment"
+  val="${val//\$HOME/$HOME}"
+  val="${val/#\~/$HOME}"
+  val="${val%"${val##*[![:space:]]}"}" # rstrip
+  printf '%s' "$val"
+}
+
+wallpaper_for() { # <mode> -> path, wallpaper_<mode> with $wallpaper fallback
+  local mode="$1" path
+  if ! path="$(local_conf_get "wallpaper_${mode}")"; then
+    path="$(local_conf_get wallpaper)" || return 1
+  fi
+  printf '%s' "$path"
+}
+
+wallpaper_resolved() { # <mode> -> existing path, falls back to $wallpaper
+  local mode="$1" path fallback
+  path="$(wallpaper_for "$mode")" || return 1
+  if [[ -f "$path" ]]; then
+    printf '%s' "$path"
+    return 0
+  fi
+  fallback="$(local_conf_get wallpaper)" || return 1
+  [[ -f "$fallback" ]] || return 1
+  printf '%s' "$fallback"
 }
 
 hex() { printf '%s' "${1#\#}"; }
@@ -243,6 +284,15 @@ return {
 EOF
 }
 
+render_wallpaper() { # hyprlock gets the wallpaper for this mode
+  local mode="$1" path
+  path="$(wallpaper_resolved "$mode")" || path=""
+  {
+    echo "# Generated from hypr/conf.d/local.conf by scripts/theme. Do not edit."
+    echo "\$wallpaper = $path"
+  } >"$DOTFILES/hyprlock/wallpaper.conf"
+}
+
 render_all() {
   local mode
   for mode in dark light; do
@@ -276,6 +326,19 @@ reload() {
   fi
 }
 
+apply_wallpaper() { # apply_wallpaper <mode>
+  local mode="$1" path configured
+  configured="$(wallpaper_for "$mode")" || return 0
+  [[ -f "$configured" ]] || echo "theme: wallpaper for $mode not found: $configured" >&2
+  path="$(wallpaper_resolved "$mode")" || return 0
+  [[ -n "$path" ]] || return 0
+  if command -v awww >/dev/null 2>&1; then
+    awww img "$path" --transition-type fade --transition-duration 0.8 --transition-fps 60 >/dev/null 2>&1 || true
+  elif command -v swww >/dev/null 2>&1; then
+    swww img "$path" --transition-type fade --transition-duration 0.8 --transition-fps 60 >/dev/null 2>&1 || true
+  fi
+}
+
 set_mode() { # set_mode <light|dark>
   local mode="$1"
 
@@ -299,6 +362,8 @@ set_mode() { # set_mode <light|dark>
   ln -sfn "config-$mode" "$DOTFILES/cava/config"
 
   render_ly "$mode"
+  render_wallpaper "$mode"
+  apply_wallpaper "$mode"
   reload
 }
 
@@ -310,11 +375,19 @@ case "$mode" in
   render)
     render_all
     render_ly "$(current)"
+    render_wallpaper "$(current)"
     echo "theme: rendered from $PALETTE"
     exit 0
     ;;
+  wallpaper)
+    mode="${2:-$(current)}"
+    [[ "$mode" == light || "$mode" == dark ]] || mode="$(current)"
+    render_wallpaper "$mode"
+    apply_wallpaper "$mode"
+    exit 0
+    ;;
   *)
-    echo "usage: theme [toggle|light|dark|sync|render]" >&2
+    echo "usage: theme [toggle|light|dark|sync|render|wallpaper]" >&2
     exit 1
     ;;
 esac

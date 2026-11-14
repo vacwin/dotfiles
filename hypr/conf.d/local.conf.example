@@ -1,6 +1,11 @@
 # Machine-specific overrides.
 # Copy this file to local.conf (untracked, see .gitignore) and adjust per host.
-# Read by hyprland.lua (lua/cfg/vars.lua), hyprlock.conf and scripts/monitor-ctl.
+# Read by hyprland.lua (lua/cfg/vars.lua), hyprlock.conf and scripts/theme.
 
-$wallpaper = $HOME/Pictures/twin-snoopy.jpeg
+# Wallpaper per theme mode. scripts/theme picks wallpaper_<mode> when the
+# theme is toggled; $wallpaper is the fallback for both modes.
+$wallpaper       = $HOME/Pictures/wallpaper.png
+$wallpaper_dark  = $HOME/Pictures/wallpaper-dark.png
+$wallpaper_light = $HOME/Pictures/wallpaper-light.png
+
 $avatar = $HOME/Pictures/ava.jpeg

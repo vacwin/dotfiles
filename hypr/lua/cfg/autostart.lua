@@ -2,9 +2,8 @@ local vars = require("cfg.vars")
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("awww-daemon")
-    if vars.wallpaper then
-        hl.exec_cmd("sleep 3 && awww img '" .. vars.wallpaper .. "'")
-    end
+    -- wallpaper for the current light/dark mode comes from hypr/conf.d/local.conf
+    hl.exec_cmd("sleep 3 && '" .. (os.getenv("HOME") or "~") .. "/dotfiles/scripts/theme' wallpaper")
     hl.exec_cmd(vars.cursor)
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")

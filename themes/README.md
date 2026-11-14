@@ -56,6 +56,24 @@ dark_alpha_tooltip=0.92  light_alpha_tooltip=0.94
 через `hl.layer_rule` в `hypr/lua/cfg/visuals.lua` (namespace `waybar`,
 `ignore_alpha = 0.1`).
 
+## Обои по теме
+
+Пути живут в `hypr/conf.d/local.conf` (untracked, machine-specific) в том же
+формате `$var`, что и у Hyprland:
+
+```bash
+$wallpaper       = $HOME/Pictures/wallpaper.png        # fallback
+$wallpaper_dark  = $HOME/Pictures/wallpaper-dark.png
+$wallpaper_light = $HOME/Pictures/wallpaper-light.png
+```
+
+При `theme toggle` вызывается `theme wallpaper`: скрипт берёт
+`wallpaper_<mode>`, ставит его через `awww img` и пишет
+`hyprlock/wallpaper.conf`, чтобы локскрин использовал ту же картинку. Если
+файла для режима ещё нет — предупреждение и откат на `$wallpaper`.
+Отдельно: `theme wallpaper light|dark` — применить без смены темы (этим
+пользуется autostart при логине).
+
 ## Новая тема
 
 ```sh
