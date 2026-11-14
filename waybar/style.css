@@ -74,6 +74,18 @@ button {
 }
 
 #custom-sysmon      { color: @slate; }
+/* hardware drawer: chevron shows the state, collapsed "<" -> expanded ">" */
+#custom-hardware,
+#custom-hardware-open {
+    color: @frost;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 8px;
+    margin: 4px 0;
+    background: transparent;
+}
+#custom-hardware:hover,
+#custom-hardware-open:hover { color: @fg; }
 #custom-weather     { color: @silver; }
 #custom-cava        { color: @slate; }
 #wireplumber        { color: @steel; }

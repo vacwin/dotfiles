@@ -11,15 +11,12 @@
         "custom/playerctl"
     ],
     "modules-right": [
-        "custom/sysmon",
-        "wireplumber",
-        "backlight",
-        "bluetooth",
         "network",
         "battery",
         "custom/language",
         "custom/weather",
         "clock",
+        "group/hardware",
         "tray"
     ],
     "hyprland/workspaces": {
@@ -110,8 +107,8 @@
         "format-wifi": "󰖩",
         "format-ethernet": "󰈀",
         "format-disconnected": "󰖪",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)  {frequency} GHz\n{ifname} \u2014 {ipaddr}/{cidr}\nGateway: {gwaddr}\n\u25bc {bandwidthDownBytes}  \u25b2 {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "{ifname} \u2014 {ipaddr}/{cidr}\nGateway: {gwaddr}\n\u25bc {bandwidthDownBytes}  \u25b2 {bandwidthUpBytes}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  {frequency} GHz\n{ifname} — {ipaddr}/{cidr}\nGateway: {gwaddr}\n▼ {bandwidthDownBytes}  ▲ {bandwidthUpBytes}",
+        "tooltip-format-ethernet": "{ifname} — {ipaddr}/{cidr}\nGateway: {gwaddr}\n▼ {bandwidthDownBytes}  ▲ {bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected"
     },
     "wireplumber": {
@@ -135,6 +132,32 @@
     },
     "tray": {
         "spacing": 10
+    },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/hardware",
+            "custom/hardware-open",
+            "custom/sysmon",
+            "wireplumber",
+            "backlight",
+            "bluetooth"
+        ],
+        "drawer": {
+            "transition-duration": 200,
+            "children-class": "hardware-child",
+            "reveal-delay": 120,
+            "hide-leader-when-expanded": true,
+            "transition-left-to-right": true
+        }
+    },
+    "custom/hardware": {
+        "format": "&lt;",
+        "tooltip": false
+    },
+    "custom/hardware-open": {
+        "format": "&gt;",
+        "tooltip": false
     },
     "custom/sysmon": {
         "exec": "$HOME/.local/bin/sysmon-waybar",
